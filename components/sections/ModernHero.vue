@@ -2,7 +2,7 @@
     <section id="home" class="relative min-h-screen bg-black text-white overflow-hidden flex items-center">
         <!-- Animated Background Grid -->
         <div class="absolute inset-0">
-            <div class="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-black to-purple-500/5"></div>
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-black to-cyan-500/5"></div>
             <div class="absolute inset-0"
                 style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0); background-size: 40px 40px;">
             </div>
@@ -17,8 +17,8 @@
         </div>
 
         <!-- Floating Elements -->
-        <div class="absolute top-20 left-10 w-64 h-64 bg-pink-500/10 rounded-full blur-3xl animate-float"></div>
-        <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-float-delayed">
+        <div class="absolute top-20 left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-20 right-10 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl animate-float-delayed">
         </div>
 
         <div class="container mx-auto px-4 sm:px-6 relative z-10">
@@ -26,8 +26,8 @@
                 <!-- Left Content -->
                 <div class="space-y-6 md:space-y-8 order-2 lg:order-1">
                     <div
-                        class="inline-block px-4 py-2 bg-pink-500/10 border border-pink-500/30 rounded-full animate-fadeIn">
-                        <span class="text-pink-500 font-semibold text-sm md:text-base">👋 Welcome to my Portfolio</span>
+                        class="inline-block px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full animate-fadeIn">
+                        <span class="text-blue-500 font-semibold text-sm md:text-base">👋 Welcome to my Portfolio</span>
                     </div>
 
                     <div>
@@ -36,12 +36,12 @@
                         <!-- Typewriter Effect for Name -->
                         <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4">
                             <span class="text-white">{{ displayedName }}</span>
-                            <span v-if="showNameCursor" class="text-pink-500 animate-blink">|</span>
+                            <span v-if="showNameCursor" class="text-blue-500 animate-blink">|</span>
                         </h1>
 
                         <!-- Role with Typewriter Effect -->
                         <div
-                            class="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500 mb-6 min-h-[3rem] sm:min-h-[4rem] md:min-h-[5rem]">
+                            class="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-500 mb-6 min-h-[3rem] sm:min-h-[4rem] md:min-h-[5rem]">
                             {{ typedRole }}<span class="animate-blink">|</span>
                         </div>
                     </div>
@@ -55,7 +55,7 @@
                     <!-- CTA Buttons -->
                     <div class="flex flex-wrap gap-4">
                         <a href="#contact"
-                            class="px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full font-semibold hover:scale-105 transition-all shadow-lg shadow-pink-500/50 flex items-center gap-2 text-sm md:text-base">
+                            class="px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full font-semibold hover:scale-105 transition-all shadow-lg shadow-blue-500/50 flex items-center gap-2 text-sm md:text-base">
                             <span>Hire Me</span>
                             <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -63,7 +63,7 @@
                             </svg>
                         </a>
                         <a href="#projects"
-                            class="px-6 md:px-8 py-3 md:py-4 border-2 border-pink-500 rounded-full font-semibold hover:bg-pink-500/10 transition-all flex items-center gap-2 text-sm md:text-base">
+                            class="px-6 md:px-8 py-3 md:py-4 border-2 border-blue-500 rounded-full font-semibold hover:bg-blue-500/10 transition-all flex items-center gap-2 text-sm md:text-base">
                             <span>View Projects</span>
                             <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -78,7 +78,7 @@
                     <!-- Social Links -->
                     <div class="flex gap-3 md:gap-4">
                         <a href="#"
-                            class="w-10 h-10 md:w-12 md:h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-pink-500 hover:border-pink-500 transition-all group">
+                            class="w-10 h-10 md:w-12 md:h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-blue-500 hover:border-blue-500 transition-all group">
                             <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400 group-hover:text-white" fill="currentColor"
                                 viewBox="0 0 24 24">
                                 <path
@@ -86,7 +86,7 @@
                             </svg>
                         </a>
                         <a href="#"
-                            class="w-10 h-10 md:w-12 md:h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-pink-500 hover:border-pink-500 transition-all group">
+                            class="w-10 h-10 md:w-12 md:h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-blue-500 hover:border-blue-500 transition-all group">
                             <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400 group-hover:text-white" fill="currentColor"
                                 viewBox="0 0 24 24">
                                 <path
@@ -94,7 +94,7 @@
                             </svg>
                         </a>
                         <a href="#"
-                            class="w-10 h-10 md:w-12 md:h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-pink-500 hover:border-pink-500 transition-all group">
+                            class="w-10 h-10 md:w-12 md:h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-blue-500 hover:border-blue-500 transition-all group">
                             <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400 group-hover:text-white" fill="currentColor"
                                 viewBox="0 0 24 24">
                                 <path
@@ -102,7 +102,7 @@
                             </svg>
                         </a>
                         <a href="#"
-                            class="w-10 h-10 md:w-12 md:h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-pink-500 hover:border-pink-500 transition-all group">
+                            class="w-10 h-10 md:w-12 md:h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-blue-500 hover:border-blue-500 transition-all group">
                             <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400 group-hover:text-white" fill="currentColor"
                                 viewBox="0 0 24 24">
                                 <path
@@ -117,7 +117,7 @@
                     <div class="relative group w-full max-w-[280px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[420px]">
                         <!-- Glowing Border -->
                         <div
-                            class="absolute inset-0 bg-gradient-to-r from-pink-500 to-purple-500 rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-opacity">
+                            class="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-opacity">
                         </div>
 
                         <!-- Image Container with 3D Effect -->
@@ -128,14 +128,14 @@
 
                             <!-- Floating Stats -->
                             <div
-                                class="absolute top-4 -left-4 sm:-left-6 bg-black/80 backdrop-blur-md border border-pink-500/30 rounded-2xl p-3 md:p-4 animate-float">
-                                <div class="text-2xl md:text-3xl font-bold text-pink-500">5+</div>
+                                class="absolute top-4 -left-4 sm:-left-6 bg-black/80 backdrop-blur-md border border-blue-500/30 rounded-2xl p-3 md:p-4 animate-float">
+                                <div class="text-2xl md:text-3xl font-bold text-blue-500">5+</div>
                                 <div class="text-xs md:text-sm text-gray-400">Years Exp</div>
                             </div>
 
                             <div
-                                class="absolute bottom-4 -right-4 sm:-right-6 bg-black/80 backdrop-blur-md border border-purple-500/30 rounded-2xl p-3 md:p-4 animate-float-delayed">
-                                <div class="text-2xl md:text-3xl font-bold text-purple-500">50+</div>
+                                class="absolute bottom-4 -right-4 sm:-right-6 bg-black/80 backdrop-blur-md border border-cyan-500/30 rounded-2xl p-3 md:p-4 animate-float-delayed">
+                                <div class="text-2xl md:text-3xl font-bold text-cyan-500">50+</div>
                                 <div class="text-xs md:text-sm text-gray-400">Projects</div>
                             </div>
                         </div>
@@ -143,10 +143,10 @@
 
                     <!-- Decorative Elements -->
                     <div
-                        class="absolute -top-4 -right-4 w-16 h-16 md:w-24 md:h-24 border-4 border-pink-500 rounded-full opacity-20">
+                        class="absolute -top-4 -right-4 w-16 h-16 md:w-24 md:h-24 border-4 border-blue-500 rounded-full opacity-20">
                     </div>
                     <div
-                        class="absolute -bottom-4 -left-4 w-20 h-20 md:w-32 md:h-32 border-4 border-purple-500 rounded-full opacity-20">
+                        class="absolute -bottom-4 -left-4 w-20 h-20 md:w-32 md:h-32 border-4 border-cyan-500 rounded-full opacity-20">
                     </div>
                 </div>
             </div>
@@ -155,8 +155,8 @@
         <!-- Scroll Indicator -->
         <div class="absolute bottom-6 md:bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
             <div
-                class="w-5 h-8 md:w-6 md:h-10 border-2 border-pink-500 rounded-full flex items-start justify-center p-2">
-                <div class="w-1 h-2 bg-pink-500 rounded-full animate-scroll"></div>
+                class="w-5 h-8 md:w-6 md:h-10 border-2 border-blue-500 rounded-full flex items-start justify-center p-2">
+                <div class="w-1 h-2 bg-blue-500 rounded-full animate-scroll"></div>
             </div>
         </div>
     </section>
@@ -165,7 +165,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
-const fullName = 'John Cooper'
+const fullName = 'Muhammad Sameer'
 const displayedName = ref('')
 const showNameCursor = ref(true)
 const typedRole = ref('')

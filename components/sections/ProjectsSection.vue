@@ -13,8 +13,8 @@
           @click="activeFilter = filter"
           class="px-6 py-2 rounded-full font-semibold transition-all"
           :class="activeFilter === filter 
-            ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white scale-105' 
-            : 'border border-purple-500 text-purple-400 hover:bg-purple-500/10'">
+            ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white scale-105' 
+            : 'border border-cyan-500 text-cyan-400 hover:bg-cyan-500/10'">
           {{ filter }}
         </button>
       </div>

@@ -2,19 +2,19 @@
   <section class="py-32 bg-black relative overflow-hidden">
     <!-- Background -->
     <div class="absolute inset-0">
-      <div class="absolute top-0 left-1/4 w-96 h-96 bg-pink-500/5 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
+      <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+      <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
     </div>
 
     <div class="container mx-auto px-6 relative z-10">
       <!-- Section Header -->
       <div class="text-center mb-20">
-        <div class="inline-block px-4 py-2 bg-pink-500/10 border border-pink-500/30 rounded-full mb-6">
-          <span class="text-pink-500 font-semibold">Testimonials</span>
+        <div class="inline-block px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full mb-6">
+          <span class="text-blue-500 font-semibold">Testimonials</span>
         </div>
         <h2 class="text-5xl md:text-6xl font-bold mb-6">
           <span class="text-white">What Clients</span>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500"> Say</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-500"> Say</span>
         </h2>
         <p class="text-gray-400 text-xl max-w-2xl mx-auto">
           Don't just take my word for it - hear from some of my satisfied clients
@@ -34,9 +34,9 @@
               :key="index"
               class="w-full flex-shrink-0 px-4">
               
-              <div class="bg-gradient-to-br from-gray-900/50 to-black border border-white/5 rounded-3xl p-8 md:p-12 hover:border-pink-500/50 transition-all relative overflow-hidden group">
+              <div class="bg-gradient-to-br from-gray-900/50 to-black border border-white/5 rounded-3xl p-8 md:p-12 hover:border-blue-500/50 transition-all relative overflow-hidden group">
                 <!-- Quote Icon -->
-                <div class="absolute top-8 right-8 text-8xl text-pink-500/10 group-hover:text-pink-500/20 transition-colors">
+                <div class="absolute top-8 right-8 text-8xl text-blue-500/10 group-hover:text-blue-500/20 transition-colors">
                   "
                 </div>
 
@@ -57,22 +57,22 @@
                   <!-- Author Info -->
                   <div class="flex items-center gap-4">
                     <div class="relative">
-                      <div class="absolute inset-0 bg-gradient-to-br from-pink-500 to-purple-500 rounded-full blur-lg opacity-50"></div>
+                      <div class="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full blur-lg opacity-50"></div>
                       <img 
                         :src="testimonial.image" 
                         :alt="testimonial.name" 
-                        class="relative w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-pink-500">
+                        class="relative w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-blue-500">
                     </div>
                     <div>
                       <h4 class="text-xl md:text-2xl font-bold text-white">{{ testimonial.name }}</h4>
                       <p class="text-gray-400">{{ testimonial.role }}</p>
-                      <p class="text-pink-500 text-sm">{{ testimonial.company }}</p>
+                      <p class="text-blue-500 text-sm">{{ testimonial.company }}</p>
                     </div>
                   </div>
                 </div>
 
                 <!-- Decorative gradient -->
-                <div class="absolute inset-0 bg-gradient-to-br from-pink-500/0 to-purple-500/0 group-hover:from-pink-500/5 group-hover:to-purple-500/5 transition-all duration-500 rounded-3xl pointer-events-none"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-cyan-500/0 group-hover:from-blue-500/5 group-hover:to-cyan-500/5 transition-all duration-500 rounded-3xl pointer-events-none"></div>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@
         <!-- Navigation Arrows -->
         <button 
           @click="previousSlide"
-          class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-lg shadow-pink-500/50 group"
+          class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-lg shadow-blue-500/50 group"
           :class="{ 'opacity-50 cursor-not-allowed': currentIndex === 0 }">
           <svg class="w-6 h-6 text-white transform group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
@@ -90,7 +90,7 @@
 
         <button 
           @click="nextSlide"
-          class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-lg shadow-pink-500/50 group"
+          class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 w-12 h-12 md:w-14 md:h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-lg shadow-blue-500/50 group"
           :class="{ 'opacity-50 cursor-not-allowed': currentIndex === testimonials.length - 1 }">
           <svg class="w-6 h-6 text-white transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -105,14 +105,14 @@
             @click="goToSlide(index)"
             class="transition-all duration-300 rounded-full"
             :class="currentIndex === index 
-              ? 'w-12 h-3 bg-gradient-to-r from-pink-500 to-purple-500' 
+              ? 'w-12 h-3 bg-gradient-to-r from-blue-500 to-cyan-500' 
               : 'w-3 h-3 bg-gray-600 hover:bg-gray-500'">
           </button>
         </div>
 
         <!-- Counter -->
         <div class="text-center mt-8">
-          <span class="text-pink-500 font-semibold text-lg">
+          <span class="text-blue-500 font-semibold text-lg">
             {{ currentIndex + 1 }} / {{ testimonials.length }}
           </span>
         </div>
