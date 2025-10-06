@@ -1,15 +1,25 @@
 <template>
-  <section id="experience" class="py-32 relative overflow-hidden">
+  <section id="experience" class="py-32 bg-black relative overflow-hidden">
     <!-- Background Effects -->
     <div class="absolute inset-0">
-      <div class="absolute top-20 left-10 w-72 h-72 bg-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
-      <div class="absolute bottom-20 right-10 w-96 h-96 bg-pink-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
+      <div class="absolute top-20 left-10 w-72 h-72 bg-pink-500/10 rounded-full blur-3xl animate-pulse"></div>
+      <div class="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style="animation-delay: 2s;"></div>
     </div>
 
     <div class="container mx-auto px-6 relative z-10">
-      <SectionTitle 
-        title="Career Journey" 
-        subtitle="From code to leadership - Every step tells a story" />
+      <!-- Section Header -->
+      <div class="text-center mb-20">
+        <div class="inline-block px-4 py-2 bg-pink-500/10 border border-pink-500/30 rounded-full mb-6">
+          <span class="text-pink-500 font-semibold">Career Path</span>
+        </div>
+        <h2 class="text-5xl md:text-6xl font-bold mb-6">
+          <span class="text-white">My</span>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-500"> Journey</span>
+        </h2>
+        <p class="text-gray-400 text-xl max-w-2xl mx-auto">
+          From code to leadership - Every step tells a story
+        </p>
+      </div>
       
       <div class="max-w-6xl mx-auto">
         <!-- Interactive Timeline -->
