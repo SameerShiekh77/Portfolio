@@ -184,9 +184,9 @@ const hoveredIndex = ref(null)
 
 const experiences = [
   {
-    period: '2020 - Present',
-    title: 'DevOps Manager',
-    company: 'Tech Innovations Inc.',
+    period: '2023 - Present',
+    title: 'DevOps Manager and Software Engineer',
+    company: 'Al Nafi E-Learning Private Ltd.',
     current: true,
     description: 'Leading a team of 8 engineers in building and maintaining cloud infrastructure. Spearheading DevOps transformation initiatives, implementing cutting-edge CI/CD pipelines, and driving automation across the organization.',
     achievements: [
@@ -199,7 +199,8 @@ const experiences = [
     stats: {
       team: { value: '8', label: 'Team Size' },
       uptime: { value: '99.99%', label: 'Uptime' },
-      savings: { value: '35%', label: 'Cost Saved' }
+      savings: { value: '35%', label: 'Cost Saved' },
+      projects: { value: '50+', label: 'Projects' }
     }
   },
   {

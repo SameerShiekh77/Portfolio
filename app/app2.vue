@@ -171,7 +171,7 @@
           </p>
           
           <div class="flex flex-wrap justify-center gap-4 mb-12">
-            <a href="mailto:your.email@example.com" 
+            <a href="mailto:muhammadsameer.css@gmail.com" 
                class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full hover:scale-105 transition-all shadow-lg hover:shadow-cyan-500/50">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
@@ -200,7 +200,7 @@
               <div class="hover:scale-105 transition-transform">
                 <div class="text-3xl mb-2">📧</div>
                 <div class="text-gray-400 text-sm">Email</div>
-                <div class="text-cyan-400">your.email@example.com</div>
+                <div class="text-cyan-400">muhammadsameer.css@gmail.com</div>
               </div>
               <div class="hover:scale-105 transition-transform">
                 <div class="text-3xl mb-2">📍</div>
@@ -208,7 +208,7 @@
                 <div class="text-cyan-400">Your City, Country</div>
               </div>
               <div class="hover:scale-105 transition-transform">
-                <div class="text-3xl mb-2">⚡</div>
+                <div class="text-3xl mb                                                                                     -2">⚡</div>
                 <div class="text-gray-400 text-sm">Response Time</div>
                 <div class="text-cyan-400">24-48 hours</div>
               </div>
@@ -222,7 +222,7 @@
     <footer class="py-8 border-t border-cyan-500/20">
       <div class="container mx-auto px-6 text-center text-gray-400">
         <p>© 2025 Built with ❤️ using Vue 3 & Nuxt.js</p>
-        <p class="mt-2">Deployed on AWS | Powered by Coffee ☕</p>
+        <p class="mt-2">Deployed on Netlify | Powered by Muhammad Sameer                                                                                      </p>
       </div>
     </footer>
 

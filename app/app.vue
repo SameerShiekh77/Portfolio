@@ -187,7 +187,7 @@
                 </svg>
               </div>
               <h3 class="text-lg font-semibold text-white mb-2">Email</h3>
-              <p class="text-gray-400">your.email@example.com</p>
+              <p class="text-gray-400">muhammadsameer.css@gmail.com</p>
             </div>
 
             <div class="bg-gradient-to-br from-gray-900/50 to-black border border-blue-500/20 rounded-2xl p-6 text-center hover:border-blue-500/50 transition-all hover:scale-105">
@@ -197,7 +197,17 @@
                 </svg>
               </div>
               <h3 class="text-lg font-semibold text-white mb-2">Phone</h3>
-              <p class="text-gray-400">+1 234 567 890</p>
+              <p class="text-gray-400">+923166368782</p>
+            </div>
+
+            <div class="bg-gradient-to-br from-gray-900/50 to-black border border-blue-500/20 rounded-2xl p-6 text-center hover:border-blue-500/50 transition-all hover:scale-105">
+              <div class="w-14 h-14 bg-blue-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h1l1 2h.89a1 1 0 01.832.445l1.528 2.042a1 1 0 01-.132 1.316l-1.414 1.414a11.042 11.042 0 005.516 5.516l1.414-1.414a1 1 0 011.316-.132l2.042 1.528a1 1 0 01.445.832V21a2 2 0 01-2 2h-1C9.716 23 3 16.284 3 8v2z"></path>
+</svg>
+              </div>
+              <h3 class="text-lg font-semibold text-white mb-2">WhatsApp</h3>
+              <p class="text-gray-400">+923431396493</p>
             </div>
 
             <div class="bg-gradient-to-br from-gray-900/50 to-black border border-blue-500/20 rounded-2xl p-6 text-center hover:border-blue-500/50 transition-all hover:scale-105">
@@ -304,11 +314,22 @@ const skillCategories = [
   {
     title: 'Backend & DevOps',
     skills: [
-      { name: 'Python / Django', level: 95 },
-      { name: 'AWS Cloud', level: 92 },
-      { name: 'Docker / Kubernetes', level: 90 },
-      { name: 'CI/CD Pipelines', level: 93 },
-      { name: 'REST APIs', level: 94 }
+      { name: 'Python', level: 70 },
+      { name: 'Django', level: 90 },
+      { name: 'Flask', level: 60 },
+      { name: 'Streamlit', level: 70 },
+      { name: 'AWS Cloud', level: 50 },
+
+      { name: 'Monolithic Architecture', level: 90 },
+      { name: 'Docker', level: 50 },
+      { name: 'CI/CD Pipelines', level: 60 },
+      { name: 'REST APIs', level: 94 },
+      { name: 'Microservices Architecture', level: 80 },
+      { name: 'Database Management (SQL & NoSQL)', level: 70 },
+      { name: 'Azure', level: 20 },
+      { name: 'ERP Next', level: 60 },
+      { name: 'PHP / Laravel', level: 40 },
+
     ]
   },
   {
@@ -316,9 +337,18 @@ const skillCategories = [
     skills: [
       { name: 'Vue.js / Nuxt.js', level: 90 },
       { name: 'JavaScript / TypeScript', level: 88 },
-      { name: 'Tailwind CSS', level: 85 },
+      { name: 'Tailwind CSS / Bootstrap', level: 85 },
       { name: 'Git / GitHub', level: 95 },
-      { name: 'Linux Administration', level: 90 }
+      { name: 'Linux Administration', level: 90 },
+      { name: 'Agile Methodologies', level: 80 },
+      { name: 'Trello', level: 75 },
+      { name: 'Sentry', level: 70 },
+      { name: 'Postman', level: 80 },
+      { name: 'Visual Studio Code', level: 90 },
+      { name: 'Copilot', level: 70 },
+      { name: 'WordPress', level: 40 },
+      { name: 'AI Integration', level: 70 },
+
     ]
   }
 ]

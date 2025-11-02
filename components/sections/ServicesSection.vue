@@ -57,24 +57,26 @@
 <script setup>
 const services = [
   {
+    icon: '💻',
+    title: 'Full Stack Dev',
+    description: 'End-to-end web application development using modern frameworks like Django, Vue.js, Nux.js and tailwind css.'
+  },
+  {
     icon: '☁️',
     title: 'Cloud DevOps',
     description: 'AWS infrastructure design, implementation, and management. CI/CD pipelines and automation for seamless deployments.'
   },
-  {
-    icon: '💻',
-    title: 'Full Stack Dev',
-    description: 'End-to-end web application development using modern frameworks like Django, Vue.js, and React.'
-  },
+  
   {
     icon: '🤖',
     title: 'AI Integration',
-    description: 'Implementing machine learning models and AI-powered features into production applications.'
+    description: 'Implementing machine learning models and AI-powered features into web applications.'
   },
   {
-    icon: '🎨',
-    title: 'UI/UX Design',
-    description: 'Creating beautiful, intuitive interfaces with modern design principles and best practices.'
+    icon: '📊',
+    title: 'CRM/HRM/ERP Solutions',
+    description: 'Custom solutions for managing customer relationships, human resources, and enterprise resource planning.'
   }
+  
 ]
 </script>
