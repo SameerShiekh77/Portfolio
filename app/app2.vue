@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-gradient-to-br from-gray-900 via-cyan-900 to-gray-900 min-h-screen text-white overflow-x-hidden">
+  <div class="bg-linear-to-br from-gray-900 via-cyan-900 to-gray-900 min-h-screen text-white overflow-x-hidden">
     <!-- Navigation -->
     <nav class="fixed top-0 w-full z-50 backdrop-blur-lg bg-gray-900/70 border-b border-cyan-500/20 transition-all duration-300"
          :class="{ 'bg-gray-900/90': scrolled }">
       <div class="container mx-auto px-6 py-4">
         <div class="flex justify-between items-center">
-          <div class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+          <div class="text-2xl font-bold bg-linear-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
             Portfolio
           </div>
           <div class="hidden md:flex space-x-8">
@@ -14,7 +14,7 @@
                @click="scrollToSection(item.id)"
                class="hover:text-cyan-400 transition-colors relative group">
               {{ item.label }}
-              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
+              <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-linear-to-r from-cyan-400 to-blue-400 group-hover:w-full transition-all duration-300"></span>
             </a>
           </div>
           <button @click="mobileMenuOpen = !mobileMenuOpen" class="md:hidden">
@@ -52,7 +52,7 @@
             :key="index"
             :ref="el => storyRefs[index] = el"
             class="story-card opacity-0 transform translate-y-20">
-            <div class="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 p-8 rounded-2xl backdrop-blur-sm border border-cyan-500/20 hover:border-cyan-500/50 transition-all hover:scale-105">
+            <div class="bg-linear-to-br from-cyan-900/30 to-blue-900/30 p-8 rounded-2xl backdrop-blur-sm border border-cyan-500/20 hover:border-cyan-500/50 transition-all hover:scale-105">
               <div class="flex items-start gap-4">
                 <div class="text-4xl">{{ story.icon }}</div>
                 <div class="flex-1">
@@ -104,7 +104,7 @@
         <div class="max-w-4xl mx-auto">
           <div 
             ref="educationRef"
-            class="education-card bg-gradient-to-br from-cyan-900/40 to-blue-900/20 p-8 rounded-2xl backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500/60 transition-all hover:scale-105 opacity-0 transform translate-y-20">
+            class="education-card bg-linear-to-br from-cyan-900/40 to-blue-900/20 p-8 rounded-2xl backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500/60 transition-all hover:scale-105 opacity-0 transform translate-y-20">
             <div class="flex items-start gap-6">
               <div class="text-6xl">🎓</div>
               <div class="flex-1">
@@ -148,7 +148,7 @@
             v-for="(achievement, index) in achievements" 
             :key="index"
             :ref="el => achievementRefs[index] = el"
-            class="achievement-card bg-gradient-to-br from-cyan-900/40 to-blue-900/20 p-6 rounded-2xl backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500/60 transition-all hover:scale-105 opacity-0 transform scale-90">
+            class="achievement-card bg-linear-to-br from-cyan-900/40 to-blue-900/20 p-6 rounded-2xl backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500/60 transition-all hover:scale-105 opacity-0 transform scale-90">
             <div class="text-5xl mb-4">{{ achievement.icon }}</div>
             <h3 class="text-xl font-bold mb-2 text-cyan-400">{{ achievement.title }}</h3>
             <p class="text-gray-300">{{ achievement.description }}</p>
@@ -172,7 +172,7 @@
           
           <div class="flex flex-wrap justify-center gap-4 mb-12">
             <a href="mailto:muhammadsameer.css@gmail.com" 
-               class="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full hover:scale-105 transition-all shadow-lg hover:shadow-cyan-500/50">
+               class="flex items-center gap-2 px-6 py-3 bg-linear-to-r from-cyan-600 to-blue-600 rounded-full hover:scale-105 transition-all shadow-lg hover:shadow-cyan-500/50">
               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
                 <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
@@ -195,7 +195,7 @@
             </a>
           </div>
           
-          <div class="bg-gradient-to-br from-cyan-900/30 to-blue-900/30 p-8 rounded-2xl backdrop-blur-sm border border-cyan-500/20">
+          <div class="bg-linear-to-br from-cyan-900/30 to-blue-900/30 p-8 rounded-2xl backdrop-blur-sm border border-cyan-500/20">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div class="hover:scale-105 transition-transform">
                 <div class="text-3xl mb-2">📧</div>
@@ -229,7 +229,7 @@
     <!-- Scroll Progress Bar -->
     <div class="fixed top-0 left-0 w-full h-1 bg-gray-800 z-50">
       <div 
-        class="h-full bg-gradient-to-r from-cyan-500 to-blue-500 transition-all duration-300"
+        class="h-full bg-linear-to-r from-cyan-500 to-blue-500 transition-all duration-300"
         :style="{ width: scrollProgress + '%' }">
       </div>
     </div>

@@ -16,7 +16,7 @@
       <div class="text-center" :class="{'animate-fadeInUp': isVisible}">
         <!-- Animated Avatar -->
         <div class="mb-6 inline-block">
-          <div class="w-32 h-32 rounded-full bg-gradient-to-br from-cyan-400 to-blue-600 p-1 animate-spin-slow">
+          <div class="w-32 h-32 rounded-full bg-linear-to-br from-cyan-400 to-blue-600 p-1 animate-spin-slow">
             <div class="w-full h-full rounded-full bg-gray-900 flex items-center justify-center">
               <span class="text-5xl">👨‍💻</span>
             </div>
@@ -24,11 +24,11 @@
         </div>
         
         <!-- Typing Effect Title -->
-        <h1 class="text-6xl md:text-8xl font-bold mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
+        <h1 class="text-6xl md:text-8xl font-bold mb-4 bg-linear-to-r from-cyan-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
           {{ displayText }}<span class="animate-blink">|</span>
         </h1>
         
-        <h2 class="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-500">
+        <h2 class="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-cyan-500">
           DevOps Manager & Full Stack Developer
         </h2>
         
@@ -41,7 +41,7 @@
         <div class="flex flex-wrap justify-center gap-4 mb-12">
           <a 
             href="#contact" 
-            class="px-8 py-4 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-full font-semibold hover:scale-105 transform transition-all shadow-lg hover:shadow-cyan-500/50">
+            class="px-8 py-4 bg-linear-to-r from-cyan-600 to-blue-600 rounded-full font-semibold hover:scale-105 transform transition-all shadow-lg hover:shadow-cyan-500/50">
             Let's Connect
           </a>
           <a 

@@ -14,7 +14,7 @@
         </div>
         <h2 class="text-5xl md:text-6xl font-bold mb-6">
           <span class="text-white">What</span>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-500"> I Do</span>
+          <span class="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-cyan-500"> I Do</span>
         </h2>
         <p class="text-gray-400 text-xl max-w-2xl mx-auto">
           Delivering end-to-end solutions from cloud architecture to full-stack development
@@ -24,9 +24,10 @@
       <!-- Services Grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div v-for="(service, index) in services" :key="index"
-             class="group relative bg-gradient-to-br from-gray-900/50 to-black border border-white/5 rounded-3xl p-8 hover:border-blue-500/50 transition-all duration-500 hover:-translate-y-2">
+          class="group relative bg-linear-to-br from-gray-900/50 to-black border border-white/5 rounded-3xl p-8 hover:border-blue-500/50 transition-all duration-500 hover:-translate-y-2">
           <!-- Icon -->
-          <div class="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <div
+            class="w-16 h-16 bg-linear-to-br from-blue-500/20 to-cyan-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
             <div class="text-4xl">{{ service.icon }}</div>
           </div>
 
@@ -41,13 +42,16 @@
           <!-- Arrow -->
           <div class="flex items-center text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity">
             <span class="text-sm font-semibold mr-2">Learn More</span>
-            <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </div>
 
           <!-- Hover Effect -->
-          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-cyan-500/0 group-hover:from-blue-500/5 group-hover:to-cyan-500/5 rounded-3xl transition-all duration-500"></div>
+          <div
+            class="absolute inset-0 bg-linear-to-br from-blue-500/0 to-cyan-500/0 group-hover:from-blue-500/5 group-hover:to-cyan-500/5 rounded-3xl transition-all duration-500">
+          </div>
         </div>
       </div>
     </div>
@@ -66,7 +70,7 @@ const services = [
     title: 'Cloud DevOps',
     description: 'AWS infrastructure design, implementation, and management. CI/CD pipelines and automation for seamless deployments.'
   },
-  
+
   {
     icon: '🤖',
     title: 'AI Integration',
@@ -77,6 +81,6 @@ const services = [
     title: 'CRM/HRM/ERP Solutions',
     description: 'Custom solutions for managing customer relationships, human resources, and enterprise resource planning.'
   }
-  
+
 ]
 </script>

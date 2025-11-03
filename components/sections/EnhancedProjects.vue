@@ -14,7 +14,7 @@
         </div>
         <h2 class="text-5xl md:text-6xl font-bold mb-6">
           <span class="text-white">Featured</span>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-500"> Projects</span>
+          <span class="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-cyan-500"> Projects</span>
         </h2>
         <p class="text-gray-400 text-xl max-w-2xl mx-auto">
           Transforming ideas into exceptional digital experiences
@@ -29,7 +29,7 @@
           @click="activeFilter = filter"
           class="px-6 py-3 rounded-full font-semibold transition-all"
           :class="activeFilter === filter 
-            ? 'bg-gradient-to-r from-blue-500 to-blue-600 text-white scale-105 shadow-lg shadow-blue-500/50' 
+            ? 'bg-linear-to-r from-blue-500 to-blue-600 text-white scale-105 shadow-lg shadow-blue-500/50' 
             : 'bg-white/5 border border-white/10 text-gray-400 hover:bg-white/10 hover:border-blue-500/30'">
           {{ filter }}
         </button>
@@ -45,13 +45,13 @@
           @mouseleave="hoveredProject = null">
           
           <!-- Project Card -->
-          <div class="relative bg-gradient-to-br from-gray-900/50 to-black border border-white/5 rounded-3xl overflow-hidden hover:border-blue-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20">
+          <div class="relative bg-linear-to-br from-gray-900/50 to-black border border-white/5 rounded-3xl overflow-hidden hover:border-blue-500/50 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20">
             
             <!-- Project Image with 3D Effect -->
             <div class="relative h-64 overflow-hidden"
                  @mousemove="handleMouseMove($event, index)"
                  @mouseleave="resetTransform(index)">
-              <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-cyan-500/20"></div>
+              <div class="absolute inset-0 bg-linear-to-br from-blue-500/20 to-cyan-500/20"></div>
               <img 
                 :src="project.image" 
                 :alt="project.title"
@@ -75,7 +75,7 @@
 
             <!-- Content -->
             <div class="p-6">
-              <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-cyan-500 transition-all">
+              <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-blue-500 group-hover:to-cyan-500 transition-all">
                 {{ project.title }}
               </h3>
               <p class="text-gray-400 mb-4 line-clamp-2">
@@ -101,7 +101,7 @@
                   v-if="project.liveUrl"
                   :href="project.liveUrl" 
                   target="_blank"
-                  class="flex-1 px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg text-center text-sm font-semibold hover:scale-105 transition-transform flex items-center justify-center gap-2">
+                  class="flex-1 px-4 py-2 bg-linear-to-r from-blue-500 to-blue-600 rounded-lg text-center text-sm font-semibold hover:scale-105 transition-transform flex items-center justify-center gap-2">
                   <span>Live Demo</span>
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
@@ -121,14 +121,14 @@
             </div>
 
             <!-- Hover Glow Effect -->
-            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-cyan-500/0 group-hover:from-blue-500/5 group-hover:to-cyan-500/5 pointer-events-none transition-all duration-500 rounded-3xl"></div>
+            <div class="absolute inset-0 bg-linear-to-br from-blue-500/0 to-cyan-500/0 group-hover:from-blue-500/5 group-hover:to-cyan-500/5 pointer-events-none transition-all duration-500 rounded-3xl"></div>
           </div>
         </div>
       </div>
 
       <!-- View All Projects Button -->
       <div class="text-center mt-16">
-        <a href="#" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full font-semibold hover:scale-105 transition-all shadow-lg shadow-blue-500/50">
+        <a href="#" class="inline-flex items-center gap-2 px-8 py-4 bg-linear-to-r from-blue-500 to-blue-600 rounded-full font-semibold hover:scale-105 transition-all shadow-lg shadow-blue-500/50">
           <span>View All Projects</span>
           <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>

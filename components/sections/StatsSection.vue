@@ -4,10 +4,10 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
         <!-- Experience Card -->
         <div class="relative group">
-          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-transparent rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
-          <div class="relative bg-gradient-to-br from-gray-900 to-black border border-blue-500/20 rounded-3xl p-8 hover:border-blue-500/50 transition-all">
+          <div class="absolute inset-0 bg-linear-to-br from-blue-500/20 to-transparent rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
+          <div class="relative bg-linear-to-br from-gray-900 to-black border border-blue-500/20 rounded-3xl p-8 hover:border-blue-500/50 transition-all">
             <div class="text-6xl mb-4">💼</div>
-            <div class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 mb-2">
+            <div class="text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-blue-600 mb-2">
               {{ stats.experience }}+
             </div>
             <div class="text-gray-400 text-lg">Years of Experience</div>
@@ -17,10 +17,10 @@
 
         <!-- Projects Card -->
         <div class="relative group">
-          <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-transparent rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
-          <div class="relative bg-gradient-to-br from-gray-900 to-black border border-cyan-500/20 rounded-3xl p-8 hover:border-cyan-500/50 transition-all">
+          <div class="absolute inset-0 bg-linear-to-br from-cyan-500/20 to-transparent rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
+          <div class="relative bg-linear-to-br from-gray-900 to-black border border-cyan-500/20 rounded-3xl p-8 hover:border-cyan-500/50 transition-all">
             <div class="text-6xl mb-4">🚀</div>
-            <div class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 to-cyan-600 mb-2">
+            <div class="text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-500 to-cyan-600 mb-2">
               {{ stats.projects }}+
             </div>
             <div class="text-gray-400 text-lg">Completed Projects</div>
@@ -30,10 +30,10 @@
 
         <!-- Clients Card -->
         <div class="relative group">
-          <div class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-transparent rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
-          <div class="relative bg-gradient-to-br from-gray-900 to-black border border-blue-500/20 rounded-3xl p-8 hover:border-blue-500/50 transition-all">
+          <div class="absolute inset-0 bg-linear-to-br from-blue-500/20 to-transparent rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
+          <div class="relative bg-linear-to-br from-gray-900 to-black border border-blue-500/20 rounded-3xl p-8 hover:border-blue-500/50 transition-all">
             <div class="text-6xl mb-4">👥</div>
-            <div class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-blue-600 mb-2">
+            <div class="text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-blue-600 mb-2">
               {{ stats.clients }}+
             </div>
             <div class="text-gray-400 text-lg">Happy Clients</div>
@@ -43,10 +43,10 @@
 
         <!-- Awards Card -->
         <div class="relative group">
-          <div class="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-transparent rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
-          <div class="relative bg-gradient-to-br from-gray-900 to-black border border-yellow-500/20 rounded-3xl p-8 hover:border-yellow-500/50 transition-all">
+          <div class="absolute inset-0 bg-linear-to-br from-yellow-500/20 to-transparent rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
+          <div class="relative bg-linear-to-br from-gray-900 to-black border border-yellow-500/20 rounded-3xl p-8 hover:border-yellow-500/50 transition-all">
             <div class="text-6xl mb-4">🏆</div>
-            <div class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-500 to-yellow-600 mb-2">
+            <div class="text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-yellow-500 to-yellow-600 mb-2">
               {{ stats.awards }}+
             </div>
             <div class="text-gray-400 text-lg">Awards Won</div>

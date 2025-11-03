@@ -1,11 +1,11 @@
 <template>
   <div 
-    class="group relative bg-gradient-to-br from-cyan-900/40 to-blue-900/20 rounded-2xl overflow-hidden backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500/60 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20"
+    class="group relative bg-linear-to-br from-cyan-900/40 to-blue-900/20 rounded-2xl overflow-hidden backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-500/60 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/20"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false">
     
     <!-- Project Image/Placeholder -->
-    <div class="relative h-48 bg-gradient-to-br from-cyan-600/30 to-blue-600/30 overflow-hidden">
+    <div class="relative h-48 bg-linear-to-br from-cyan-600/30 to-blue-600/30 overflow-hidden">
       <div class="absolute inset-0 flex items-center justify-center text-6xl">
         {{ project.icon || '🚀' }}
       </div>
@@ -63,7 +63,7 @@
           v-if="project.liveUrl"
           :href="project.liveUrl" 
           target="_blank"
-          class="flex-1 px-4 py-2 bg-gradient-to-r from-cyan-600 to-blue-600 rounded-lg text-center text-sm font-semibold hover:scale-105 transition-transform">
+          class="flex-1 px-4 py-2 bg-linear-to-r from-cyan-600 to-blue-600 rounded-lg text-center text-sm font-semibold hover:scale-105 transition-transform">
           View Live
         </a>
         <a 
@@ -78,7 +78,7 @@
 
     <!-- Hover Overlay Effect -->
     <div 
-      class="absolute inset-0 bg-gradient-to-br from-cyan-600/0 to-blue-600/0 group-hover:from-cyan-600/10 group-hover:to-blue-600/10 transition-all duration-500 pointer-events-none">
+      class="absolute inset-0 bg-linear-to-br from-cyan-600/0 to-blue-600/0 group-hover:from-cyan-600/10 group-hover:to-blue-600/10 transition-all duration-500 pointer-events-none">
     </div>
   </div>
 </template>

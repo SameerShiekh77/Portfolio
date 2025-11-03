@@ -2,7 +2,7 @@
     <section id="home" class="relative min-h-screen bg-black text-white overflow-hidden flex items-center">
         <!-- Animated Background Grid -->
         <div class="absolute inset-0">
-            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-black to-cyan-500/5"></div>
+            <div class="absolute inset-0 bg-linear-to-br from-blue-500/5 via-black to-cyan-500/5"></div>
             <div class="absolute inset-0"
                 style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.05) 1px, transparent 0); background-size: 40px 40px;">
             </div>
@@ -41,21 +41,20 @@
 
                         <!-- Role with Typewriter Effect -->
                         <div
-                            class="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-500 mb-6 min-h-[3rem] sm:min-h-[4rem] md:min-h-[5rem]">
+                            class="text-3xl sm:text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-cyan-500 mb-6 min-h-[3rem] sm:min-h-[4rem] md:min-h-[5rem]">
                             {{ typedRole }}<span class="animate-blink">|</span>
                         </div>
                     </div>
 
                     <p class="text-gray-400 text-base md:text-lg leading-relaxed max-w-xl">
-                        I'm a DevOps Manager with 5+ years of experience in building scalable cloud infrastructure,
-                        implementing CI/CD pipelines, and leading high-performing engineering teams. Passionate about
-                        automation, cloud technologies, and creating seamless development workflows.
+                        Versatile and detail-oriented Full Stack Developer & DevOps Manager with over 5 years of experience in web development, DevOps, and cloud engineering. Holds BS in Computer Science, with hands-on expertise in Python, Django, AWS, CI/CD pipelines, microservices, and modern frontend frameworks like Vue.js/Nuxt.js. Adept at architecting scalable, secure, and high-performance systems from
+                        scratch. Proven track record of leading cross-functional teams, automating DevOps workflows, and consistently delivering complex projects on time. Eager to contribute innovation, leadership, and deep technical expertise to impactful, forward-thinking teams.
                     </p>
 
                     <!-- CTA Buttons -->
                     <div class="flex flex-wrap gap-4">
                         <a href="#contact"
-                            class="px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full font-semibold hover:scale-105 transition-all shadow-lg shadow-blue-500/50 flex items-center gap-2 text-sm md:text-base">
+                            class="px-6 md:px-8 py-3 md:py-4 bg-linear-to-r from-blue-500 to-blue-600 rounded-full font-semibold hover:scale-105 transition-all shadow-lg shadow-blue-500/50 flex items-center gap-2 text-sm md:text-base">
                             <span>Hire Me</span>
                             <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -85,7 +84,7 @@
                                     d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                             </svg>
                         </a>
-                        
+
                         <a href="https://www.linkedin.com/in/muhammadsameer/"
                             class="w-10 h-10 md:w-12 md:h-12 bg-white/5 border border-white/10 rounded-full flex items-center justify-center hover:bg-blue-500 hover:border-blue-500 transition-all group">
                             <svg class="w-4 h-4 md:w-5 md:h-5 text-gray-400 group-hover:text-white" fill="currentColor"
@@ -110,13 +109,13 @@
                     <div class="relative group w-full max-w-[280px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[420px]">
                         <!-- Glowing Border -->
                         <div
-                            class="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-opacity">
+                            class="absolute inset-0 bg-linear-to-r from-blue-500 to-cyan-500 rounded-3xl blur-2xl opacity-40 group-hover:opacity-60 transition-opacity">
                         </div>
 
                         <!-- Image Container with 3D Effect -->
-                        <div class="relative bg-gradient-to-br from-gray-900 to-black p-1.5 md:p-2 rounded-3xl transform hover:scale-105 transition-all duration-500"
+                        <div class="relative bg-linear-to-br from-gray-900 to-black p-1.5 md:p-2 rounded-3xl transform hover:scale-105 transition-all duration-500"
                             @mousemove="handleMouseMove" @mouseleave="resetTransform" :style="imageTransform">
-                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop"
+                            <img src="images/Muhammad-Sameer.jpeg"
                                 alt="Professional Portrait" class="w-full h-auto rounded-3xl object-cover">
 
                             <!-- Floating Stats -->
@@ -340,6 +339,4 @@ onMounted(() => {
 .animate-fadeIn {
     animation: fadeIn 0.8s ease-out;
 }
-
-
 </style>
