@@ -1,12 +1,19 @@
-# Private Projects & Screenshots Feature
+# Private Projects & Screenshots Feature - UPDATED
 
 ## Overview
-This portfolio now supports private projects that can't be shown via GitHub or live URLs, along with expandable descriptions for better readability.
+This portfolio now supports private projects that can't be shown via GitHub or live URLs, along with expandable descriptions and image gallery navigation.
 
-## New Features
+## 🎉 NEW: Fixed Image Navigation Issue
 
-### 1. **Project Screenshots**
-For private projects, you can now showcase them using screenshots instead of live URLs or GitHub links.
+The image navigation issue has been resolved! You can now properly navigate through multiple screenshots using:
+- Previous/Next buttons
+- Thumbnail clicks
+- Keyboard arrows (←→)
+
+## Features
+
+### 1. **Project Screenshots Gallery**
+For private projects, you can showcase them using an interactive image gallery with full navigation support.
 
 #### How to add screenshots:
 1. Place your project screenshots in `public/images/screenshots/`

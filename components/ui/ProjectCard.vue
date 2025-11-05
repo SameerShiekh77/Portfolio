@@ -107,16 +107,16 @@
           GitHub
         </a>
         <button 
-          v-if="project.screenshots && project.screenshots.length > 0 && !project.liveUrl && !project.githubUrl"
+          v-if="project.screenshots && project.screenshots.length > 0"
           @click="openImageModal(0)"
           class="flex-1 px-4 py-2 bg-linear-to-r from-purple-600 to-pink-600 rounded-lg text-center text-sm font-semibold hover:scale-105 transition-transform">
           View Screenshots
         </button>
-        <button 
+        <div 
           v-if="(!project.liveUrl && !project.githubUrl && (!project.screenshots || project.screenshots.length === 0))"
           class="flex-1 px-4 py-2 bg-gray-600 rounded-lg text-center text-sm font-semibold cursor-not-allowed opacity-50">
           Private Project
-        </button>
+        </div>
       </div>
     </div>
 
@@ -130,11 +130,11 @@
   <div v-if="isModalOpen" 
        class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
        @click="closeModal">
-    <div class="relative max-w-6xl max-h-[90vh] w-full h-full flex flex-col">
+    <div class="relative max-w-6xl max-h-[90vh] w-full h-full flex flex-col" @click.stop>
       <!-- Modal Header -->
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-2xl font-bold text-white">{{ project.title }} - Screenshots</h3>
-        <button @click="closeModal" 
+        <button @click.stop="closeModal" 
                 class="text-white hover:text-red-400 text-2xl p-2">
           ✕
         </button>
@@ -152,14 +152,14 @@
       <!-- Navigation -->
       <div v-if="project.screenshots && project.screenshots.length > 1" 
            class="flex justify-center items-center gap-4 mt-4">
-        <button @click="previousImage" 
+        <button @click.stop="previousImage" 
                 class="px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500 transition-colors">
           ← Previous
         </button>
         <span class="text-white">
           {{ currentImageIndex + 1 }} / {{ project.screenshots.length }}
         </span>
-        <button @click="nextImage" 
+        <button @click.stop="nextImage" 
                 class="px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500 transition-colors">
           Next →
         </button>
@@ -174,7 +174,7 @@
              :alt="`${project.title} thumbnail ${index + 1}`"
              class="w-16 h-16 object-cover rounded cursor-pointer border-2 transition-all"
              :class="currentImageIndex === index ? 'border-cyan-400' : 'border-gray-600 hover:border-gray-400'"
-             @click="currentImageIndex = index">
+             @click.stop="currentImageIndex = index">
       </div>
     </div>
   </div>
@@ -212,19 +212,23 @@ const closeModal = () => {
 }
 
 const nextImage = () => {
+  console.log('Next image clicked, current index:', currentImageIndex.value, 'total images:', props.project.screenshots?.length)
   if (props.project.screenshots && currentImageIndex.value < props.project.screenshots.length - 1) {
     currentImageIndex.value++
   } else {
     currentImageIndex.value = 0 // Loop back to first image
   }
+  console.log('New index:', currentImageIndex.value)
 }
 
 const previousImage = () => {
+  console.log('Previous image clicked, current index:', currentImageIndex.value, 'total images:', props.project.screenshots?.length)
   if (currentImageIndex.value > 0) {
     currentImageIndex.value--
   } else if (props.project.screenshots) {
     currentImageIndex.value = props.project.screenshots.length - 1 // Loop to last image
   }
+  console.log('New index:', currentImageIndex.value)
 }
 
 // Keyboard navigation

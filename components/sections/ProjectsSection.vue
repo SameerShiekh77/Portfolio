@@ -181,6 +181,10 @@ const projects = [
       performance: '71%',
       uptime: '99.8%'
     },
+    screenshots: [
+      '/images/screenshots/Epay-1.png',
+      '/images/screenshots/Epay-2.png'
+    ]
   },
   {
     title: 'MCQ and Notes Generator',
@@ -224,11 +228,7 @@ const projects = [
       performance: '95%',
       uptime: '99.8%'
     },
-    screenshots: [
-      '/images/screenshots/placeholder.svg',
-      '/images/screenshots/placeholder.svg',
-      '/images/screenshots/placeholder.svg'
-    ]
+
   },
   {
     title: 'Sales and Support Dashboard',
@@ -242,6 +242,14 @@ const projects = [
       performance: '95%',
       uptime: '99.8%'
     },
+    screenshots: [
+      '/images/screenshots/sasd-1.png',
+      '/images/screenshots/sasd-2.png',
+      '/images/screenshots/sasd-3.png',
+      '/images/screenshots/sasd-4.png',
+      '/images/screenshots/sasd-5.png',
+      '/images/screenshots/sasd-6.png',
+    ]
   },
   {
     title: 'Al Nafi Loyalty Program',
@@ -268,6 +276,14 @@ const projects = [
       performance: '70%',
       uptime: '99.8%'
     },
+    screenshots: [
+      '/images/screenshots/sms-1.png',
+      '/images/screenshots/sms-2.png',
+      '/images/screenshots/sms-3.png',
+      '/images/screenshots/sms-4.png',
+      '/images/screenshots/sms-5.png',
+      '/images/screenshots/sms-6.png',
+    ]
   }, {
     title: 'SEO Management System',
     description: 'Developed a comprehensive SEO or backlinks management system that helps businesses optimize their online presence. The system includes features for keyword research, on-page optimization, backlink tracking, and performance analytics.',
@@ -279,7 +295,8 @@ const projects = [
       users: '25',
       performance: '98%',
       uptime: '99.8%'
-  }},
+    }
+  },
   {
     title: 'HRM System',
     description: 'Developed a comprehensive HRM system that helps businesses manage their human resources effectively. The system includes features for employee onboarding, performance tracking, leave management, and payroll processing. This enterprise-grade solution streamlines HR processes and provides real-time insights into workforce management.',
