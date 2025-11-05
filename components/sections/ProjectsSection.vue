@@ -83,8 +83,8 @@ const projects = [
     liveUrl: 'https://alnafi.academy',
   },
   {
-    title: 'Affiliate Marketing System',
-    description: 'Developed a robust affiliate marketing system for Al Nafi Affiliate Program. This platform enables users to sign up as affiliates, track their referrals, and earn commissions through various marketing channels. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
+    title: 'Affiliate Management System',
+    description: 'Developed a robust affiliate management system for Al Nafi Affiliate Program. This platform enables users to sign up as affiliates, track their referrals, and earn commissions through various management channels. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
     icon: '💼',
     status: 'Live',
     technologies: ['Python', 'Django', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
@@ -150,6 +150,11 @@ const projects = [
       performance: '100%',
       uptime: '99.8%'
     },
+    screenshots: [
+      '/images/screenshots/EMS-1.png',
+      '/images/screenshots/EMS-2.png',
+      '/images/screenshots/EMS-3.png'
+    ]
   },
   {
     title: 'Al Baseer',
@@ -169,7 +174,7 @@ const projects = [
     description: 'Built a comprehensive Fintech solution named Epay, which is a payment gateway system where users can pay through multiple payment gateways like Easypaisa or any other Pakistani banking application using 1-bill integration. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
     icon: '💳',
     status: 'Live',
-    technologies: ['Python', 'Django', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
+    technologies: ['Python', 'Flask', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
     category: ['Web Application', 'Internal Application'],
     metrics: {
       users: '1k',
@@ -189,6 +194,10 @@ const projects = [
       performance: '95%',
       uptime: '99.8%'
     },
+    screenshots: [
+      '/images/screenshots/placeholder.svg',
+      '/images/screenshots/placeholder.svg'
+    ]
   },
   {
     title: 'Resume Generator',
@@ -215,6 +224,11 @@ const projects = [
       performance: '95%',
       uptime: '99.8%'
     },
+    screenshots: [
+      '/images/screenshots/placeholder.svg',
+      '/images/screenshots/placeholder.svg',
+      '/images/screenshots/placeholder.svg'
+    ]
   },
   {
     title: 'Sales and Support Dashboard',
@@ -229,6 +243,60 @@ const projects = [
       uptime: '99.8%'
     },
   },
+  {
+    title: 'Al Nafi Loyalty Program',
+    description: 'Developed a comprehensive loyalty program for Al Nafi, allowing users to earn and redeem points across various services. The system includes a user-friendly interface for tracking points, managing rewards, and viewing transaction history. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
+    icon: '🎁',
+    status: 'Live',
+    technologies: ['Python', 'Django', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
+    category: ['Web Application'],
+    metrics: {
+      users: '100',
+      performance: '95%',
+      uptime: '99.8%'
+    },
+    liveUrl: 'https://loyalty.alnafi.com/',
+  }, {
+    title: 'Campus Management System',
+    description: 'Developed a comprehensive campus management system that streamlines administrative tasks, including student enrollment, attendance tracking, and grade management with teachers tracking. The system features a user-friendly interface for both administrators and teachers, with robust reporting capabilities. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
+    icon: '🏫',
+    status: 'Live',
+    technologies: ['Python', 'Django', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
+    category: ['Web Application', 'Internal Application'],
+    metrics: {
+      users: '10',
+      performance: '70%',
+      uptime: '99.8%'
+    },
+  }, {
+    title: 'SEO Management System',
+    description: 'Developed a comprehensive SEO or backlinks management system that helps businesses optimize their online presence. The system includes features for keyword research, on-page optimization, backlink tracking, and performance analytics.',
+    icon: '🔍',
+    status: 'Live',
+    technologies: ['Python', 'Django', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
+    category: ['Web Application', 'Internal Application'],
+    metrics: {
+      users: '25',
+      performance: '98%',
+      uptime: '99.8%'
+  }},
+  {
+    title: 'HRM System',
+    description: 'Developed a comprehensive HRM system that helps businesses manage their human resources effectively. The system includes features for employee onboarding, performance tracking, leave management, and payroll processing. This enterprise-grade solution streamlines HR processes and provides real-time insights into workforce management.',
+    icon: '👥',
+    status: 'Live',
+    technologies: ['Python', 'Django', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
+    category: ['Web Application', 'Internal Application'],
+    metrics: {
+      users: '100',
+      performance: '98%',
+      uptime: '99.8%'
+    },
+    screenshots: [
+      '/images/screenshots/placeholder.svg'
+    ]
+  },
+
 ]
 
 

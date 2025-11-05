@@ -210,8 +210,21 @@ const hoveredIndex = ref(null)
 
 const experiences = [
   {
+    period: 'June 2024 - Present.',
+    title: 'Freelancer Full Stack Developer',
+    company: 'Ranked Designs',
+    current: true,
+    description: 'Developing end-to-end web applications and solutions for diverse clients. Focusing on building scalable, maintainable, and high-performance systems that align with business objectives.',
+    achievements: [
+      'Built custom PMS solutions, improving internal workflow automation by 40%',
+      'Resolved diverse client challenges by delivering full-cycle software solutions tailored to business goals',
+    ],
+    technologies: ['Python', 'Django', 'JavaScript', 'Git/Github', 'Hostinger', 'MySQL', 'REST APIs'],
+    stats: {
+    }
+  }, {
     period: 'Oct 2024 - Present.',
-    title: 'Full Stack Developer ',
+    title: 'Senior Full Stack Developer',
     company: 'Nexia Tech',
     current: true,
     description: 'Developing end-to-end web applications and solutions for diverse clients. Focusing on building scalable, maintainable, and high-performance systems that align with business objectives.',
@@ -222,7 +235,7 @@ const experiences = [
       'Enhanced application responsiveness and maintainability, reducing bug reports by 25%',
       'Delivered secure backend systems integrated with intuitive frontend interfaces'
     ],
-    technologies: ['Python', 'Django', 'PHP', 'Streamlit', 'JavaScript', 'Git/Github', 'AWS', 'Nginx', 'MySQL', 'REST APIs','React'],
+    technologies: ['Python', 'Django', 'PHP', 'Streamlit', 'JavaScript', 'Git/Github', 'AWS', 'Nginx', 'MySQL', 'REST APIs', 'React'],
     stats: {
       team: { value: '1', label: 'Team Size' },
       uptime: { value: '99.99%', label: 'Uptime' },
@@ -287,7 +300,7 @@ const experiences = [
       'Reduced page load times by 40%',
 
     ],
-    technologies: ['JavaScript', 'Python', 'MySQL', 'Hostinger', 'Django', 'HTML/CSS','REST APIs'],
+    technologies: ['JavaScript', 'Python', 'MySQL', 'Hostinger', 'Django', 'HTML/CSS', 'REST APIs'],
     stats: {
       projects: { value: '10', label: 'Projects' },
 
