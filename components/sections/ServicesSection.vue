@@ -39,14 +39,7 @@
             {{ service.description }}
           </p>
 
-          <!-- Arrow -->
-          <div class="flex items-center text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity">
-            <span class="text-sm font-semibold mr-2">Learn More</span>
-            <svg class="w-5 h-5 transform group-hover:translate-x-2 transition-transform" fill="none"
-              stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-            </svg>
-          </div>
+        
 
           <!-- Hover Effect -->
           <div

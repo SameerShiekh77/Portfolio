@@ -1,5 +1,5 @@
 <template>
-  <section id="projects" class="py-32 relative">
+  <section id="projects" class="py-3 relative">
     <div class="container mx-auto px-6">
       <SectionTitle title="Featured Projects"
         subtitle="Showcasing excellence in full-stack development and DevOps engineering" />
@@ -7,7 +7,7 @@
       <!-- Filter Tabs -->
       <div class="flex justify-center gap-4 mb-12 flex-wrap">
         <button v-for="filter in filters" :key="filter" @click="activeFilter = filter"
-          class="px-6 py-2 rounded-full font-semibold transition-all" :class="activeFilter === filter
+          class="px-6 py-2 rounded-full font-semibold transition-all cursor-pointer" :class="activeFilter === filter
             ? 'bg-linear-to-r from-cyan-600 to-blue-600 text-white scale-105'
             : 'border border-cyan-500 text-cyan-400 hover:bg-cyan-500/10'">
           {{ filter }}

@@ -26,7 +26,7 @@
         <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <button 
             @click="openImageModal(0)"
-            class="px-4 py-2 bg-cyan-600/90 text-white rounded-lg text-sm font-semibold hover:bg-cyan-500 transition-colors">
+            class="cursor-pointer px-4 py-2 bg-cyan-600/90 text-white rounded-lg text-sm font-semibold hover:bg-cyan-500 transition-colors">
             View Images
           </button>
         </div>
@@ -109,7 +109,7 @@
         <button 
           v-if="project.screenshots && project.screenshots.length > 0"
           @click="openImageModal(0)"
-          class="flex-1 px-4 py-2 bg-linear-to-r from-purple-600 to-pink-600 rounded-lg text-center text-sm font-semibold hover:scale-105 transition-transform">
+          class="flex-1 px-4 cursor-pointer py-2 bg-linear-to-r from-purple-600 to-pink-600 rounded-lg text-center text-sm font-semibold hover:scale-105 transition-transform">
           View Screenshots
         </button>
         <div 

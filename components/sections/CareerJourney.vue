@@ -321,23 +321,23 @@ const experiences = [
     stats: {
     }
   },
-  {
-    period: 'Nov 2020 – Present',
-    title: 'Co-Founder',
-    company: 'TechShoor',
-    description: 'Founded a tech community to foster learning and collaboration among developers. Organized courses, blog posting, networking events to promote knowledge sharing. Teached programming fundamentals and mentored aspiring developers.',
-    achievements: [
-      'Managed, initiated, deployed AI models, and converted machine learning models into APIs.',
-      'Served as a Python Course Instructor for the PEPC: Programming Essentials in Python course.',
-      'Designed a course covering Python programming fundamentals and object-oriented concepts.'
+  // {
+  //   period: 'Nov 2020 – Present',
+  //   title: 'Co-Founder',
+  //   company: 'TechShoor',
+  //   description: 'Founded a tech community to foster learning and collaboration among developers. Organized courses, blog posting, networking events to promote knowledge sharing. Teached programming fundamentals and mentored aspiring developers.',
+  //   achievements: [
+  //     'Managed, initiated, deployed AI models, and converted machine learning models into APIs.',
+  //     'Served as a Python Course Instructor for the PEPC: Programming Essentials in Python course.',
+  //     'Designed a course covering Python programming fundamentals and object-oriented concepts.'
 
-    ],
-    technologies: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Jupyter Notebooks', 'Django', 'Flask', 'REST APIs'],
-    stats: {
-      users: { value: '500+', label: 'Students' },
-      team: { value: '3', label: 'Team Size' },
-    }
-  }
+  //   ],
+  //   technologies: ['Python', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Jupyter Notebooks', 'Django', 'Flask', 'REST APIs'],
+  //   stats: {
+  //     users: { value: '500+', label: 'Students' },
+  //     team: { value: '3', label: 'Team Size' },
+  //   }
+  // }
 ]
 
 const handleScroll = () => {
@@ -351,7 +351,7 @@ const handleScroll = () => {
         ref.style.transform = index % 2 === 0
           ? 'translateX(0)'
           : 'translateX(0)'
-        ref.style.transition = `all 0.8s ease-out ${index * 0.2}s`
+        ref.style.transition = `all 0.5s ease-out ${index * 0.3}s`
       }
     }
   })

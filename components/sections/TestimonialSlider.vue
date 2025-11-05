@@ -1,5 +1,5 @@
 <template>
-  <section class="py-32 bg-black relative overflow-hidden">
+  <section class="bg-black relative overflow-hidden">
     <!-- Background -->
     <div class="absolute inset-0">
       <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
@@ -83,7 +83,7 @@
 
         <!-- Navigation Arrows -->
         <button @click="previousSlide"
-          class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 w-12 h-12 md:w-14 md:h-14 bg-linear-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-lg shadow-blue-500/50 group"
+          class="cursor-pointer absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 w-12 h-12 md:w-14 md:h-14 bg-linear-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-lg shadow-blue-500/50 group"
           :class="{ 'opacity-50 cursor-not-allowed': currentIndex === 0 }">
           <svg class="w-6 h-6 text-white transform group-hover:-translate-x-1 transition-transform" fill="none"
             stroke="currentColor" viewBox="0 0 24 24">
@@ -92,7 +92,7 @@
         </button>
 
         <button @click="nextSlide"
-          class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 w-12 h-12 md:w-14 md:h-14 bg-linear-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-lg shadow-blue-500/50 group"
+          class="cursor-pointer absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 w-12 h-12 md:w-14 md:h-14 bg-linear-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-lg shadow-blue-500/50 group"
           :class="{ 'opacity-50 cursor-not-allowed': currentIndex === testimonials.length - 1 }">
           <svg class="w-6 h-6 text-white transform group-hover:translate-x-1 transition-transform" fill="none"
             stroke="currentColor" viewBox="0 0 24 24">
