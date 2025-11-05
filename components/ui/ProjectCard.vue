@@ -128,53 +128,66 @@
 
   <!-- Image Modal -->
   <div v-if="isModalOpen" 
-       class="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
+       class="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-2 sm:p-4"
        @click="closeModal">
-    <div class="relative max-w-6xl max-h-[90vh] w-full h-full flex flex-col" @click.stop>
+    <div class="relative w-full h-full flex flex-col" @click.stop>
       <!-- Modal Header -->
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-2xl font-bold text-white">{{ project.title }} - Screenshots</h3>
+      <div class="flex justify-between items-center mb-2 px-2 shrink-0">
+        <h3 class="text-lg sm:text-xl font-bold text-white truncate pr-4">{{ project.title }}</h3>
         <button @click.stop="closeModal" 
-                class="text-white hover:text-red-400 text-2xl p-2">
+                class="text-white hover:text-red-400 text-xl p-2 shrink-0">
           ✕
         </button>
       </div>
       
-      <!-- Image Container -->
-      <div class="flex-1 flex items-center justify-center bg-gray-900/50 rounded-lg overflow-hidden">
+      <!-- Large Image Container - Takes most of the screen -->
+      <div class="flex-1 flex items-center justify-center bg-gray-900/20 rounded-lg overflow-hidden min-h-0 relative">
         <img v-if="project.screenshots && project.screenshots[currentImageIndex]"
              :src="project.screenshots[currentImageIndex]" 
              :alt="`${project.title} screenshot ${currentImageIndex + 1}`"
-             class="max-w-full max-h-full object-contain"
+             class="w-full h-full object-contain"
              @click.stop>
       </div>
       
-      <!-- Navigation -->
-      <div v-if="project.screenshots && project.screenshots.length > 1" 
-           class="flex justify-center items-center gap-4 mt-4">
-        <button @click.stop="previousImage" 
-                class="px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500 transition-colors">
-          ← Previous
-        </button>
-        <span class="text-white">
-          {{ currentImageIndex + 1 }} / {{ project.screenshots.length }}
-        </span>
-        <button @click.stop="nextImage" 
-                class="px-4 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500 transition-colors">
-          Next →
-        </button>
-      </div>
-      
-      <!-- Thumbnails -->
-      <div v-if="project.screenshots && project.screenshots.length > 1" 
-           class="flex gap-2 mt-4 justify-center flex-wrap">
-        <img v-for="(screenshot, index) in project.screenshots" 
-             :key="index"
-             :src="screenshot" 
-             :alt="`${project.title} thumbnail ${index + 1}`"
-             class="w-16 h-16 object-cover rounded cursor-pointer border-2 transition-all"
-             :class="currentImageIndex === index ? 'border-cyan-400' : 'border-gray-600 hover:border-gray-400'"
-             @click.stop="currentImageIndex = index">
+      <!-- Navigation and Controls - Compact at bottom -->
+      <div class="mt-2 space-y-2 shrink-0">
+        <!-- Compact Controls Row -->
+        <div class="flex justify-between items-center">
+          <!-- Navigation Buttons -->
+          <div v-if="project.screenshots && project.screenshots.length > 1" 
+               class="flex items-center gap-2">
+            <button @click.stop="previousImage" 
+                    class="px-3 py-1.5 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500 transition-colors text-sm">
+              ← Prev
+            </button>
+            <span class="text-white text-sm font-medium bg-black/50 px-2 py-1 rounded">
+              {{ currentImageIndex + 1 }} / {{ project.screenshots.length }}
+            </span>
+            <button @click.stop="nextImage" 
+                    class="px-3 py-1.5 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500 transition-colors text-sm">
+              Next →
+            </button>
+          </div>
+          
+          <!-- Instructions -->
+          <div class="text-xs text-gray-400">
+            <span v-if="project.screenshots && project.screenshots.length > 1">← → arrows</span>
+            <span v-if="project.screenshots && project.screenshots.length > 1"> • </span>
+            <span>ESC to close</span>
+          </div>
+        </div>
+        
+        <!-- Thumbnails Row -->
+        <div v-if="project.screenshots && project.screenshots.length > 1" 
+             class="flex gap-1 justify-center flex-wrap">
+          <img v-for="(screenshot, index) in project.screenshots" 
+               :key="index"
+               :src="screenshot" 
+               :alt="`${project.title} thumbnail ${index + 1}`"
+               class="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded cursor-pointer border-2 transition-all hover:scale-105"
+               :class="currentImageIndex === index ? 'border-cyan-400 ring-1 ring-cyan-400/50' : 'border-gray-600 hover:border-gray-400'"
+               @click.stop="currentImageIndex = index">
+        </div>
       </div>
     </div>
   </div>
