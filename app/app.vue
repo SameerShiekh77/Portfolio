@@ -191,16 +191,17 @@
           </div>
 
           <div class="bg-linear-to-br from-gray-900/50 to-black border border-blue-500/20 rounded-3xl p-8">
-            <form class="space-y-6">
+            <form action="https://api.web3forms.com/submit" method="POST">
+               <input type="hidden" name="access_key" value="2dda2782-f7fe-45fe-918c-6fc64f4b6f93">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <input type="text" placeholder="Your Name"
+                <input type="text" name="name" placeholder="Your Name"
                   class="w-full px-6 py-4 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none transition-colors">
-                <input type="email" placeholder="Your Email"
+                <input type="email" name="email" placeholder="Your Email"
                   class="w-full px-6 py-4 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none transition-colors">
               </div>
-              <input type="text" placeholder="Subject"
+              <input type="text" name="subject" placeholder="Subject"
                 class="w-full px-6 py-4 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none transition-colors">
-              <textarea rows="6" placeholder="Your Message"
+              <textarea rows="6" name="message" placeholder="Your Message"
                 class="w-full px-6 py-4 bg-black/50 border border-white/10 rounded-xl text-white placeholder-gray-500 focus:border-blue-500 focus:outline-none transition-colors resize-none"></textarea>
               <button type="submit"
                 class="cursor-pointer w-full px-8 py-4 bg-linear-to-r from-blue-500 to-blue-600 rounded-xl font-semibold hover:scale-105 transition-all shadow-lg shadow-blue-500/50">
