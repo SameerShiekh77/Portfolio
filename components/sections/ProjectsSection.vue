@@ -151,9 +151,9 @@ const projects = [
       uptime: '99.8%'
     },
     screenshots: [
-      '/images/screenshots/EMS-1.png',
-      '/images/screenshots/EMS-2.png',
-      '/images/screenshots/EMS-3.png'
+      '/images/screenshots/EMS-1.webp',
+      '/images/screenshots/EMS-2.webp',
+      '/images/screenshots/EMS-3.webp'
     ]
   },
   {
@@ -182,8 +182,8 @@ const projects = [
       uptime: '99.8%'
     },
     screenshots: [
-      '/images/screenshots/Epay-1.png',
-      '/images/screenshots/Epay-2.png'
+      '/images/screenshots/Epay-1.webp',
+      '/images/screenshots/Epay-2.webp'
     ]
   },
   {
@@ -243,12 +243,12 @@ const projects = [
       uptime: '99.8%'
     },
     screenshots: [
-      '/images/screenshots/sasd-1.png',
-      '/images/screenshots/sasd-2.png',
-      '/images/screenshots/sasd-3.png',
-      '/images/screenshots/sasd-4.png',
-      '/images/screenshots/sasd-5.png',
-      '/images/screenshots/sasd-6.png',
+      '/images/screenshots/sasd-1.webp',
+      '/images/screenshots/sasd-2.webp',
+      '/images/screenshots/sasd-3.webp',
+      '/images/screenshots/sasd-4.webp',
+      '/images/screenshots/sasd-5.webp',
+      '/images/screenshots/sasd-6.webp',
     ]
   },
   {
@@ -277,12 +277,12 @@ const projects = [
       uptime: '99.8%'
     },
     screenshots: [
-      '/images/screenshots/sms-1.png',
-      '/images/screenshots/sms-2.png',
-      '/images/screenshots/sms-3.png',
-      '/images/screenshots/sms-4.png',
-      '/images/screenshots/sms-5.png',
-      '/images/screenshots/sms-6.png',
+      '/images/screenshots/sms-1.webp',
+      '/images/screenshots/sms-2.webp',
+      '/images/screenshots/sms-3.webp',
+      '/images/screenshots/sms-4.webp',
+      '/images/screenshots/sms-5.webp',
+      '/images/screenshots/sms-6.webp',
     ]
   }, {
     title: 'SEO Management System',

@@ -115,7 +115,7 @@
                         <!-- Image Container with 3D Effect -->
                         <div class="relative bg-linear-to-br from-gray-900 to-black p-1.5 md:p-2 rounded-3xl transform hover:scale-105 transition-all duration-500"
                             @mousemove="handleMouseMove" @mouseleave="resetTransform" :style="imageTransform">
-                            <img src="/images/Muhammad-Sameer.jpeg"
+                            <img src="/images/Muhammad-Sameer.webp"
                                 alt="Professional Portrait" class="w-full h-auto rounded-3xl object-cover">
 
                             <!-- Floating Stats -->
