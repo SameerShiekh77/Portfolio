@@ -1,6 +1,6 @@
 <template>
   <section id="education" class="py-20  bg-[#070412] relative overflow-hidden">
-    <div class="absolute bottom-0 right-0 w-[500px] h-[400px] opacity-10 pointer-events-none"
+    <div class="absolute bottom-0 right-0 w-125 h-[400px] opacity-10 pointer-events-none"
       style="background: radial-gradient(ellipse, #22d3ee 0%, transparent 70%)" />
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10">

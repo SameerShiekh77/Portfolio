@@ -128,22 +128,19 @@
         </div>
 
         <!-- Skills grid -->
-        <div v-for="cat in skillCategories" :key="cat.title" :v-show="activeSkillCat === cat.title">
-          {{cat.title}}
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-            <div v-for="skill in cat.skills" :key="skill.name"
-              class="group rounded-2xl border p-5 transition-all duration-300 hover:border-violet-500/40"
-              :class="darkMode ? 'border-white/5 bg-white/2 hover:bg-white/4' : 'border-slate-100 bg-white hover:bg-violet-50/50'">
-              <div class="flex justify-between items-center mb-3">
-                <span class="font-semibold text-sm" :class="darkMode ? 'text-white' : 'text-slate-800'">{{ skill.name }}</span>
-                <span class="text-xs font-bold tabular-nums" style="color: #a78bfa">{{ skill.level }}%</span>
-              </div>
-              <!-- Bar -->
-              <div class="h-1.5 rounded-full overflow-hidden"
-                :class="darkMode ? 'bg-white/5' : 'bg-slate-100'">
-                <div class="h-full rounded-full transition-all duration-1000 ease-out"
-                  :style="{ width: skillsVisible ? skill.level + '%' : '0%', background: 'linear-gradient(90deg, #6C3EEF, #22d3ee)' }" />
-              </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+          <div v-for="skill in activeSkillCategory.skills" :key="skill.name"
+            class="group rounded-2xl border p-5 transition-all duration-300 hover:border-violet-500/40"
+            :class="darkMode ? 'border-white/5 bg-white/[0.02] hover:bg-white/[0.04]' : 'border-slate-100 bg-white hover:bg-violet-50/50'">
+            <div class="flex justify-between items-center mb-3">
+              <span class="font-semibold text-sm" :class="darkMode ? 'text-white' : 'text-slate-800'">{{ skill.name }}</span>
+              <span class="text-xs font-bold tabular-nums" style="color: #a78bfa">{{ skill.level }}%</span>
+            </div>
+            <!-- Bar -->
+            <div class="h-1.5 rounded-full overflow-hidden"
+              :class="darkMode ? 'bg-white/5' : 'bg-slate-100'">
+              <div class="h-full rounded-full transition-all duration-1000 ease-out"
+                :style="{ width: skillsVisible ? skill.level + '%' : '0%', background: 'linear-gradient(90deg, #6C3EEF, #22d3ee)' }" />
             </div>
           </div>
         </div>
@@ -281,7 +278,7 @@
             </div>
           </div>
 
-          <p class="text-gray-600 text-sm">© 2025 Muhammad Sameer. All rights reserved.</p>
+          <p class="text-gray-600 text-sm">© {{ currentYear }} Muhammad Sameer. All rights reserved.</p>
 
           <div class="flex gap-3">
             <a v-for="s in footerSocials" :key="s.label" :href="s.href" target="_blank" :aria-label="s.label"
@@ -317,6 +314,8 @@ const formSent = ref(false)
 const sending = ref(false)
 const form = ref({ name: '', email: '', subject: '', message: '' })
 
+const currentYear = new Date().getFullYear()
+
 const navItems = [
   { id: 'home', label: 'Home' },
   { id: 'skills', label: 'Skills' },
@@ -330,45 +329,69 @@ const skillCategories = [
   {
     title: 'Backend & DevOps',
     skills: [
-      { name: 'REST APIs', level: 95 },
-      { name: 'Django', level: 90 },
+      { name: 'Python', level: 70 },
+      { name: 'Django', level: 80 },
+      { name: 'REST APIs', level: 90},
       { name: 'Microservices Architecture', level: 85 },
-      { name: 'Monolithic Architecture', level: 90 },
+      { name: 'Monolithic Architecture', level: 80 },
       { name: 'CI/CD Pipelines', level: 80 },
       { name: 'Docker', level: 75 },
       { name: 'AWS Cloud', level: 70 },
-      { name: 'Python', level: 70 },
       { name: 'Database (SQL & NoSQL)', level: 75 },
-      { name: 'Linux Administration', level: 90 },
+      { name: 'Linux Administration', level: 80 },
       { name: 'Flask', level: 65 },
+      { name: 'Fast API', level: 50 },
+      { name: 'Selenium', level: 65 },
+      { name: 'Playwright', level: 55 },
+      { name: 'Redis', level: 60 },
       { name: 'Streamlit', level: 70 },
+      { name: 'Cron Jobs', level: 85 },
+      { name: 'System Design', level: 75 },
+      { name: 'PHP', level: 45 },
+      
     ]
   },
   {
     title: 'Frontend & Tools',
     skills: [
-      { name: 'Vue.js / Nuxt.js', level: 90 },
-      { name: 'JavaScript / TypeScript', level: 88 },
-      { name: 'Git / GitHub', level: 95 },
-      { name: 'Tailwind CSS / Bootstrap', level: 88 },
+      { name: 'Vue.js / Nuxt.js', level: 80 },
+      { name: 'WordPress', level: 70 },
+      { name: 'JavaScript / TypeScript', level: 80 },
+      { name: 'Git / GitHub', level: 90 },
+      { name: 'Tailwind CSS / Bootstrap', level: 80 },
       { name: 'Postman', level: 85 },
       { name: 'Sentry / APM', level: 80 },
       { name: 'Agile Methodologies', level: 85 },
       { name: 'AI Integration', level: 75 },
+      { name: 'Jira / Trello', level: 80 },
+      { name: 'Nginx / Apache', level: 70 },
+      { name: 'VS Code', level: 80 },
+
     ]
   },
   {
     title: 'Leadership',
     skills: [
-      { name: 'Team Leadership (8 engineers)', level: 95 },
+      { name: 'Team Leadership (12 engineers)', level: 90 },
       { name: 'Project Management', level: 90 },
-      { name: 'Stakeholder Communication', level: 88 },
-      { name: 'Technical Mentoring', level: 92 },
-      { name: 'Architecture Decisions', level: 85 },
+      { name: 'Stakeholder Communication', level: 80 },
+      { name: 'Technical Mentoring', level: 85 },
+      { name: 'Architecture Decisions', level: 75 },
       { name: 'Cross-functional Collaboration', level: 90 },
+      { name: 'Code Reviews & Best Practices', level: 90 },
+      { name: 'Hiring & Talent Development', level: 80 },
+      { name: 'Strategic Planning', level: 85 },
+      { name: 'Conflict Resolution', level: 75 },
+      { name: 'Performance Management', level: 88 },
+      { name: 'BRD & Documentation', level: 90 },
+      { name: 'Risk Management', level: 70 },
     ]
   },
 ]
+
+const activeSkillCategory = computed(() => {
+  return skillCategories.find((cat) => cat.title === activeSkillCat.value) ?? skillCategories[0]
+})
 
 const contactItems = [
   { label: 'Email', value: 'muhammadsameer.css@gmail.com', icon: `<svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>` },
@@ -382,6 +405,8 @@ const footerSocials = [
   { label: 'GitHub', href: 'https://github.com/SameerShiekh77', icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>` },
   { label: 'Facebook', href: 'https://www.facebook.com/MuhammadSameer47', icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>` },
 ]
+
+
 
 const scrollToSection = (id) => {
   const el = document.getElementById(id)

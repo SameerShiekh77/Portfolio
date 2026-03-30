@@ -5,15 +5,15 @@
     <canvas ref="threeCanvas" class="absolute inset-0 w-full h-full z-0 opacity-70" />
 
     <!-- Radial ambient glow -->
-    <div class="absolute inset-0 z-[1] pointer-events-none">
-      <div class="absolute top-1/4 left-1/3 w-[700px] h-[700px] rounded-full"
+    <div class="absolute inset-0 z-1 pointer-events-none">
+      <div class="absolute top-1/4 left-1/3 w-175 h-175 rounded-full"
         style="background: radial-gradient(circle, rgba(108,62,239,0.15) 0%, transparent 70%)" />
-      <div class="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] rounded-full"
+      <div class="absolute bottom-1/4 right-1/4 w-125 h-[500px] rounded-full"
         style="background: radial-gradient(circle, rgba(34,211,238,0.08) 0%, transparent 70%)" />
     </div>
 
     <!-- Noise texture overlay -->
-    <div class="absolute inset-0 z-[2] opacity-[0.025] pointer-events-none"
+    <div class="absolute inset-0 z-2 opacity-[0.025] pointer-events-none"
       style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E'); background-size: 200px" />
 
     <div class="container mx-auto px-6 lg:px-12 relative z-10 pt-28 pb-20">
@@ -46,7 +46,7 @@
           <div :class="{ 'animate-fadeSlideUp': mounted }" style="animation-delay:0.4s; opacity:0">
             <div class="flex items-center gap-3">
               <div class="h-px w-8 bg-amber-400" />
-              <div class="text-xl sm:text-2xl font-semibold font-mono min-h-[2rem]">
+              <div class="text-xl sm:text-2xl font-semibold font-mono min-h-8">
                 <span class="text-amber-400">{{ typedRole }}</span>
                 <span class="text-amber-400/60 animate-blink">|</span>
               </div>
@@ -122,13 +122,13 @@
               style="background: linear-gradient(135deg, #6C3EEF, #22d3ee)" />
 
             <!-- Card -->
-            <div class="relative rounded-3xl overflow-hidden border border-white/10 bg-linear-to-br from-white/5 to-white/[0.02] backdrop-blur-xl p-2 transition-transform duration-300"
+            <div class="relative rounded-3xl overflow-hidden border border-white/10 bg-linear-to-br from-white/5 to-white/2 backdrop-blur-xl p-2 transition-transform duration-300"
               :style="cardTransform">
 
               <!-- Profile image -->
               <div class="rounded-2xl overflow-hidden">
-                <img src="https://media.licdn.com/dms/image/v2/D4D03AQEJB8L_IhxMrA/profile-displayphoto-scale_400_400/B4DZviL_BBIgAg-/0/1769026353282?e=1776297600&v=beta&t=107Jj9PpZYGAFJCauhsdHy7ngYtSvZnUFLNRxeh51fY" alt="Muhammad Sameer"
-                  class="w-full max-w-[340px] h-auto object-cover block" />
+                <img src="images/Muhammad-Sameer.jfif" alt="Muhammad Sameer"
+                  class="w-full object-cover block" />
               </div>
 
               <!-- Floating badge: Experience -->

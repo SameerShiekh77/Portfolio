@@ -159,7 +159,7 @@ const experiences = reactive([
     company: 'Al Nafi E-Learning Pvt. Ltd.',
     current: true,
     expanded: false,
-    description: 'Leading a team of 8 engineers building and maintaining cloud infrastructure and 50+ production applications. Driving DevOps transformation, CI/CD automation, and microservices migration across the organization.',
+    description: 'Leading a team of 12 engineers building and maintaining cloud infrastructure and 50+ production applications. Driving DevOps transformation, CI/CD automation, and microservices migration across the organization.',
     achievements: [
       'Mentored 5 junior developers to mid-level positions',
       'Achieved 99.99% uptime across all production services',
@@ -170,7 +170,7 @@ const experiences = reactive([
       'Managed 5 cross-functional teams improving delivery timelines by 30%',
     ],
     technologies: ['Python', 'Django', 'Flask', 'Vue.js', 'Nuxt.js', 'AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Nginx', 'PostgreSQL', 'Redis', 'Sentry', 'APM', 'GraphQL'],
-    stats: { team: { value: '8', label: 'Team Size' }, uptime: { value: '99.99%', label: 'Uptime' }, projects: { value: '50+', label: 'Projects' } }
+    stats: { team: { value: '12', label: 'Team Size' }, uptime: { value: '99.99%', label: 'Uptime' }, projects: { value: '50+', label: 'Projects' } }
   },
   {
     period: 'Jun 2024 – Present',
