@@ -83,14 +83,14 @@
               </svg>
             </a>
             <span v-else class="text-xs text-gray-700 font-medium">Internal / Private</span>
-
+<!-- 
             <NuxtLink :to="`/projects#${slugify(project.title)}`"
               class="inline-flex items-center gap-1 text-xs text-gray-600 hover:text-violet-400 font-medium transition-colors">
               Details
               <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
               </svg>
-            </NuxtLink>
+            </NuxtLink> -->
           </div>
         </div>
       </div>
