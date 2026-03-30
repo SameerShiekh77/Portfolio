@@ -12,7 +12,7 @@
         <div class="flex justify-between items-center">
 
           <!-- Logo -->
-          <a href="#home" @click.prevent="scrollToSection('home')" class="flex items-center gap-3">
+          <a href="/" @click.prevent="goHome" class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl flex items-center justify-center font-black text-white text-sm"
               style="background: linear-gradient(135deg, #6C3EEF, #a78bfa)">MS</div>
             <div>
@@ -23,10 +23,10 @@
 
           <!-- Desktop links -->
           <div class="hidden md:flex items-center gap-1">
-            <a v-for="item in navItems" :key="item.id" :href="`#${item.id}`"
-              @click.prevent="scrollToSection(item.id)"
+            <a v-for="item in navItems" :key="item.id" :href="item.path || `/#${item.id}`"
+              @click.prevent="handleNavItemClick(item)"
               class="px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200"
-              :class="activeSection === item.id
+              :class="isNavItemActive(item)
                 ? 'text-violet-400 bg-violet-500/10'
                 : (darkMode ? 'text-gray-400 hover:text-white hover:bg-white/5' : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100')">
               {{ item.label }}
@@ -51,7 +51,7 @@
               </svg>
             </button>
 
-            <a href="#contact" @click.prevent="scrollToSection('contact')"
+            <a href="#contact" @click.prevent="goToContact"
               class="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white transition-all duration-300 hover:scale-105"
               style="background: linear-gradient(135deg, #6C3EEF, #a78bfa); box-shadow: 0 4px 20px rgba(108,62,239,0.3)">
               Hire Me
@@ -73,13 +73,13 @@
         <div v-if="mobileOpen"
           class="md:hidden mt-4 pb-4 space-y-1 border-t pt-4"
           :class="darkMode ? 'border-white/5' : 'border-slate-200'">
-          <a v-for="item in navItems" :key="item.id" :href="`#${item.id}`"
-            @click.prevent="scrollToSection(item.id); mobileOpen = false"
+          <a v-for="item in navItems" :key="item.id" :href="item.path || `#${item.id}`"
+            @click.prevent="handleNavItemClick(item)"
             class="block px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200"
             :class="darkMode ? 'text-gray-300 hover:text-white hover:bg-white/5' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'">
             {{ item.label }}
           </a>
-          <a href="#contact" @click.prevent="scrollToSection('contact'); mobileOpen = false"
+          <a href="#contact" @click.prevent="goToContact"
             class="block mt-3 px-4 py-3 rounded-xl font-bold text-sm text-center text-white"
             style="background: linear-gradient(135deg, #6C3EEF, #a78bfa)">
             Hire Me
@@ -95,9 +95,10 @@
     </div>
 
     <!-- ── Sections ── -->
+    <template v-if="route.path === '/'">
       <ModernHero />
-    <StatsSection />
-    <ServicesSection />
+      <StatsSection />
+      <ServicesSection />
 
     <!-- Skills Section -->
     <section id="skills" class="pb-20  relative overflow-hidden"
@@ -147,14 +148,15 @@
       </div>
     </section>
 
-    <ProjectsSection />
-    <CareerJourney />
-    <Education />
-    <TestimonialSlider />
+      <ProjectsSection />
 
-    <!-- Contact Section -->
-    <section id="contact" class="pb-20  relative overflow-hidden"
-      :class="darkMode ? 'bg-[#050310]' : 'bg-slate-50'">
+      <CareerJourney />
+      <Education />
+      <TestimonialSlider />
+
+      <!-- Contact Section -->
+      <section id="contact" class="pb-20  relative overflow-hidden"
+        :class="darkMode ? 'bg-[#050310]' : 'bg-slate-50'">
       <div class="absolute inset-0 pointer-events-none">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.08]"
           style="background: radial-gradient(circle, #6C3EEF, transparent)" />
@@ -262,7 +264,10 @@
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </template>
+
+      
 
     <!-- Footer -->
     <footer class="py-12 border-t"
@@ -294,7 +299,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import ModernHero from '../components/sections/ModernHero.vue'
 import StatsSection from '../components/sections/StatsSection.vue'
 import ServicesSection from '../components/sections/ServicesSection.vue'
@@ -328,7 +333,7 @@ if (route.path !== '/') {
 const navItems = [
   { id: 'home', label: 'Home' },
   { id: 'skills', label: 'Skills' },
-  { id: 'projects', label: 'Projects' },
+  { id: 'projects', label: 'Projects',  },
   { id: 'experience', label: 'Experience' },
   { id: 'education', label: 'Education' },
   { id: 'contact', label: 'Contact' },
@@ -414,13 +419,52 @@ const footerSocials = [
   { label: 'GitHub', href: 'https://github.com/SameerShiekh77', icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>` },
   { label: 'Facebook', href: 'https://www.facebook.com/MuhammadSameer47', icon: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>` },
 ]
-
-
-
 const scrollToSection = (id) => {
+  if (route.path !== '/') return
   const el = document.getElementById(id)
   if (el) el.scrollIntoView({ behavior: 'smooth' })
   mobileOpen.value = false
+}
+
+const isNavItemActive = (item) => {
+  if (item.path) return route.path === item.path
+  return route.path === '/' && activeSection.value === item.id
+}
+
+const goHome = async () => {
+  if (route.path === '/') {
+    scrollToSection('home')
+    return
+  }
+
+  await navigateTo('/')
+  mobileOpen.value = false
+}
+
+const goToContact = async () => {
+  if (route.path !== '/') {
+    await navigateTo('/#contact')
+    mobileOpen.value = false
+    return
+  }
+
+  scrollToSection('contact')
+}
+
+const handleNavItemClick = async (item) => {
+  if (item.path) {
+    await navigateTo(item.path)
+    mobileOpen.value = false
+    return
+  }
+
+  if (route.path !== '/') {
+    await navigateTo(`/#${item.id}`)
+    mobileOpen.value = false
+    return
+  }
+
+  scrollToSection(item.id)
 }
 
 const handleScroll = () => {
@@ -468,6 +512,15 @@ onMounted(() => {
   window.addEventListener('scroll', handleScroll, { passive: true })
   handleScroll()
 })
+
+watch(
+  () => route.path,
+  (path) => {
+    activeSection.value = path === '/projects' ? 'projects' : 'home'
+  },
+  { immediate: true }
+)
+
 onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 </script>
 
