@@ -100,7 +100,7 @@
     <ServicesSection />
 
     <!-- Skills Section -->
-    <section id="skills" class="py-20  relative overflow-hidden"
+    <section id="skills" class="pb-20  relative overflow-hidden"
       :class="darkMode ? 'bg-[#050310]' : 'bg-white'">
       <div class="container mx-auto px-6 lg:px-12">
           <!-- Header -->
@@ -153,7 +153,7 @@
     <TestimonialSlider />
 
     <!-- Contact Section -->
-    <section id="contact" class="py-20  relative overflow-hidden"
+    <section id="contact" class="pb-20  relative overflow-hidden"
       :class="darkMode ? 'bg-[#050310]' : 'bg-slate-50'">
       <div class="absolute inset-0 pointer-events-none">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full opacity-[0.08]"
@@ -315,6 +315,15 @@ const sending = ref(false)
 const form = ref({ name: '', email: '', subject: '', message: '' })
 
 const currentYear = new Date().getFullYear()
+const route = useRoute()
+
+if (route.path !== '/') {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Page not found',
+    fatal: true,
+  })
+}
 
 const navItems = [
   { id: 'home', label: 'Home' },

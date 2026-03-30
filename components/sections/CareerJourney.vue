@@ -1,5 +1,5 @@
 <template>
-  <section id="experience" class="py-20  bg-[#050310] relative overflow-hidden">
+  <section id="experience" class="pb-20  bg-[#050310] relative overflow-hidden">
 
     <!-- Ambient glow -->
     <div class="absolute top-1/2 left-0 w-[400px] h-[600px] -translate-y-1/2 opacity-20 pointer-events-none"

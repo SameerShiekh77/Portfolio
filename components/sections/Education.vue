@@ -1,5 +1,5 @@
 <template>
-  <section id="education" class="py-20  bg-[#070412] relative overflow-hidden">
+  <section id="education" class="pb-20  bg-[#070412] relative overflow-hidden">
     <div class="absolute bottom-0 right-0 w-125 h-[400px] opacity-10 pointer-events-none"
       style="background: radial-gradient(ellipse, #22d3ee 0%, transparent 70%)" />
 

@@ -1,5 +1,5 @@
 <template>
-  <section class="py-20 bg-[#070412] relative overflow-hidden">
+  <section class="pb-20 bg-[#070412] relative overflow-hidden">
     <!-- Top border shimmer -->
     <div class="absolute top-0 left-0 right-0 h-px"
       style="background: linear-gradient(90deg, transparent, #6C3EEF, #22d3ee, transparent)" />
