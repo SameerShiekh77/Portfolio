@@ -89,7 +89,7 @@
     </nav>
 
     <!-- ── Scroll progress ── -->
-    <div class="fixed top-0 left-0 w-full h-0.5 z-[60]">
+    <div class="fixed top-0 left-0 w-full h-0.5 z-60">
       <div class="h-full transition-all duration-300"
         :style="{ width: scrollProgress + '%', background: 'linear-gradient(90deg, #6C3EEF, #22d3ee)' }" />
     </div>
@@ -128,11 +128,12 @@
         </div>
 
         <!-- Skills grid -->
-        <div v-for="cat in skillCategories" :key="cat.title" v-show="activeSkillCat === cat.title">
+        <div v-for="cat in skillCategories" :key="cat.title" :v-show="activeSkillCat === cat.title">
+          {{cat.title}}
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
             <div v-for="skill in cat.skills" :key="skill.name"
               class="group rounded-2xl border p-5 transition-all duration-300 hover:border-violet-500/40"
-              :class="darkMode ? 'border-white/5 bg-white/[0.02] hover:bg-white/[0.04]' : 'border-slate-100 bg-white hover:bg-violet-50/50'">
+              :class="darkMode ? 'border-white/5 bg-white/2 hover:bg-white/4' : 'border-slate-100 bg-white hover:bg-violet-50/50'">
               <div class="flex justify-between items-center mb-3">
                 <span class="font-semibold text-sm" :class="darkMode ? 'text-white' : 'text-slate-800'">{{ skill.name }}</span>
                 <span class="text-xs font-bold tabular-nums" style="color: #a78bfa">{{ skill.level }}%</span>
@@ -183,7 +184,7 @@
           <div class="lg:col-span-2 space-y-4">
             <div v-for="item in contactItems" :key="item.label"
               class="flex items-center gap-4 rounded-2xl border p-5 transition-all duration-300 hover:border-violet-500/40"
-              :class="darkMode ? 'border-white/5 bg-white/[0.02]' : 'border-slate-100 bg-white'">
+              :class="darkMode ? 'border-white/5 bg-white/2' : 'border-slate-100 bg-white'">
               <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
                 style="background: rgba(108,62,239,0.12); border: 1px solid rgba(108,62,239,0.2)">
                 <span v-html="item.icon" class="w-5 h-5 text-violet-400 [&>svg]:w-5 [&>svg]:h-5 [&>svg]:text-violet-400" />
@@ -201,14 +202,14 @@
                 <span class="text-emerald-400 font-bold text-sm">Available for hire</span>
               </div>
               <p class="text-gray-500 text-xs leading-relaxed">
-                Open to full-time Engineering Manager, VP Engineering, or senior architect roles.
+                Open to full-time Sr. Software Engineer, Engineering Manager, VP Engineering, or senior architect roles.
               </p>
             </div>
           </div>
 
           <!-- Contact form -->
           <div class="lg:col-span-3 rounded-3xl border p-8"
-            :class="darkMode ? 'border-white/5 bg-white/[0.02]' : 'border-slate-100 bg-white'">
+            :class="darkMode ? 'border-white/5 bg-white/2' : 'border-slate-100 bg-white'">
             <form v-if="!formSent" action="https://api.web3forms.com/submit" method="POST" @submit.prevent="submitForm" class="space-y-5">
               <input type="hidden" name="access_key" value="2dda2782-f7fe-45fe-918c-6fc64f4b6f93" />
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -276,7 +277,7 @@
               style="background: linear-gradient(135deg, #6C3EEF, #a78bfa)">MS</div>
             <div>
               <div class="font-bold text-sm" :class="darkMode ? 'text-white' : 'text-slate-900'">Muhammad Sameer</div>
-              <div class="text-xs font-mono" style="color: #a78bfa">Engineering Manager</div>
+              <div class="text-xs font-mono" style="color: #a78bfa">Sr. Software Engineer</div>
             </div>
           </div>
 

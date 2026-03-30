@@ -62,7 +62,7 @@
           </p>
 
           <!-- Stat chips -->
-          <div class="flex flex-wrap gap-4" :class="{ 'animate-fadeSlideUp': mounted }"
+          <div class="grid grid-cols-2 gap-4 " :class="{ 'animate-fadeSlideUp': mounted }"
             style="animation-delay:0.7s; opacity:0">
             <div v-for="stat in stats" :key="stat.label"
               class="px-5 py-3 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center gap-3 hover:border-violet-500/40 transition-all duration-300">
@@ -122,7 +122,7 @@
               style="background: linear-gradient(135deg, #6C3EEF, #22d3ee)" />
 
             <!-- Card -->
-            <div class="relative rounded-3xl overflow-hidden border border-white/10 bg-gradient-to-br from-white/5 to-white/[0.02] backdrop-blur-xl p-2 transition-transform duration-300"
+            <div class="relative rounded-3xl overflow-hidden border border-white/10 bg-linear-to-br from-white/5 to-white/[0.02] backdrop-blur-xl p-2 transition-transform duration-300"
               :style="cardTransform">
 
               <!-- Profile image -->
@@ -160,7 +160,7 @@
     <!-- Scroll indicator -->
     <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-bounce">
       <span class="text-xs text-gray-600 tracking-widest uppercase font-mono">scroll</span>
-      <div class="w-px h-8 bg-gradient-to-b from-gray-600 to-transparent" />
+      <div class="w-px h-8 bg-linear-to-b from-gray-600 to-transparent" />
     </div>
   </section>
 </template>
@@ -174,7 +174,7 @@ const mounted = ref(false)
 const typedRole = ref('')
 const cardTransform = ref('perspective(1200px) rotateX(0deg) rotateY(0deg)')
 
-const roles = ['Engineering Manager', 'Full Stack Architect', 'DevOps Leader', 'AI Integration Expert']
+const roles = ['Engineering Manager', 'Full Stack Architect','Sr. Software Engineer',  'DevOps Leader', 'AI Integration Developer']
 let roleIndex = 0
 
 const stats = [

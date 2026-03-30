@@ -59,7 +59,7 @@
                 :style="project.transform || ''">
               
               <!-- Overlay -->
-              <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
+              <div class="absolute inset-0 bg-linear-to-t from-black via-black/50 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
               
               <!-- Status Badge -->
               <div class="absolute top-4 right-4">

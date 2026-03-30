@@ -19,7 +19,7 @@
       <!-- Services grid -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div v-for="(service, i) in services" :key="i"
-          class="group relative rounded-3xl border border-white/5 bg-white/[0.02] p-8 lg:p-10 hover:border-violet-500/30 transition-all duration-500 overflow-hidden cursor-default">
+          class="group relative rounded-3xl border border-white/5 bg-white/2 p-8 lg:p-10 hover:border-violet-500/30 transition-all duration-500 overflow-hidden cursor-default">
 
           <!-- Background glow on hover -->
           <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"

@@ -40,7 +40,7 @@ export default defineNuxtConfig({
   
   app: {
     head: {
-      title: 'Engineering Manager - Core Applications',
+      title: 'Sr. Software Engineer & Engineering Manager | Muhammad Sameer',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

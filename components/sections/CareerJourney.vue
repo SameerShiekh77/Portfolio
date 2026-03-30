@@ -91,7 +91,7 @@
                 <!-- Tech tags -->
                 <div class="flex flex-wrap gap-1.5">
                   <span v-for="tech in exp.technologies.slice(0, 8)" :key="tech"
-                    class="px-2 py-0.5 rounded-md text-xs text-gray-500 border border-white/5 bg-white/[0.02]">
+                    class="px-2 py-0.5 rounded-md text-xs text-gray-500 border border-white/5 bg-white/2">
                     {{ tech }}
                   </span>
                   <span v-if="exp.technologies.length > 8"

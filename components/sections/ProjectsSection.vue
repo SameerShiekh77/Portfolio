@@ -32,12 +32,8 @@
       <!-- Bento grid -->
       <div v-if="filteredProjects.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         <div v-for="(project, index) in filteredProjects" :key="project.title"
-          class="group relative rounded-3xl border border-white/5 bg-white/[0.02] p-7 hover:border-violet-500/30 hover:bg-white/[0.04] transition-all duration-500 overflow-hidden cursor-default"
+          class="group relative rounded-3xl border border-white/5 bg-white/2 p-7 hover:border-violet-500/30 hover:bg-white/4 transition-all duration-500 overflow-hidden cursor-default"
           :class="index === 0 ? 'md:col-span-2 lg:col-span-1' : ''">
-
-          <!-- Hover glow -->
-          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"
-            style="background: radial-gradient(circle at 0% 0%, rgba(108,62,239,0.08) 0%, transparent 60%)" />
 
           <!-- Status + category -->
           <div class="flex items-center justify-between mb-5">

@@ -17,7 +17,7 @@
 
       <div class="max-w-4xl mx-auto space-y-6">
         <div v-for="(edu, i) in educations" :key="i"
-          class="group relative rounded-3xl border border-white/5 bg-white/[0.02] p-8 lg:p-10 hover:border-violet-500/30 hover:bg-white/[0.04] transition-all duration-500 overflow-hidden">
+          class="group relative rounded-3xl border border-white/5 bg-white/2 p-8 lg:p-10 hover:border-violet-500/30 hover:bg-white/4 transition-all duration-500 overflow-hidden">
 
           <!-- Degree number watermark -->
           <div class="absolute right-8 top-6 text-8xl font-black opacity-[0.03] select-none text-violet-400 leading-none">
