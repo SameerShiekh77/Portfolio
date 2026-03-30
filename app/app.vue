@@ -4,7 +4,7 @@
     :class="darkMode ? 'bg-[#070412]' : 'bg-slate-50 text-slate-900'">
 
     <!-- ── Navigation ── -->
-    <nav class="fixed top-0 w-full z-50 transition-all duration-500"
+    <nav class="sticky top-0 md:fixed md:top-0 w-full z-50 transition-all duration-500"
       :class="scrolled
         ? (darkMode ? 'bg-[#070412]/90 backdrop-blur-xl border-b border-white/5' : 'bg-white/90 backdrop-blur-xl border-b border-slate-200/80')
         : 'bg-transparent'">
@@ -236,7 +236,7 @@
                   :class="darkMode ? 'bg-white/5 border-white/10 text-white placeholder-gray-600' : 'bg-slate-50 border-slate-200 text-slate-800'" />
               </div>
               <button type="submit" :disabled="sending"
-                class="w-full py-4 rounded-xl font-bold text-white transition-all duration-300 hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                class="cursor-pointer w-full py-4 rounded-xl font-bold text-white transition-all duration-300 hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 style="background: linear-gradient(135deg, #6C3EEF, #a78bfa); box-shadow: 0 8px 32px rgba(108,62,239,0.3)">
                 <svg v-if="sending" class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />

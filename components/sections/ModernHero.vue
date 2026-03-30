@@ -127,7 +127,7 @@
 
               <!-- Profile image -->
               <div class="rounded-2xl overflow-hidden">
-                <img src="/images/Muhammad-Sameer.jfif" alt="Muhammad Sameer"
+                <img src="/images/M-Sameer.webp" alt="Muhammad Sameer"
                   class="w-full object-cover block" />
               </div>
 
