@@ -516,7 +516,7 @@ onMounted(() => {
 watch(
   () => route.path,
   (path) => {
-    activeSection.value = path === '/projects' ? 'projects' : 'home'
+    activeSection.value = 'home'
   },
   { immediate: true }
 )
