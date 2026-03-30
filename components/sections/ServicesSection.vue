@@ -1,49 +1,63 @@
 <template>
-  <section class="py-16 bg-black relative overflow-hidden">
-    <!-- Background -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
-    </div>
+  <section class="py-20  bg-[#070412] relative overflow-hidden">
+    <div class="container mx-auto px-6 lg:px-12">
 
-    <div class="container mx-auto px-6 relative z-10">
-      <!-- Section Header -->
-      <div class="text-center mb-20">
-        <div class="inline-block px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full mb-6">
-          <span class="text-blue-500 font-semibold">Services</span>
+      <!-- Header -->
+      <div class="max-w-2xl mb-20">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-500/30 bg-violet-500/10 mb-6">
+          <span class="text-violet-400 text-sm font-semibold tracking-wide">Capabilities</span>
         </div>
-        <h2 class="text-5xl md:text-6xl font-bold mb-6">
-          <span class="text-white">What</span>
-          <span class="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-cyan-500"> I Do</span>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-4">
+          What I <span class="text-transparent"
+            style="background: linear-gradient(135deg, #a78bfa, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Build</span>
         </h2>
-        <p class="text-gray-400 text-xl max-w-2xl mx-auto">
-          Delivering end-to-end solutions from cloud architecture to full-stack development
+        <p class="text-gray-400 text-lg leading-relaxed">
+          End-to-end engineering leadership - from architecture decisions to production deployments.
         </p>
       </div>
 
-      <!-- Services Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div v-for="(service, index) in services" :key="index"
-          class="group relative bg-linear-to-br from-gray-900/50 to-black border border-white/5 rounded-3xl p-8 hover:border-blue-500/50 transition-all duration-500 hover:-translate-y-2">
-          <!-- Icon -->
-          <div
-            class="w-16 h-16 bg-linear-to-br from-blue-500/20 to-cyan-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-            <div class="text-4xl">{{ service.icon }}</div>
+      <!-- Services grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div v-for="(service, i) in services" :key="i"
+          class="group relative rounded-3xl border border-white/5 bg-white/[0.02] p-8 lg:p-10 hover:border-violet-500/30 transition-all duration-500 overflow-hidden cursor-default">
+
+          <!-- Background glow on hover -->
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+            :style="{ background: `radial-gradient(circle at 0% 100%, ${service.color}10 0%, transparent 60%)` }" />
+
+          <!-- Number -->
+          <div class="text-7xl font-black opacity-[0.04] absolute top-4 right-6 select-none leading-none"
+            :style="{ color: service.color }">
+            {{ String(i + 1).padStart(2, '0') }}
           </div>
 
-          <!-- Content -->
-          <h3 class="text-2xl font-bold text-white mb-4 group-hover:text-blue-500 transition-colors">
-            {{ service.title }}
-          </h3>
-          <p class="text-gray-400 leading-relaxed mb-6">
-            {{ service.description }}
-          </p>
+          <div class="relative z-10">
+            <!-- Icon + title row -->
+            <div class="flex items-start gap-4 mb-6">
+              <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
+                :style="{ background: service.color + '15', border: `1px solid ${service.color}30` }">
+                {{ service.icon }}
+              </div>
+              <div>
+                <h3 class="text-xl font-bold text-white mb-1 group-hover:text-violet-300 transition-colors">
+                  {{ service.title }}
+                </h3>
+                <div class="h-0.5 w-8 rounded-full transition-all duration-500 group-hover:w-20"
+                  :style="{ background: service.color }" />
+              </div>
+            </div>
 
-        
+            <!-- Description -->
+            <p class="text-gray-400 leading-relaxed mb-6">{{ service.description }}</p>
 
-          <!-- Hover Effect -->
-          <div
-            class="absolute inset-0 bg-linear-to-br from-blue-500/0 to-cyan-500/0 group-hover:from-blue-500/5 group-hover:to-cyan-500/5 rounded-3xl transition-all duration-500">
+            <!-- Tech tags -->
+            <div class="flex flex-wrap gap-2">
+              <span v-for="tag in service.tags" :key="tag"
+                class="px-3 py-1 rounded-lg text-xs font-medium border border-white/10 text-gray-400"
+                :style="{ borderColor: service.color + '20', color: service.color + 'cc' }">
+                {{ tag }}
+              </span>
+            </div>
           </div>
         </div>
       </div>
@@ -54,26 +68,32 @@
 <script setup>
 const services = [
   {
-    icon: '💻',
-    title: 'Full Stack Dev',
-    description: 'End-to-end web application development using modern frameworks like Django, Vue.js, Nux.js and tailwind css.'
+    icon: '🏗️',
+    title: 'Full-Stack Architecture & Development',
+    description: 'Designing and building scalable web platforms from scratch - RESTful APIs, microservices, event-driven systems, and responsive frontends. Every decision made with production and maintainability in mind.',
+    color: '#a78bfa',
+    tags: ['Django', 'Vue.js / Nuxt.js', 'REST APIs', 'Microservices', 'PostgreSQL', 'Redis'],
   },
   {
     icon: '☁️',
-    title: 'Cloud DevOps',
-    description: 'AWS infrastructure design, implementation, and management. CI/CD pipelines and automation for seamless deployments.'
+    title: 'Cloud Infrastructure & DevOps',
+    description: 'End-to-end cloud architecture on AWS - EC2, containers, serverless - plus CI/CD pipeline automation that cut deployment times by 75%. Infrastructure as code, zero-downtime deployments.',
+    color: '#22d3ee',
+    tags: ['AWS', 'Docker', 'Kubernetes', 'CI/CD', 'Nginx', 'Linux'],
   },
-
   {
     icon: '🤖',
-    title: 'AI Integration',
-    description: 'Implementing machine learning models and AI-powered features into web applications.'
+    title: 'AI Integration & Automation',
+    description: 'Embedding OpenAI and Anthropic Claude into production workflows - MCQ generators, resume builders, intelligent dashboards, and content pipelines that run reliably at scale.',
+    color: '#f59e0b',
+    tags: ['OpenAI', 'Claude API', 'Streamlit', 'Python', 'Automation', 'Prompt Engineering'],
   },
   {
-    icon: '📊',
-    title: 'CRM/HRM/ERP Solutions',
-    description: 'Custom solutions for managing customer relationships, human resources, and enterprise resource planning.'
-  }
-
+    icon: '👥',
+    title: 'Engineering Leadership & Mentoring',
+    description: 'Leading cross-functional teams (Frontend, Backend, QA, DevOps, DataOps), defining engineering standards, conducting code reviews, and mentoring 5+ engineers from junior to senior.',
+    color: '#34d399',
+    tags: ['Team Leadership', 'Agile', 'Code Review', 'Mentoring', 'Stakeholder Management', 'Trello'],
+  },
 ]
 </script>

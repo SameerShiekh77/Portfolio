@@ -29,7 +29,7 @@
         </h1>
         
         <h2 class="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-cyan-500">
-          DevOps Manager & Full Stack Developer
+          Engineering Manager & Senior Software Engineer
         </h2>
         
         <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed">

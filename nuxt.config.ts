@@ -1,18 +1,33 @@
+const env = (globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env ?? {}
+const isWsl = Boolean(env.WSL_DISTRO_NAME)
+const usePolling = env.NUXT_WATCH_POLLING === 'true' || isWsl
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-10-06',
   devtools: { enabled: true },
-  
-  // Add this section
+
   devServer: {
-    host: '0.0.0.0', // Listen on all network interfaces
+    host: '0.0.0.0',
     port: 3000
   },
-  
+
   vite: {
     server: {
-      hmr: {
-        clientPort: 443, // Use HTTPS port for ngrok
-      }
+      watch: usePolling
+        ? {
+            usePolling: true,
+            interval: 150,
+            awaitWriteFinish: {
+              stabilityThreshold: 100,
+              pollInterval: 50,
+            },
+          }
+        : undefined,
+      hmr: env.NUXT_HMR_CLIENT_PORT
+        ? {
+            clientPort: Number(env.NUXT_HMR_CLIENT_PORT),
+          }
+        : undefined,
     }
   },
 
@@ -25,7 +40,7 @@ export default defineNuxtConfig({
   
   app: {
     head: {
-      title: 'DevOps Manager | Full Stack Developer',
+      title: 'Engineering Manager - Core Applications',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

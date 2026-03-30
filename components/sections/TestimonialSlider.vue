@@ -1,119 +1,84 @@
 <template>
-  <section class="bg-black relative overflow-hidden">
-    <!-- Background -->
-    <div class="absolute inset-0">
-      <div class="absolute top-0 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
-    </div>
+  <section class="py-20  bg-[#070412] relative overflow-hidden">
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] opacity-[0.06] pointer-events-none rounded-full"
+      style="background: radial-gradient(circle, #6C3EEF, transparent)" />
 
-    <div class="container mx-auto px-6 relative z-10">
-      <!-- Section Header -->
+    <div class="container mx-auto px-6 lg:px-12 relative z-10">
+      <!-- Header -->
       <div class="text-center mb-20">
-        <div class="inline-block px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full mb-6">
-          <span class="text-blue-500 font-semibold">Testimonials</span>
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-500/30 bg-violet-500/10 mb-6">
+          <span class="text-violet-400 text-sm font-semibold tracking-wide">Testimonials</span>
         </div>
-        <h2 class="text-5xl md:text-6xl font-bold mb-6">
-          <span class="text-white">What Clients</span>
-          <span class="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-cyan-500"> Say</span>
+        <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
+          What People <span class="text-transparent"
+            style="background: linear-gradient(135deg, #a78bfa, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Say</span>
         </h2>
-        <p class="text-gray-400 text-xl max-w-2xl mx-auto">
-          Don't just take my word for it - hear from some of my satisfied clients
-        </p>
       </div>
 
-      <!-- Testimonial Slider -->
-      <div class="max-w-6xl mx-auto relative">
-        <!-- Slider Container -->
-        <div class="relative overflow-hidden">
-          <div class="flex transition-transform duration-700 ease-out"
-            :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
+      <!-- Slider -->
+      <div class="max-w-4xl mx-auto relative">
+        <!-- Cards stack -->
+        <div class="relative h-auto min-h-[280px]">
+          <div v-for="(t, i) in testimonials" :key="i"
+            class="absolute inset-x-0 rounded-3xl border border-white/5 bg-white/[0.03] p-8 lg:p-12 transition-all duration-700 overflow-hidden"
+            :class="getCardClasses(i)">
 
-            <div v-for="(testimonial, index) in testimonials" :key="index" class="w-full shrink-0 px-4">
+            <!-- Quote mark -->
+            <div class="absolute top-6 right-8 text-8xl leading-none font-black select-none"
+              style="color: rgba(108,62,239,0.1)">"</div>
 
-              <div
-                class="bg-linear-to-br from-gray-900/50 to-black border border-white/5 rounded-3xl p-8 md:p-12 hover:border-blue-500/50 transition-all relative overflow-hidden group">
-                <!-- Quote Icon -->
-                <div
-                  class="absolute top-8 right-8 text-8xl text-blue-500/10 group-hover:text-blue-500/20 transition-colors">
-                  "
-                </div>
+            <!-- Stars -->
+            <div class="flex gap-1 mb-6">
+              <svg v-for="s in 5" :key="s" class="w-4 h-4 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+              </svg>
+            </div>
 
-                <!-- Content -->
-                <div class="relative z-10">
-                  <!-- Stars -->
-                  <div class="flex gap-1 mb-6">
-                    <svg v-for="i in 5" :key="i" class="w-6 h-6 text-yellow-500" fill="currentColor"
-                      viewBox="0 0 20 20">
-                      <path
-                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z">
-                      </path>
-                    </svg>
-                  </div>
+            <!-- Text -->
+            <p class="text-gray-300 text-base lg:text-lg leading-relaxed italic mb-8 relative z-10">
+              "{{ t.text }}"
+            </p>
 
-                  <!-- Testimonial Text -->
-                  <p class="text-gray-300 text-lg md:text-xl leading-relaxed mb-8 italic">
-                    "{{ testimonial.text }}"
-                  </p>
-
-                  <!-- Author Info -->
-                  <div class="flex items-center gap-4">
-                    <div class="relative">
-                      <div
-                        class="absolute inset-0 bg-linear-to-br from-blue-500 to-cyan-500 rounded-full blur-lg opacity-50">
-                      </div>
-                      <img :src="testimonial.image" :alt="testimonial.name"
-                        class="relative w-16 h-16 md:w-20 md:h-20 rounded-full object-cover border-2 border-blue-500">
-                    </div>
-                    <div>
-                      <h4 class="text-xl md:text-2xl font-bold text-white">{{ testimonial.name }}</h4>
-                      <p class="text-gray-400">{{ testimonial.role }}</p>
-                      <p class="text-blue-500 text-sm">{{ testimonial.company }}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Decorative gradient -->
-                <div
-                  class="absolute inset-0 bg-linear-to-br from-blue-500/0 to-cyan-500/0 group-hover:from-blue-500/5 group-hover:to-cyan-500/5 transition-all duration-500 rounded-3xl pointer-events-none">
-                </div>
+            <!-- Author -->
+            <div class="flex items-center gap-4">
+              <div class="relative flex-shrink-0">
+                <div class="absolute inset-0 rounded-full blur-lg opacity-40"
+                  style="background: linear-gradient(135deg, #6C3EEF, #22d3ee)" />
+                <img :src="t.image" :alt="t.name"
+                  class="relative w-12 h-12 rounded-full object-cover border border-violet-500/30" />
+              </div>
+              <div>
+                <div class="text-white font-bold">{{ t.name }}</div>
+                <div class="text-gray-500 text-sm">{{ t.role }}</div>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Navigation Arrows -->
-        <button @click="previousSlide"
-          class="cursor-pointer absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-16 w-12 h-12 md:w-14 md:h-14 bg-linear-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-lg shadow-blue-500/50 group"
-          :class="{ 'opacity-50 cursor-not-allowed': currentIndex === 0 }">
-          <svg class="w-6 h-6 text-white transform group-hover:-translate-x-1 transition-transform" fill="none"
-            stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-          </svg>
-        </button>
+        <!-- Navigation -->
+        <div class="flex items-center justify-between mt-10 pt-8 border-t border-white/5">
+          <div class="flex gap-2">
+            <button v-for="(t, i) in testimonials" :key="i" @click="goTo(i)"
+              class="transition-all duration-300 rounded-full"
+              :class="currentIndex === i ? 'w-8 h-2 bg-violet-500' : 'w-2 h-2 bg-gray-700 hover:bg-gray-500'" />
+          </div>
 
-        <button @click="nextSlide"
-          class="cursor-pointer absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-16 w-12 h-12 md:w-14 md:h-14 bg-linear-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-all shadow-lg shadow-blue-500/50 group"
-          :class="{ 'opacity-50 cursor-not-allowed': currentIndex === testimonials.length - 1 }">
-          <svg class="w-6 h-6 text-white transform group-hover:translate-x-1 transition-transform" fill="none"
-            stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-          </svg>
-        </button>
-
-        <!-- Dots Indicator -->
-        <div class="flex justify-center gap-3 mt-12">
-          <button v-for="(testimonial, index) in testimonials" :key="index" @click="goToSlide(index)"
-            class="transition-all duration-300 rounded-full" :class="currentIndex === index
-              ? 'w-12 h-3 bg-linear-to-r from-blue-500 to-cyan-500'
-              : 'w-3 h-3 bg-gray-600 hover:bg-gray-500'">
-          </button>
-        </div>
-
-        <!-- Counter -->
-        <div class="text-center mt-8">
-          <span class="text-blue-500 font-semibold text-lg">
-            {{ currentIndex + 1 }} / {{ testimonials.length }}
-          </span>
+          <div class="flex gap-3">
+            <button @click="prev"
+              class="w-11 h-11 rounded-xl border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-violet-500/40 hover:bg-violet-500/10 transition-all duration-300"
+              :class="{ 'opacity-30 cursor-not-allowed': currentIndex === 0 }">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            <button @click="next"
+              class="w-11 h-11 rounded-xl border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-violet-500/40 hover:bg-violet-500/10 transition-all duration-300"
+              :class="{ 'opacity-30 cursor-not-allowed': currentIndex === testimonials.length - 1 }">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -121,149 +86,36 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
 
 const currentIndex = ref(0)
-let autoplayInterval = null
+let autoplay = null
 
 const testimonials = [
-  {
-    name: 'Isra Ilyas Qureshi',
-    role: 'Mern Stack Developer',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop',
-    text: "Muhammad Sameer is an exceptional full stack developer and DevOps engineer. His expertise in both front-end and back-end development is truly impressive.Though haven't worked directly with him, Sameer has been a guiding force in my web development journey. His mentorship has been invaluable, and his willingness to share knowledge is a testament to his character. Beyond his technical skills, he is also a kind and approachable person who genuinely cares about helping others grow. I highly recommend Muhammad Sameer for any role that requires a skilled and supportive developer. He would be a great asset to any team."
-  },
-  {
-    name: 'Sajjad Hussain',
-    role: 'Mobile Application Developer',
-    company: 'Digital Solutions Ltd.',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop',
-    text: "I wholeheartedly recommend Sameer for his outstanding tech and presentation skills. Sameer's rare combination of technical proficiency and presentation acumen makes him an invaluable asset to any team. Without a doubt, highly recommend Sameer for roles requiring a blend of technical excellence and effective communication"
-  },
-  {
-    name: 'Mahrukh Naz',
-    role: 'Founder',
-    company: 'CodeBuds Global',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop',
-    text: 'I highly recommend Sameer for his exceptional technical knowledge in DevOps. He is a dedicated team player with a deep understanding of DevOps principles and practices. Sameer consistently impresses with his ability to grasp complex concepts and apply them effectively.'
-  },
-  {
-    name: 'Saba Parveen',
-    role: 'Frontend Developer',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop',
-    text: 'I highly recommend Muhammad Sameer for his exceptional skills as a web developer. His passion for coding, quick learning abilities, and pleasant personality make him a valuable asset to any team.'
-  },
-  {
-    name: 'Shaheer Haider',
-    role: 'CEO & Founder',
-    company: 'Softech Ops',
-    image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&h=200&fit=crop',
-    text: "He's one of the fastest learner know. He'll surprise you with his knowledge in almost every area of development & cloud and his habit of working and learning tirelessly."
-  },
-  {
-    name: 'Shaheer Haider',
-    role: 'CEO & Founder',
-    company: 'Softech Ops',
-    image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&h=200&fit=crop',
-    text: "Sameer is an exceptional backend developer. He consistently deliver efficient, high-quality solutions and excel in communication. His proactive approach and commitment to staying current with technology trends make them a valuable asset to any team."
-  },
-  {
-    name: 'Hasnain Saeed',
-    role: 'Software Engineer',
-    company: 'Absolutely Digital',
-    image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&h=200&fit=crop',
-    text: "In addition to his technical prowess, Sameer is a fantastic team player. He fosters a collaborative and inclusive work environment, and his ability to communicate effectively and build strong relationships with colleagues and clients is truly commendable. Sameer's positive attitude and willingness to mentor and support his peers have been instrumental in creating a positive and productive work atmosphere."
-  }, {
-    name: 'Hamza Naveed',
-    role: 'Senior UI/UX Designer',
-    company: 'GssTech Solutions',
-    image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&h=200&fit=crop',
-    text: "Muhammad Sameer is an exceptional backend developer. His coding skills and attention to detail set him apart. Highly recommended. I highly endorse Muhammad Sameer for his outstanding backend development expertise. He consistently delivers efficient and reliable solutions. Muhammad Sameer is a top-notch backend developer. His technical prowess and collaborative nature make him an invaluable team member."
-  }
+  { name: 'Isra Ilyas Qureshi', role: 'MERN Stack Developer', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop', text: "Muhammad Sameer is an exceptional full stack developer and DevOps engineer. His mentorship has been invaluable and his willingness to share knowledge is a testament to his character. He genuinely cares about helping others grow. I highly recommend him for any role that requires a skilled and supportive developer." },
+  { name: 'Sajjad Hussain', role: 'Mobile Application Developer', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop', text: "I wholeheartedly recommend Sameer for his outstanding tech and presentation skills. His rare combination of technical proficiency and presentation acumen makes him an invaluable asset to any team." },
+  { name: 'Mahrukh Naz', role: 'Founder, CodeBuds Global', image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop', text: 'I highly recommend Sameer for his exceptional technical knowledge in DevOps. He is a dedicated team player with a deep understanding of DevOps principles and consistently impresses with his ability to apply them effectively.' },
+  { name: 'Shaheer Haider', role: 'CEO & Founder, Softech Ops', image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&h=200&fit=crop', text: "He's one of the fastest learners I know. He'll surprise you with his knowledge in almost every area of development and cloud, and his habit of working and learning tirelessly." },
+  { name: 'Hasnain Saeed', role: 'Software Engineer, Absolutely Digital', image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop', text: "Sameer is a fantastic team player who fosters a collaborative and inclusive work environment. His ability to communicate effectively and mentor peers has been instrumental in creating a positive and productive work atmosphere." },
+  { name: 'Hamza Naveed', role: 'Senior UI/UX Designer, GssTech Solutions', image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&h=200&fit=crop', text: "Muhammad Sameer is an exceptional backend developer. His coding skills and attention to detail set him apart. His technical prowess and collaborative nature make him an invaluable team member." },
 ]
 
-const nextSlide = () => {
-  if (currentIndex.value < testimonials.length - 1) {
-    currentIndex.value++
-  }
+const getCardClasses = (i) => {
+  const diff = i - currentIndex.value
+  if (diff === 0) return 'relative z-20 opacity-100 scale-100 translate-y-0'
+  if (diff === -1) return 'z-10 opacity-0 pointer-events-none translate-y-4 scale-95'
+  if (diff === 1) return 'z-10 opacity-20 pointer-events-none translate-y-2 scale-97'
+  return 'opacity-0 pointer-events-none z-0'
 }
 
-const previousSlide = () => {
-  if (currentIndex.value > 0) {
-    currentIndex.value--
-  }
-}
-
-const goToSlide = (index) => {
-  currentIndex.value = index
-}
-
-const startAutoplay = () => {
-  autoplayInterval = setInterval(() => {
-    if (currentIndex.value < testimonials.length - 1) {
-      currentIndex.value++
-    } else {
-      currentIndex.value = 0
-    }
-  }, 5000) // Change slide every 5 seconds
-}
-
-const stopAutoplay = () => {
-  if (autoplayInterval) {
-    clearInterval(autoplayInterval)
-  }
-}
+const goTo = (i) => { currentIndex.value = i }
+const prev = () => { if (currentIndex.value > 0) currentIndex.value-- }
+const next = () => { if (currentIndex.value < testimonials.length - 1) currentIndex.value++ }
 
 onMounted(() => {
-  startAutoplay()
+  autoplay = setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % testimonials.length
+  }, 6000)
 })
-
-onUnmounted(() => {
-  stopAutoplay()
-})
-
-// Touch/Swipe support for mobile
-let touchStartX = 0
-let touchEndX = 0
-
-const handleTouchStart = (e) => {
-  touchStartX = e.changedTouches[0].screenX
-}
-
-const handleTouchEnd = (e) => {
-  touchEndX = e.changedTouches[0].screenX
-  handleSwipe()
-}
-
-const handleSwipe = () => {
-  if (touchStartX - touchEndX > 50) {
-    // Swipe left
-    nextSlide()
-  }
-
-  if (touchEndX - touchStartX > 50) {
-    // Swipe right
-    previousSlide()
-  }
-}
-
-onMounted(() => {
-  const sliderContainer = document.querySelector('.overflow-hidden')
-  if (sliderContainer) {
-    sliderContainer.addEventListener('touchstart', handleTouchStart)
-    sliderContainer.addEventListener('touchend', handleTouchEnd)
-  }
-})
+onUnmounted(() => clearInterval(autoplay))
 </script>
-
-<style scoped>
-/* Smooth transition for slider */
-.transition-transform {
-  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Pause autoplay on hover */
-section:hover {
-  --autoplay-paused: true;
-}
-</style>

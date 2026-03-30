@@ -1,101 +1,82 @@
 <template>
-  <section class="py-16 bg-black relative overflow-hidden">
-    <div class="container mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <!-- Experience Card -->
-        <div class="relative group">
-          <div class="absolute inset-0 bg-linear-to-br from-blue-500/20 to-transparent rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
-          <div class="relative bg-linear-to-br from-gray-900 to-black border border-blue-500/20 rounded-3xl p-8 hover:border-blue-500/50 transition-all">
-            <div class="text-6xl mb-4">💼</div>
-            <div class="text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-blue-600 mb-2">
-              {{ stats.experience }}+
-            </div>
-            <div class="text-gray-400 text-lg">Years of Experience</div>
-            <p class="text-gray-500 text-sm mt-2">Building scalable solutions and leading teams</p>
-          </div>
-        </div>
+  <section class="py-20 bg-[#070412] relative overflow-hidden">
+    <!-- Top border shimmer -->
+    <div class="absolute top-0 left-0 right-0 h-px"
+      style="background: linear-gradient(90deg, transparent, #6C3EEF, #22d3ee, transparent)" />
 
-        <!-- Projects Card -->
-        <div class="relative group">
-          <div class="absolute inset-0 bg-linear-to-br from-cyan-500/20 to-transparent rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
-          <div class="relative bg-linear-to-br from-gray-900 to-black border border-cyan-500/20 rounded-3xl p-8 hover:border-cyan-500/50 transition-all">
-            <div class="text-6xl mb-4">🚀</div>
-            <div class="text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-500 to-cyan-600 mb-2">
-              {{ stats.projects }}+
-            </div>
-            <div class="text-gray-400 text-lg">Completed Projects</div>
-            <p class="text-gray-500 text-sm mt-2">From concept to production deployment</p>
-          </div>
-        </div>
+    <div class="container mx-auto px-6 lg:px-12">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <div v-for="(stat, i) in stats" :key="i" ref="statRefs"
+          class="group relative rounded-3xl border border-white/5 bg-white/[0.03] backdrop-blur-sm p-8 hover:border-violet-500/30 hover:bg-white/[0.05] transition-all duration-500 overflow-hidden cursor-default">
 
-        <!-- Clients Card -->
-        <div class="relative group">
-          <div class="absolute inset-0 bg-linear-to-br from-blue-500/20 to-transparent rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
-          <div class="relative bg-linear-to-br from-gray-900 to-black border border-blue-500/20 rounded-3xl p-8 hover:border-blue-500/50 transition-all">
-            <div class="text-6xl mb-4">👥</div>
-            <div class="text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-blue-600 mb-2">
-              {{ stats.clients }}+
-            </div>
-            <div class="text-gray-400 text-lg">Happy Clients</div>
-            <p class="text-gray-500 text-sm mt-2">Worldwide satisfied customers</p>
-          </div>
-        </div>
+          <!-- Glow bg -->
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"
+            :style="{ background: `radial-gradient(circle at 50% 100%, ${stat.glow}15 0%, transparent 70%)` }" />
 
-        <!-- Awards Card -->
-        <div class="relative group">
-          <div class="absolute inset-0 bg-linear-to-br from-yellow-500/20 to-transparent rounded-3xl blur-xl group-hover:blur-2xl transition-all"></div>
-          <div class="relative bg-linear-to-br from-gray-900 to-black border border-yellow-500/20 rounded-3xl p-8 hover:border-yellow-500/50 transition-all">
-            <div class="text-6xl mb-4">🏆</div>
-            <div class="text-5xl font-bold text-transparent bg-clip-text bg-linear-to-r from-yellow-500 to-yellow-600 mb-2">
-              {{ stats.awards }}+
-            </div>
-            <div class="text-gray-400 text-lg">Awards Won</div>
-            <p class="text-gray-500 text-sm mt-2">Recognition for excellence</p>
+          <!-- Icon -->
+          <div class="text-3xl mb-4 select-none">{{ stat.icon }}</div>
+
+          <!-- Value -->
+          <div class="text-4xl lg:text-5xl font-black mb-2 tabular-nums"
+            :style="{ color: stat.color }">
+            {{ stat.animated }}{{ stat.suffix }}
           </div>
+
+          <!-- Label -->
+          <div class="text-gray-400 text-sm font-medium">{{ stat.label }}</div>
+          <div class="text-gray-600 text-xs mt-1">{{ stat.sub }}</div>
+
+          <!-- Bottom accent line -->
+          <div class="absolute bottom-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700 rounded-full"
+            :style="{ background: stat.color }" />
         </div>
       </div>
     </div>
+
+    <!-- Bottom border shimmer -->
+    <div class="absolute bottom-0 left-0 right-0 h-px"
+      style="background: linear-gradient(90deg, transparent, rgba(108,62,239,0.4), transparent)" />
   </section>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 
-const stats = ref({
-  experience: 0,
-  projects: 0,
-  clients: 0,
-  awards: 0
-})
+const statRefs = ref([])
 
-const finalStats = {
-  experience: 5,
-  projects: 50,
-  clients: 30,
-  awards: 15
-}
+const stats = ref([
+  { icon: '💼', value: 5, suffix: '+', label: 'Years of Experience', sub: 'Shipping production systems', color: '#a78bfa', glow: '#a78bfa', animated: 0 },
+  { icon: '🚀', value: 50, suffix: '+', label: 'Projects Delivered', sub: 'Concept to production', color: '#22d3ee', glow: '#22d3ee', animated: 0 },
+  { icon: '👥', value: 30, suffix: '+', label: 'Happy Clients', sub: 'Worldwide', color: '#f59e0b', glow: '#f59e0b', animated: 0 },
+  { icon: '🏆', value: 8, suffix: '', label: 'Engineers Mentored', sub: 'To mid & senior levels', color: '#34d399', glow: '#34d399', animated: 0 },
+])
 
-const animateValue = (key, end, duration = 2000) => {
-  const start = 0
-  const range = end - start
-  const increment = end > start ? 1 : -1
-  const stepTime = Math.abs(Math.floor(duration / range))
-  
-  let current = start
+const animateCount = (statItem, duration = 1800) => {
+  const end = statItem.value
+  const steps = 60
+  const increment = end / steps
+  let current = 0
+  let step = 0
   const timer = setInterval(() => {
-    current += increment
-    stats.value[key] = current
-    if (current === end) {
-      clearInterval(timer)
-    }
-  }, stepTime)
+    step++
+    current = Math.min(Math.round(increment * step), end)
+    statItem.animated = current
+    if (step >= steps) clearInterval(timer)
+  }, duration / steps)
 }
 
 onMounted(() => {
-  setTimeout(() => {
-    Object.keys(finalStats).forEach(key => {
-      animateValue(key, finalStats[key])
-    })
-  }, 500)
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          stats.value.forEach((s, i) => setTimeout(() => animateCount(s), i * 150))
+          observer.disconnect()
+        }
+      })
+    },
+    { threshold: 0.3 }
+  )
+  if (statRefs.value[0]) observer.observe(statRefs.value[0])
 })
 </script>

@@ -1,31 +1,98 @@
 <template>
-  <section id="projects" class="py-3 relative">
-    <div class="container mx-auto px-6">
-      <SectionTitle title="Featured Projects"
-        subtitle="Showcasing excellence in full-stack development and DevOps engineering" />
+  <section id="projects" class="py-20  bg-[#050310] relative overflow-hidden">
+    <div class="container mx-auto px-6 lg:px-12">
 
-      <!-- Filter Tabs -->
-      <div class="flex justify-center gap-4 mb-12 flex-wrap">
-        <button v-for="filter in filters" :key="filter" @click="activeFilter = filter"
-          class="px-6 py-2 rounded-full font-semibold transition-all cursor-pointer" :class="activeFilter === filter
-            ? 'bg-linear-to-r from-cyan-600 to-blue-600 text-white scale-105'
-            : 'border border-cyan-500 text-cyan-400 hover:bg-cyan-500/10'">
-          {{ filter }}
-        </button>
-      </div>
+      <!-- Header -->
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
+        <div>
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-violet-500/30 bg-violet-500/10 mb-6">
+            <span class="text-violet-400 text-sm font-semibold tracking-wide">Featured Work</span>
+          </div>
+          <h2 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight">
+            Production <span class="text-transparent"
+              style="background: linear-gradient(135deg, #a78bfa, #22d3ee); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">Systems</span>
+          </h2>
+          <p class="text-gray-400 text-lg mt-3 max-w-xl">
+            50+ projects shipped - LMS, fintech, cloud platforms, AI tools, and internal automation systems.
+          </p>
+        </div>
 
-      <!-- Projects Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <div v-for="(project, index) in filteredProjects" :key="index" :style="`animation-delay: ${index * 0.1}s`"
-          class="animate-fadeInUp">
-          <ProjectCard :project="project" />
+        <!-- Filter pills -->
+        <div class="flex flex-wrap gap-2">
+          <button v-for="f in filters" :key="f" @click="activeFilter = f"
+            class="px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-300"
+            :class="activeFilter === f
+              ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/25'
+              : 'border border-white/10 text-gray-400 hover:border-violet-500/40 hover:text-violet-300'">
+            {{ f }}
+          </button>
         </div>
       </div>
 
-      <!-- Empty State -->
-      <div v-if="filteredProjects.length === 0" class="text-center py-20">
-        <div class="text-6xl mb-4">🔍</div>
-        <p class="text-xl text-gray-400">No projects found in this category</p>
+      <!-- Bento grid -->
+      <div v-if="filteredProjects.length" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div v-for="(project, index) in filteredProjects" :key="project.title"
+          class="group relative rounded-3xl border border-white/5 bg-white/[0.02] p-7 hover:border-violet-500/30 hover:bg-white/[0.04] transition-all duration-500 overflow-hidden cursor-default"
+          :class="index === 0 ? 'md:col-span-2 lg:col-span-1' : ''">
+
+          <!-- Hover glow -->
+          <div class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"
+            style="background: radial-gradient(circle at 0% 0%, rgba(108,62,239,0.08) 0%, transparent 60%)" />
+
+          <!-- Status + category -->
+          <div class="flex items-center justify-between mb-5">
+            <span class="text-2xl select-none">{{ project.icon }}</span>
+            <div class="flex items-center gap-2">
+              <span v-if="project.status === 'Live'"
+                class="flex items-center gap-1.5 text-xs font-semibold text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 rounded-full">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Live
+              </span>
+            </div>
+          </div>
+
+          <!-- Title & description -->
+          <h3 class="text-lg font-bold text-white mb-2 group-hover:text-violet-300 transition-colors">
+            {{ project.title }}
+          </h3>
+          <p class="text-gray-500 text-sm leading-relaxed mb-5 line-clamp-3">{{ project.description }}</p>
+
+          <!-- Metrics row -->
+          <div v-if="project.metrics" class="flex gap-4 mb-5 pb-5 border-b border-white/5">
+            <div v-for="(val, key) in project.metrics" :key="key" class="text-center">
+              <div class="text-sm font-bold text-violet-400">{{ val }}</div>
+              <div class="text-[10px] text-gray-600 capitalize">{{ key }}</div>
+            </div>
+          </div>
+
+          <!-- Tech tags -->
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span v-for="tech in project.technologies.slice(0, 6)" :key="tech"
+              class="px-2 py-0.5 rounded-md text-xs text-gray-500 border border-white/5">
+              {{ tech }}
+            </span>
+            <span v-if="project.technologies.length > 6"
+              class="px-2 py-0.5 rounded-md text-xs text-violet-500">
+              +{{ project.technologies.length - 6 }}
+            </span>
+          </div>
+
+          <!-- Live link -->
+          <a v-if="project.liveUrl" :href="project.liveUrl" target="_blank" rel="noopener"
+            class="inline-flex items-center gap-1.5 text-xs text-violet-400 hover:text-violet-300 font-semibold transition-colors group/link">
+            View Live
+            <svg class="w-3 h-3 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform"
+              fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+          <span v-else class="text-xs text-gray-700 font-medium">Internal / Private</span>
+        </div>
+      </div>
+
+      <div v-else class="text-center py-20">
+        <p class="text-gray-500 text-lg">No projects in this category yet.</p>
       </div>
     </div>
   </section>
@@ -33,8 +100,6 @@
 
 <script setup>
 import { ref, computed } from 'vue'
-import SectionTitle from '../ui/SectionTitle.vue'
-import ProjectCard from '../ui/ProjectCard.vue'
 
 const activeFilter = ref('All')
 const filters = ['All', 'Web Application', 'Cloud', 'AI', 'Internal Application']
@@ -42,312 +107,120 @@ const filters = ['All', 'Web Application', 'Cloud', 'AI', 'Internal Application'
 const projects = [
   {
     title: 'Al Nafi International College',
-    description: 'Developed a comprehensive web platform for Al Nafi International College using modern web technologies. Built with microservices-based architecture ensuring scalability and performance. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
-    icon: '🏫',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'PostgreSQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'Strapi', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
+    description: 'Comprehensive web platform with microservices architecture, Sentry monitoring, and AWS infrastructure. Serves 5K+ active users with 99.9% uptime.',
+    icon: '🏫', status: 'Live',
+    technologies: ['Django', 'Vue.js', 'Nuxt.js', 'REST APIs', 'PostgreSQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Sentry', 'OpenAI', 'Claude'],
     category: ['Web Application'],
-    metrics: {
-      users: '5K+',
-      performance: '75%',
-      uptime: '99.9%'
-    },
+    metrics: { users: '5K+', performance: '75%', uptime: '99.9%' },
     liveUrl: 'https://alnafi.com',
   },
   {
     title: 'Al Nafi Cloud',
-    description: 'Built a scalable cloud platform for Al Nafi Cloud services, focusing on delivering robust cloud solutions. We provide AWS EC2 instances as containers where users can perform labs and practical exercises. Implemented advanced monitoring with Sentry and optimized performance for a seamless user experience. Security best practices were followed throughout the development process.',
-    icon: '☁️',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
+    description: 'Scalable cloud platform delivering AWS EC2 containers where users perform real-world labs and practical exercises. Advanced monitoring with 99.5% uptime.',
+    icon: '☁️', status: 'Live',
+    technologies: ['Django', 'Vue.js', 'Nuxt.js', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'OpenAI', 'Claude'],
     category: ['Cloud', 'Web Application', 'AI'],
-    metrics: {
-      users: '5K+',
-      performance: '80%',
-      uptime: '99.5%'
-    },
+    metrics: { users: '5K+', performance: '80%', uptime: '99.5%' },
     liveUrl: 'https://alnafi.cloud',
   },
   {
-    title: 'Al Nafi Academy O-Level/IGCSE',
-    description: 'Built a scalable e-learning platform for Al Nafi Academy focusing on O-Level and IGCSE courses. Integrated multiple payment gateways like easypaisa, UBL, Epay, Stripe. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
-    icon: '🎓',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
-    category: ['Web Application'],
-    metrics: {
-      users: '500',
-      performance: '70%',
-      uptime: '99.8%'
-    },
-    liveUrl: 'https://alnafi.academy',
-  },
-  {
-    title: 'Affiliate Management System',
-    description: 'Developed a robust affiliate management system for Al Nafi Affiliate Program. This platform enables users to sign up as affiliates, track their referrals, and earn commissions through various management channels. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
-    icon: '💼',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
-    category: ['Web Application'],
-    metrics: {
-      users: '1k+',
-      performance: '93%',
-      uptime: '99.8%'
-    },
-    liveUrl: 'https://affiliate.alnafi.com/',
-  },
-  {
     title: 'Learning Management System',
-    description: 'Developed a comprehensive learning management system with advanced features for course management, student tracking, and interactive learning experiences. The platform includes video streaming, quiz systems, and progress analytics for enhanced educational delivery.',
-    icon: '📚',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
+    description: 'Full-featured LMS with video streaming, quiz engines, progress analytics, and payment gateway integrations (Easypaisa, UBL, Stripe).',
+    icon: '📚', status: 'Live',
+    technologies: ['Django', 'Vue.js', 'Nuxt.js', 'MySQL', 'AWS', 'Docker', 'Kubernetes'],
     category: ['Web Application'],
-    metrics: {
-      users: '1k+',
-      performance: '93%',
-      uptime: '99.8%'
-    },
+    metrics: { users: '1K+', performance: '93%', uptime: '99.8%' },
     liveUrl: 'https://lms.alnafi.com/',
   },
   {
-    title: 'Islamic Academy',
-    description: 'Developed a comprehensive e-learning platform for Islamic Academy, focusing on delivering high-quality religious educational content. Implemented advanced features like live classes, quizzes, and progress tracking. Integrated Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
-    icon: '🕌',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
-    category: ['Web Application'],
-    metrics: {
-      users: '1k+',
-      performance: '93%',
-      uptime: '99.8%'
-    },
-    liveUrl: 'https://islamic.alnafi.com/',
+    title: 'Epay - Fintech Solution',
+    description: 'Payment gateway system integrating Easypaisa and Pakistani banking apps via 1-bill. Secure transaction processing with real-time settlement.',
+    icon: '💳', status: 'Live',
+    technologies: ['Flask', 'Vue.js', 'Nuxt.js', 'MySQL', 'AWS', 'Docker', 'Redis'],
+    category: ['Web Application', 'Internal Application'],
+    metrics: { users: '1K', performance: '71%', uptime: '99.8%' },
+    liveUrl: null,
   },
   {
-    title: 'Job Portal',
-    description: 'Developed a feature-rich job portal for connecting employers with potential candidates. The platform includes job listings, application tracking, and resume management. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
-    icon: '💼',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
-    category: ['Web Application'],
-    metrics: {
-      users: '100',
-      performance: '71%',
-      uptime: '99.8%'
-    },
-    liveUrl: 'https://islamic.alnafi.com/',
+    title: 'MCQ & Notes Generator',
+    description: 'AI-powered tool where teams upload CSVs to generate MCQs and structured notes using OpenAI and Claude. Handles batch jobs at scale.',
+    icon: '📝', status: 'Live',
+    technologies: ['Django', 'REST APIs', 'OpenAI', 'Claude', 'AWS', 'Docker'],
+    category: ['Web Application', 'AI', 'Internal Application'],
+    metrics: { users: '1K', performance: '95%', uptime: '99.8%' },
+    liveUrl: null,
   },
   {
     title: 'Email Marketing System',
-    description: 'Developed a comprehensive email marketing system that allows users to create, manage, and analyze email campaigns. Features include customizable templates, audience segmentation, and performance analytics. This system was built with scalability and security in mind. This is a replica of Mailchimp. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
-    icon: '📧',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
+    description: 'Mailchimp-like email marketing platform with customizable templates, audience segmentation, A/B testing, and performance analytics for 50K+ subscribers.',
+    icon: '📧', status: 'Live',
+    technologies: ['Django', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'OpenAI'],
     category: ['Web Application', 'Internal Application'],
-    metrics: {
-      users: '50k',
-      performance: '100%',
-      uptime: '99.8%'
-    },
-    screenshots: [
-      '/images/screenshots/EMS-1.webp',
-      '/images/screenshots/EMS-2.webp',
-      '/images/screenshots/EMS-3.webp'
-    ]
+    metrics: { users: '50K', performance: '100%', uptime: '99.8%' },
+    liveUrl: null,
   },
   {
-    title: 'Al Baseer',
-    description: 'Built a comprehensive Data Lake system where all data from our applications is collected for monitoring and visualization. This centralized data platform provides insights and analytics across all organizational systems. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
-    icon: '📊',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
+    title: 'Al Baseer - Data Lake',
+    description: 'Centralized data platform collecting metrics from all org applications for monitoring, visualization, and cross-system analytics.',
+    icon: '📊', status: 'Live',
+    technologies: ['Django', 'Vue.js', 'Nuxt.js', 'MySQL', 'AWS', 'Docker', 'OpenAI'],
     category: ['Web Application', 'Internal Application'],
-    metrics: {
-      users: '40',
-      performance: '95%',
-      uptime: '99.8%'
-    },
-  },
-  {
-    title: 'Epay (Fintech Solution)',
-    description: 'Built a comprehensive Fintech solution named Epay, which is a payment gateway system where users can pay through multiple payment gateways like Easypaisa or any other Pakistani banking application using 1-bill integration. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
-    icon: '💳',
-    status: 'Live',
-    technologies: ['Python', 'Flask', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
-    category: ['Web Application', 'Internal Application'],
-    metrics: {
-      users: '1k',
-      performance: '71%',
-      uptime: '99.8%'
-    },
-    screenshots: [
-      '/images/screenshots/Epay-1.webp',
-      '/images/screenshots/Epay-2.webp'
-    ]
-  },
-  {
-    title: 'MCQ and Notes Generator',
-    description: 'Developed an internal application where our team uploads CSV files and runs multiple jobs to generate MCQs from that file, which can then be downloaded in CSV format. The system also allows teams to upload CSV files or provide content to create well-structured notes with proper headings. Integrated multiple AI models like OpenAI and Claude to generate high-quality content efficiently. Implemented Sentry for error tracking and performance monitoring.',
-    icon: '📝',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
-    category: ['Web Application', 'AI', 'Internal Application'],
-    metrics: {
-      users: '1k',
-      performance: '95%',
-      uptime: '99.8%'
-    },
-    screenshots: [
-      '/images/screenshots/placeholder.svg',
-      '/images/screenshots/placeholder.svg'
-    ]
-  },
-  {
-    title: 'Resume Generator',
-    description: 'Developed an internal application where our team uploads CSV files or provides content to automatically generate professional user resumes. The system uses AI-powered content generation to create well-formatted resumes with proper sections and styling. Integrated multiple AI models like OpenAI and Claude to generate high-quality content efficiently. Implemented Sentry for error tracking and performance monitoring.',
-    icon: '📄',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
-    category: ['Web Application', 'AI', 'Internal Application'],
-    metrics: {
-      users: '1k',
-      performance: '95%',
-      uptime: '99.8%'
-    },
-  },
-  {
-    title: 'Instructor Payout System',
-    description: 'Developed a comprehensive system that CFO and Accounts teams use to manage instructor payouts on a monthly basis. The system creates real-time commissions on any purchase and integrates seamlessly with other applications. Features automated calculations, payment tracking, and detailed reporting. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
-    icon: '💰',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
-    category: ['Web Application', 'Internal Application'],
-    metrics: {
-      users: '1k',
-      performance: '95%',
-      uptime: '99.8%'
-    },
-
-  },
-  {
-    title: 'Sales and Support Dashboard',
-    description: 'Developed a comprehensive dashboard that sales and support teams use to monitor user data, including user information, course performance metrics, token utilization, support ticket statistics, and payment information. The dashboard provides real-time insights and analytics to improve customer service and sales performance. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
-    icon: '📈',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
-    category: ['Web Application', 'Internal Application'],
-    metrics: {
-      users: '1k',
-      performance: '95%',
-      uptime: '99.8%'
-    },
-    screenshots: [
-      '/images/screenshots/sasd-1.webp',
-      '/images/screenshots/sasd-2.webp',
-      '/images/screenshots/sasd-3.webp',
-      '/images/screenshots/sasd-4.webp',
-      '/images/screenshots/sasd-5.webp',
-      '/images/screenshots/sasd-6.webp',
-    ]
-  },
-  {
-    title: 'Al Nafi Loyalty Program',
-    description: 'Developed a comprehensive loyalty program for Al Nafi, allowing users to earn and redeem points across various services. The system includes a user-friendly interface for tracking points, managing rewards, and viewing transaction history. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
-    icon: '🎁',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'Vue.js', 'Nuxt.js', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Redis', 'Kubernetes', 'Tailwind CSS', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
-    category: ['Web Application'],
-    metrics: {
-      users: '100',
-      performance: '95%',
-      uptime: '99.8%'
-    },
-    liveUrl: 'https://loyalty.alnafi.com/',
-  }, {
-    title: 'Campus Management System',
-    description: 'Developed a comprehensive campus management system that streamlines administrative tasks, including student enrollment, attendance tracking, and grade management with teachers tracking. The system features a user-friendly interface for both administrators and teachers, with robust reporting capabilities. Implemented Sentry for error tracking and performance monitoring. Security best practices were followed throughout the development process.',
-    icon: '🏫',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
-    category: ['Web Application', 'Internal Application'],
-    metrics: {
-      users: '10',
-      performance: '70%',
-      uptime: '99.8%'
-    },
-    screenshots: [
-      '/images/screenshots/sms-1.webp',
-      '/images/screenshots/sms-2.webp',
-      '/images/screenshots/sms-3.webp',
-      '/images/screenshots/sms-4.webp',
-      '/images/screenshots/sms-5.webp',
-      '/images/screenshots/sms-6.webp',
-    ]
-  }, {
-    title: 'SEO Management System',
-    description: 'Developed a comprehensive SEO or backlinks management system that helps businesses optimize their online presence. The system includes features for keyword research, on-page optimization, backlink tracking, and performance analytics.',
-    icon: '🔍',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
-    category: ['Web Application', 'Internal Application'],
-    metrics: {
-      users: '25',
-      performance: '98%',
-      uptime: '99.8%'
-    }
+    metrics: { users: '40', performance: '95%', uptime: '99.8%' },
+    liveUrl: null,
   },
   {
     title: 'HRM System',
-    description: 'Developed a comprehensive HRM system that helps businesses manage their human resources effectively. The system includes features for employee onboarding, performance tracking, leave management, and payroll processing. This enterprise-grade solution streamlines HR processes and provides real-time insights into workforce management.',
-    icon: '👥',
-    status: 'Live',
-    technologies: ['Python', 'Django', 'REST APIs', 'Sentry', 'APM', 'Git/Github', 'MySQL', 'AWS', 'Docker', 'Kubernetes', 'JavaScript', 'Copilot', 'OpenAI', 'Claude'],
+    description: 'Enterprise HR management with employee onboarding, performance tracking, leave management, and payroll processing for 100+ employees.',
+    icon: '👥', status: 'Live',
+    technologies: ['Django', 'REST APIs', 'MySQL', 'AWS', 'Docker'],
     category: ['Web Application', 'Internal Application'],
-    metrics: {
-      users: '100',
-      performance: '98%',
-      uptime: '99.8%'
-    },
-    screenshots: [
-      '/images/screenshots/placeholder.svg'
-    ]
+    metrics: { users: '100', performance: '98%', uptime: '99.8%' },
+    liveUrl: null,
   },
-
+  {
+    title: 'Instructor Payout System',
+    description: 'Real-time commission tracking and monthly payout automation for CFO and Accounts teams. Integrates with all e-learning platforms.',
+    icon: '💰', status: 'Live',
+    technologies: ['Django', 'REST APIs', 'MySQL', 'AWS', 'OpenAI'],
+    category: ['Web Application', 'Internal Application'],
+    metrics: { users: '1K', performance: '95%', uptime: '99.8%' },
+    liveUrl: null,
+  },
+  {
+    title: 'Al Nafi Loyalty Program',
+    description: 'Points-based loyalty system allowing users to earn and redeem across all Al Nafi services with transaction history and reward management.',
+    icon: '🎁', status: 'Live',
+    technologies: ['Django', 'Vue.js', 'Nuxt.js', 'MySQL', 'AWS', 'Redis'],
+    category: ['Web Application'],
+    metrics: { users: '100', performance: '95%', uptime: '99.8%' },
+    liveUrl: 'https://loyalty.alnafi.com/',
+  },
+  {
+    title: 'Affiliate Management System',
+    description: 'Multi-channel affiliate portal enabling users to sign up, track referrals, and manage commissions. Integrates with main e-learning platform.',
+    icon: '🔗', status: 'Live',
+    technologies: ['Django', 'Vue.js', 'Nuxt.js', 'MySQL', 'AWS', 'Docker'],
+    category: ['Web Application'],
+    metrics: { users: '1K+', performance: '93%', uptime: '99.8%' },
+    liveUrl: 'https://affiliate.alnafi.com/',
+  },
+  {
+    title: 'Campus Management System',
+    description: 'Streamlines student enrollment, attendance, grade management, and teacher tracking. Robust reporting for administrators and faculty.',
+    icon: '🏛️', status: 'Live',
+    technologies: ['Django', 'REST APIs', 'MySQL', 'AWS', 'OpenAI'],
+    category: ['Web Application', 'Internal Application'],
+    metrics: { users: '10', performance: '70%', uptime: '99.8%' },
+    liveUrl: null,
+  },
 ]
 
-
-
-
-
 const filteredProjects = computed(() => {
-  if (activeFilter.value === 'All') {
-    return projects
-  }
-  return projects.filter(project => {
-    // Handle both single category (string) and multiple categories (array)
-    if (Array.isArray(project.category)) {
-      return project.category.includes(activeFilter.value)
-    }
-    return project.category === activeFilter.value
-  })
+  if (activeFilter.value === 'All') return projects
+  return projects.filter(p =>
+    Array.isArray(p.category)
+      ? p.category.includes(activeFilter.value)
+      : p.category === activeFilter.value
+  )
 })
 </script>
-
-<style scoped>
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeInUp {
-  animation: fadeInUp 0.8s ease-out forwards;
-}
-</style>
