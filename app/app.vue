@@ -36,7 +36,7 @@
           <!-- Right controls -->
           <div class="flex items-center gap-3">
             <!-- Dark/light toggle -->
-            <button @click="darkMode = !darkMode"
+            <!-- <button @click="darkMode = !darkMode"
               class="w-9 h-9 rounded-xl border flex items-center justify-center transition-all duration-200"
               :class="darkMode
                 ? 'border-white/10 text-gray-400 hover:text-white hover:border-violet-500/40 hover:bg-violet-500/10'
@@ -49,7 +49,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                   d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
               </svg>
-            </button>
+            </button> -->
 
             <a href="#contact" @click.prevent="goToContact"
               class="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-white transition-all duration-300 hover:scale-105"
