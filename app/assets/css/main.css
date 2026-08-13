@@ -1,0 +1,195 @@
+@import "tailwindcss";
+
+/*
+ * Every token below is a *live* value: useThemeJourney lerps these on :root as the
+ * user scrolls, taking the page from warm sand (commit) to bright cream (production).
+ * Components must never hardcode a colour - always reference a token, or it will not
+ * participate in the journey. Source of truth for both endpoints: utils/palette.ts.
+ */
+@theme {
+  /* Surfaces */
+  --color-bg-base: #ede7dc;
+  --color-surface-1: rgba(42, 38, 33, 0.035);
+  --color-surface-2: rgba(42, 38, 33, 0.065);
+  --color-surface-3: rgba(42, 38, 33, 0.10);
+  --color-border-subtle: rgba(42, 38, 33, 0.12);
+  --color-border-strong: rgba(42, 38, 33, 0.22);
+  --color-border-hover: rgba(176, 96, 58, 0.50);
+
+  /* Text */
+  --color-text-primary: #2a2621;
+  --color-text-secondary: #5c5449;
+  --color-text-muted: #6e6558;
+
+  /* Accents - warm, sand-family */
+  --color-accent-clay: #b0603a;
+  --color-accent-clay-light: #c87b52;
+  /* Ink variants: dark enough to clear 4.5:1 as body text on the sand base.
+     Use these whenever an accent is the text colour; the lighter ones are for
+     fills, borders and glows only. */
+  --color-accent-clay-ink: #9b5433;
+  --color-accent-bronze: #9a7b4f;
+  --color-accent-olive: #5f6b4e;
+  --color-accent-gold: #a8752f;
+  --color-accent-gold-ink: #8a6027;
+  --color-accent-sage: #6b7f5e;
+
+  /* Fonts */
+  --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Clash Display", "Satoshi", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", monospace;
+
+  /* Motion */
+  --ease-expo-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Fluid type scale */
+  --text-display: clamp(3rem, 2rem + 4.2vw, 7rem);
+  --text-h1: clamp(2.25rem, 1.7rem + 2.6vw, 4.5rem);
+  --text-h2: clamp(1.875rem, 1.5rem + 1.6vw, 3rem);
+  --text-h3: clamp(1.375rem, 1.2rem + 0.8vw, 1.875rem);
+}
+
+:root {
+  color-scheme: light;
+  /* Stops stay dark enough that white button text clears 4.5:1 at every point. */
+  --gradient-primary: linear-gradient(135deg, #a04e2e, #b0603a, #8f6a45);
+  /* 0 = sand/commit, 1 = cream/production. Written by useThemeJourney. */
+  --journey: 0;
+}
+
+* {
+  border-color: var(--color-border-subtle);
+}
+
+html,
+body {
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
+  /* clip, not hidden: `overflow-x: hidden` forces `overflow-y: auto`, which makes <html>
+     a scroll container and stops ScrollTrigger's pinned sections from ever sticking —
+     the pin spacer is created but the element scrolls straight past. `clip` suppresses
+     sideways overflow without creating a scroll container, so pinning works. */
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-sans);
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Lenis owns scroll physics - native smooth-scroll must stay off or the two fight. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+html.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+html.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+::selection {
+  background: rgba(176, 96, 58, 0.28);
+  color: var(--color-text-primary);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-base);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent-clay);
+  border-radius: 3px;
+}
+
+/* Visible, on-brand focus ring for every custom interactive element */
+:focus-visible {
+  outline: 2px solid var(--color-accent-clay);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  background: var(--color-bg-base);
+  color: var(--color-text-primary);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-border-hover);
+  transition: top 0.2s var(--ease-expo-out);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/*
+ * Also targets descendants: GSAP SplitText rewraps text nodes into child divs, which
+ * would leave the gradient on a parent with no direct text to clip to (invisible word).
+ * Every accent is a single word, so a per-descendant gradient renders identically.
+ */
+/* The descendant selector is a safety net: SplitText is told to `ignore` these spans,
+   but if anything ever does split one, this keeps the text visible instead of
+   transparent-with-no-background. */
+.text-gradient,
+.text-gradient * {
+  background: linear-gradient(135deg, var(--color-accent-clay), var(--color-accent-clay-light), var(--color-accent-bronze));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Surface primitives - these replace every hardcoded bg-white/N + border-white/N pair. */
+.surface-card {
+  background: var(--color-surface-1);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.surface-card-hover:hover {
+  background: var(--color-surface-2);
+  border-color: var(--color-border-hover);
+}
+
+.glass-panel {
+  /* Frosted white rather than a surface tint - on a sand base this reads as glass
+     sitting above the page instead of a slightly darker patch of it. */
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--color-border-subtle);
+}
+
+.noise-overlay {
+  background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22/%3E%3C/svg%3E');
+  background-size: 200px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
