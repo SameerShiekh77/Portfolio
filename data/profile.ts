@@ -17,7 +17,7 @@ export const profile = {
     'Engineering Team Lead',
     'AI Integration Engineer',
   ],
-  yearsExperience: '3+',
+  yearsExperience: '5+',
   location: 'Karachi, Pakistan',
   email: 'muhammadsameer.css@gmail.com',
   phone: '+92 316 636 8782',
@@ -34,7 +34,7 @@ export const profile = {
 } as const
 
 export const heroStats = [
-  { value: '3+', label: 'Years\nExperience', color: 'var(--color-accent-clay)' },
+  { value: '5+', label: 'Years\nExperience', color: 'var(--color-accent-clay)' },
   { value: '50+', label: 'Production\nSystems', color: 'var(--color-accent-olive)' },
   { value: '12', label: 'Engineers\nLed', color: 'var(--color-accent-gold)' },
   { value: '99.9%', label: 'Avg\nUptime', color: 'var(--color-accent-sage)' },

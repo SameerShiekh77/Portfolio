@@ -207,8 +207,10 @@ onMounted(() => {
   // an undisturbed element simply stays visible.
   const tl = gsap.timeline({
     defaults: { ease: easeGsap.expoOut, immediateRender: false },
-    // Whatever happens to the tweens, the hero must not be left mid-animation.
-    onComplete: () => gsap.set(introTargets, { clearProps: 'all' }),
+    // Whatever happens to the tweens, the hero must not be left mid-animation. Scoped to
+    // the animated properties only — 'all' also strips inline styles GSAP never set, which
+    // wiped the gradient background off the primary CTA.
+    onComplete: () => gsap.set(introTargets, { clearProps: 'opacity,transform' }),
   })
   tl.fromTo(badgeEl.value, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: dur.slow })
     .fromTo([line1El.value, line2El.value], { yPercent: 110 }, { yPercent: 0, duration: dur.slower, stagger: 0.08 }, '-=0.25')

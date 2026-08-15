@@ -62,6 +62,14 @@
   border-color: var(--color-border-subtle);
 }
 
+/* Counterpart to the critical inline CSS in nuxt.config: that hides the app so the
+   unstyled SSR markup never flashes, and this reveals it the moment real styles are
+   parsed. Keep the two in sync. */
+#__nuxt {
+  visibility: visible;
+  animation: none;
+}
+
 html,
 body {
   background: var(--color-bg-base);

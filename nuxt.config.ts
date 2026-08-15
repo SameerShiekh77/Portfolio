@@ -57,7 +57,7 @@ export default defineNuxtConfig({
   site: {
     url: 'https://muhammadsameer.dev',
     name: 'Muhammad Sameer - DevOps Manager & Senior Software Engineer',
-    description: 'DevOps Manager & Senior Software Engineer specializing in cloud infrastructure, backend architecture, and engineering leadership. 3+ years shipping and scaling production systems.',
+    description: 'DevOps Manager & Senior Software Engineer specializing in cloud infrastructure, backend architecture, and engineering leadership. 5+ years shipping and scaling production systems.',
     defaultLocale: 'en',
   },
 
@@ -78,6 +78,32 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'en',
       },
+      // Critical CSS, inlined ahead of the stylesheet link. Until main.css lands the
+      // browser would otherwise paint the SSR markup as unstyled black-serif-on-white;
+      // this keeps the first frame brand sand and holds the raw markup back.
+      //
+      // NOTE: must be `innerHTML`. Passing `children` makes Unhead emit it as a literal
+      // attribute (<style children="...">), so the rules never apply.
+      style: [
+        {
+          innerHTML:
+            'html{background:#ede7dc;color:#2a2621}' +
+            'body{margin:0;font-family:Satoshi,ui-sans-serif,system-ui,-apple-system,sans-serif}' +
+            // Hide the app until real styles parse; main.css flips this straight back.
+            // The animation is a safety net: if the stylesheet never arrives the page
+            // reveals itself anyway rather than staying blank forever.
+            '#__nuxt{visibility:hidden;animation:fouc-reveal 0s linear 3s forwards}' +
+            '@keyframes fouc-reveal{to{visibility:visible}}',
+        },
+      ],
+      // With JS disabled nothing ever reveals the app, so do it unconditionally.
+      noscript: [
+        {
+          innerHTML:
+            '<style>#__nuxt{visibility:visible!important;animation:none!important}' +
+            '[aria-label="Loading portfolio"]{display:none!important}</style>',
+        },
+      ],
     }
   },
 

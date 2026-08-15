@@ -1,8 +1,13 @@
 <template>
   <Transition name="loader-fade" @after-leave="$emit('complete')">
+    <!-- The inline style duplicates the utility classes on purpose. This element is in the
+         SSR HTML, so on a cold load it paints before the stylesheet arrives - with classes
+         alone it laid out as plain inline text and the raw page showed through. Inline
+         styles need no stylesheet, so the very first paint is already the sand panel. -->
     <div
       v-if="visible"
       class="fixed inset-0 z-100 flex flex-col items-center justify-center bg-[var(--color-bg-base)]"
+      style="position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #ede7dc"
       role="status"
       aria-live="polite"
       aria-label="Loading portfolio"
@@ -10,7 +15,12 @@
       <div class="absolute inset-0 noise-overlay opacity-[0.03] pointer-events-none" />
       <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 50% 45%, rgba(176,96,58,0.12) 0%, transparent 60%)" />
 
-      <div ref="markEl" class="relative w-28 h-28 sm:w-36 sm:h-36">
+      <!-- markEl is left empty for Lottie to own. It previously also held the fallback
+           spinner as a v-if child, so when lottieReady flipped Vue patched a container
+           whose children Lottie had replaced — the render threw and this whole overlay
+           froze on screen permanently. Vue-managed nodes stay siblings, never children. -->
+      <div class="relative w-28 h-28 sm:w-36 sm:h-36">
+        <div ref="markEl" class="absolute inset-0" />
         <div v-if="!lottieReady" class="absolute inset-0 rounded-full border-2 border-[var(--color-border-subtle)] border-t-[var(--color-accent-clay-light)] animate-spin" />
       </div>
 
