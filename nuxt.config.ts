@@ -66,6 +66,17 @@ export default defineNuxtConfig({
     quality: 82,
   },
 
+  nitro: {
+    prerender: {
+      // On Netlify, @nuxt/image switches to the Netlify Image CDN and emits
+      // /.netlify/images?... URLs. The hero image is preloaded, so that URL appears as a
+      // <link rel="preload"> which the prerender crawler then follows — and the CDN does
+      // not exist during the build, so it 404s and fails the whole deploy. The endpoint
+      // is served at runtime, so it simply must not be crawled.
+      ignore: ['/.netlify'],
+    },
+  },
+
   app: {
     head: {
       titleTemplate: '%s',
