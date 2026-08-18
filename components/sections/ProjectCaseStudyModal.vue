@@ -3,7 +3,7 @@
     <Transition name="modal-fade">
       <div
         v-if="project"
-        class="fixed inset-0 z-100 flex items-start sm:items-center justify-center p-4 sm:p-8 overflow-y-auto"
+        class="fixed inset-0 z-100 flex items-center justify-center p-3 sm:p-6"
         role="dialog"
         aria-modal="true"
         :aria-labelledby="`case-study-title`"
@@ -12,33 +12,39 @@
       >
         <div class="absolute inset-0 bg-[#2a2621]/55 backdrop-blur-sm" aria-hidden="true" />
 
+        <!-- Capped to the viewport with the body scrolling inside, rather than letting the
+             dialog grow past the screen. Centring a taller-than-viewport box in a scroll
+             container pushes its top out of reach, which hid the title and close button. -->
         <div
           ref="dialogEl"
           tabindex="-1"
-          class="relative w-full max-w-3xl my-8 rounded-3xl border border-[var(--color-border-subtle)] bg-[var(--color-bg-base)] shadow-2xl"
+          class="relative flex flex-col w-full max-w-3xl max-h-[calc(100dvh-1.5rem)] sm:max-h-[calc(100dvh-3rem)] rounded-3xl border border-[var(--color-border-subtle)] bg-[var(--color-bg-base)] shadow-2xl overflow-hidden"
         >
-          <button
-            type="button"
-            class="absolute top-4 right-4 sm:top-6 sm:right-6 w-10 h-10 rounded-full flex items-center justify-center text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-2)] transition-colors z-10"
-            aria-label="Close case study"
-            @click="close"
-          >
-            <X class="w-5 h-5" />
-          </button>
-
-          <div class="p-7 sm:p-10">
-            <div class="flex items-center gap-2 mb-4">
+          <!-- Sticky header: title, status and close stay visible however long the body is. -->
+          <div class="flex items-start gap-4 p-5 sm:p-7 border-b border-[var(--color-border-subtle)] shrink-0">
+            <div class="min-w-0 flex-1">
               <span
-                class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full"
-                :class="project.status === 'Live' ? 'text-emerald-400 border border-emerald-500/30 bg-emerald-500/10' : 'text-[var(--color-text-muted)] border border-[var(--color-border-subtle)]'"
+                class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full mb-3"
+                :class="project.status === 'Live' ? 'text-emerald-600 border border-emerald-500/30 bg-emerald-500/10' : 'text-[var(--color-text-muted)] border border-[var(--color-border-subtle)]'"
               >
-                <span v-if="project.status === 'Live'" class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span v-if="project.status === 'Live'" class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 {{ project.status === 'Live' ? 'Live in Production' : 'Internal / Private' }}
               </span>
+              <h3 id="case-study-title" class="text-xl sm:text-2xl font-display font-bold text-[var(--color-text-primary)] leading-tight">{{ project.title }}</h3>
+              <p class="text-[var(--color-text-secondary)] text-sm mt-1">{{ project.tagline }}</p>
             </div>
 
-            <h3 id="case-study-title" class="text-2xl sm:text-3xl font-black text-[var(--color-text-primary)] mb-2">{{ project.title }}</h3>
-            <p class="text-[var(--color-text-secondary)] text-base mb-8">{{ project.tagline }}</p>
+            <button
+              type="button"
+              class="w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-surface-2)] transition-colors"
+              aria-label="Close case study"
+              @click="close"
+            >
+              <X class="w-5 h-5" />
+            </button>
+          </div>
+
+          <div class="overflow-y-auto overscroll-contain p-5 sm:p-7">
 
             <div v-if="project.screenshots.length" class="grid grid-cols-2 gap-3 mb-8">
               <div v-for="(src, i) in project.screenshots" :key="src" class="rounded-2xl overflow-hidden border border-[var(--color-border-subtle)]" :class="i === 0 ? 'col-span-2' : ''">

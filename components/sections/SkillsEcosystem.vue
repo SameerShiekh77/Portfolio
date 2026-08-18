@@ -11,7 +11,7 @@
         subtitle="Not a checklist - a set of interconnected disciplines I move between daily, from infrastructure to interface."
       />
 
-      <div ref="gridEl" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-6xl mx-auto">
+      <div ref="gridEl" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 items-start gap-5 max-w-6xl mx-auto">
         <div
           v-for="cat in skillCategories"
           :key="cat.id"
@@ -72,7 +72,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import { ChevronDown } from '@lucide/vue'
 import { animate } from 'motion'
 import SectionHeader from '../ui/SectionHeader.vue'
@@ -80,12 +80,13 @@ import DynamicIcon from '../ui/DynamicIcon.vue'
 import { skillCategories, type Skill } from '../../data/skills'
 import { duration as dur, ease } from '../../utils/motion'
 
-const openIds = reactive(new Set<string>(['cloud-devops']))
+// One card at a time: opening a category closes whichever was open, and clicking the
+// open one collapses it. Several expanded at once left the grid full of ragged gaps.
+const openId = ref<string | null>('cloud-devops')
 
-const isOpen = (id: string) => openIds.has(id)
+const isOpen = (id: string) => openId.value === id
 const toggle = (id: string) => {
-  if (openIds.has(id)) openIds.delete(id)
-  else openIds.add(id)
+  openId.value = openId.value === id ? null : id
 }
 
 const nodeStyle = (skill: Skill, color: string) => {

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Muhammad Sameer">
+  <defs>
+    <linearGradient id="clay" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a04e2e"/>
+      <stop offset="0.55" stop-color="#b0603a"/>
+      <stop offset="1" stop-color="#8f6a45"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="116" fill="url(#clay)"/>
+
+  <!-- Monogram drawn as geometry, not text: a favicon is rasterised in environments with
+       no guaranteed font stack, so glyphs would silently fall back or drop out entirely. -->
+  <g fill="#fbf9f5" transform="translate(-39.5 -3.5)">
+    <!-- M -->
+    <path d="M110 356V156h44l52 92 52-92h44v200h-42V232l-42 74h-24l-42-74v124z"/>
+    <!-- S -->
+    <path d="M330 300h42q0 12 10 19t26 7q15 0 24-6t9-16q0-9-7-14t-27-11l-22-6q-27-7-40-20t-13-35q0-26 20-42t52-16q33 0 53 17t20 44h-41q0-12-9-18t-24-6q-14 0-22 6t-8 15q0 9 7 14t25 10l22 6q29 8 42 21t13 35q0 28-21 44t-55 16q-35 0-56-17t-21-47z"/>
+  </g>
+</svg>

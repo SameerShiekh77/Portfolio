@@ -86,6 +86,13 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'theme-color', content: '#ede7dc' },
       ],
+      link: [
+        // .ico first for the browsers that request /favicon.ico regardless, then the SVG
+        // which modern browsers prefer and render crisply at any size.
+        { rel: 'icon', href: '/favicon.ico', sizes: '48x48' },
+        { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' },
+      ],
       htmlAttrs: {
         lang: 'en',
       },

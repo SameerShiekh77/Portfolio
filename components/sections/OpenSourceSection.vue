@@ -6,7 +6,6 @@
         stage="scale"
         title="On GitHub"
         accent="GitHub"
-        subtitle="Live activity, pulled straight from the GitHub API."
       />
 
       <div class="max-w-5xl mx-auto">
