@@ -1,223 +1,198 @@
 <template>
-  <section
-    id="home"
-    class="relative min-h-screen flex items-center overflow-hidden"
-    aria-label="Introduction"
-  >
-    <ParticleField />
+  <section id="top" ref="root" class="hero" aria-labelledby="hero-name">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="chip" data-hero>
+          <span class="dot" aria-hidden="true" />
+          {{ profile.availability }}
+        </p>
 
-    <div class="container mx-auto px-6 lg:px-12 relative z-10 pt-32 pb-20">
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
-        <div class="lg:col-span-3 space-y-8">
-          <div ref="badgeEl" class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-[var(--color-accent-clay)]/30 glass-panel">
-            <span class="relative flex h-2 w-2">
-              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
-            </span>
-            <span class="text-sm font-medium text-[var(--color-accent-clay-ink)] tracking-wide">{{ profile.heroBadge }}</span>
-          </div>
+        <h1 id="hero-name" class="hero-name">
+          <span class="mask"><span class="line" data-line>Muhammad</span></span>
+          <span class="mask"><span class="line" data-line>Sameer</span></span>
+        </h1>
 
-          <div>
-          
-            <h1 class="font-display font-bold tracking-tight leading-[0.92]" style="font-size: var(--text-display)">
-              <span class="block overflow-hidden">
-                <span ref="line1El" class="block text-[var(--color-text-primary)]">{{ profile.firstName }}</span>
-              </span>
-              <span class="block overflow-hidden">
-                <span ref="line2El" class="block text-gradient">{{ profile.lastName }}</span>
-              </span>
-            </h1>
-          </div>
+        <p class="hero-title" data-hero>
+          <span class="text-ink font-semibold">{{ hero.title }}</span>
+          <span class="bar" aria-hidden="true" />
+          <span class="heat-text font-semibold">{{ hero.subtitle }}</span>
+        </p>
 
-          <div ref="roleEl" class="flex items-center gap-3">
-            <div class="h-px w-8 bg-[var(--color-accent-gold)]" aria-hidden="true" />
-            <div class="text-xl sm:text-2xl font-semibold font-mono min-h-8">
-              <span class="text-[var(--color-accent-gold-ink)]">{{ typedRole }}</span>
-              <span class="text-[var(--color-accent-gold-ink)]/60 animate-pulse" aria-hidden="true">|</span>
-            </div>
-          </div>
+        <p class="hero-tag" data-hero>{{ hero.tagline }}</p>
 
-          <p ref="summaryEl" class="text-[var(--color-text-secondary)] text-base sm:text-lg leading-relaxed max-w-xl">
-            I don't just build software. I build scalable systems - cloud infrastructure, automation, DevOps
-            pipelines, and backend engineering that keep production running at
-            <strong class="text-[var(--color-text-primary)] font-semibold">99.9%+ uptime</strong>.
-          </p>
-
-          <div ref="statsEl" class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-            <div
-              v-for="stat in heroStats"
-              :key="stat.label"
-              class="px-4 py-3 rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-surface-1)] flex flex-col justify-center transition-all duration-300 hover:border-[var(--color-border-hover)]"
-            >
-              <span class="text-2xl font-black" :style="{ color: stat.color }">{{ stat.value }}</span>
-              <span class="text-[var(--color-text-muted)] text-xs leading-tight whitespace-pre-line">{{ stat.label }}</span>
-            </div>
-          </div>
-
-          <div ref="ctaEl" class="flex flex-wrap gap-4">
-            <a
-              href="#projects"
-              class="group relative px-8 py-4 rounded-2xl font-bold text-white overflow-hidden transition-transform duration-300 hover:scale-105 flex items-center gap-2"
-              style="background: var(--gradient-primary)"
-            >
-              View Projects
-              <ArrowRight class="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-            </a>
-
-            <a
-              :href="profile.resumeFile"
-              download
-              class="px-8 py-4 rounded-2xl font-bold border border-[var(--color-accent-gold)]/30 text-[var(--color-accent-gold-ink)] hover:bg-[var(--color-accent-gold)]/10 transition-all duration-300 flex items-center gap-2"
-            >
-              <Download class="w-4 h-4" aria-hidden="true" />
-              Resume
-            </a>
-
-            <a
-              v-for="social in primarySocials"
-              :key="social.label"
-              :href="social.href"
-              target="_blank"
-              rel="noopener noreferrer"
-              :aria-label="social.label"
-              class="w-14 h-14 rounded-2xl border border-[var(--color-border-strong)] flex items-center justify-center text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:border-[var(--color-border-hover)] hover:bg-[var(--color-surface-1)] transition-all duration-300"
-            >
-              <SocialIcon :name="social.icon" class="w-5 h-5" />
-            </a>
-          </div>
-        </div>
-
-        <div ref="cardWrapEl" class="lg:col-span-2 flex justify-center lg:justify-end">
-          <div class="relative" ref="cardEl" @mousemove="onMouseMove" @mouseleave="onMouseLeave">
-            <div class="absolute -inset-4 rounded-3xl blur-2xl opacity-30 animate-pulse" style="background: var(--gradient-primary)" aria-hidden="true" />
-            <div
-              class="relative rounded-3xl overflow-hidden border border-[var(--color-border-subtle)] glass-panel p-2 transition-transform duration-300 will-change-transform"
-              :style="cardTransform"
-            >
-              <div class="rounded-2xl overflow-hidden">
-                <NuxtImg
-                  :src="profile.avatar"
-                  :alt="profile.name"
-                  width="480"
-                  height="600"
-                  format="webp"
-                  preload
-                  class="w-full object-cover block"
-                />
-              </div>
-            </div>
-          </div>
+        <div class="flex flex-wrap items-center gap-3" data-hero>
+          <a href="#work" class="btn btn-primary">
+            See the work
+            <ArrowDown class="w-4 h-4" aria-hidden="true" />
+          </a>
+          <a href="#contact" class="btn btn-ghost">Get in touch</a>
+          <a :href="profile.resumeFile" download class="btn btn-ghost">
+            <Download class="w-4 h-4" aria-hidden="true" />
+            Resume
+          </a>
         </div>
       </div>
-    </div>
 
-    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2" aria-hidden="true">
-      <span class="text-xs text-[var(--color-text-muted)] tracking-widest uppercase font-mono animate-bounce">scroll</span>
-      <div class="w-px h-8 bg-linear-to-b from-[var(--color-border-strong)] to-transparent" />
+      <dl class="stats" data-hero>
+        <div v-for="s in hero.stats" :key="s.label" class="stat">
+          <dt class="text-ink-3 text-sm">{{ s.label }}</dt>
+          <dd class="font-display stat-value">
+            <span data-count :data-to="s.value" :data-decimals="'decimals' in s ? s.decimals : 0">{{ s.value }}</span
+            >{{ s.suffix }}
+          </dd>
+        </div>
+      </dl>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import gsap from 'gsap'
-import { ArrowRight, Download } from '@lucide/vue'
-import ParticleField from '../three/ParticleField.client.vue'
-import SocialIcon from '../ui/SocialIcon.vue'
-import { profile, heroStats, socials } from '../../data/profile'
+import { ArrowDown, Download } from '@lucide/vue'
+import { hero } from '../../data/site'
+import { profile } from '../../data/profile'
 import { useReducedMotion } from '../../composables/useReducedMotion'
-import { easeGsap, duration as dur } from '../../utils/motion'
 
-const primarySocials = socials.filter((s) => s.icon === 'linkedin' || s.icon === 'github')
-
-const badgeEl = ref<HTMLElement | null>(null)
-const line1El = ref<HTMLElement | null>(null)
-const line2El = ref<HTMLElement | null>(null)
-const roleEl = ref<HTMLElement | null>(null)
-const summaryEl = ref<HTMLElement | null>(null)
-const statsEl = ref<HTMLElement | null>(null)
-const ctaEl = ref<HTMLElement | null>(null)
-const cardWrapEl = ref<HTMLElement | null>(null)
-const cardEl = ref<HTMLElement | null>(null)
-
-const typedRole = ref('')
-const cardTransform = ref('perspective(1200px) rotateX(0deg) rotateY(0deg)')
-
-const roles = ['DevOps Manager', 'Senior Software Engineer', 'Cloud Infrastructure Architect', 'Engineering Team Lead', 'AI Integration Engineer']
-let roleIndex = 0
-
+const root = ref<HTMLElement | null>(null)
 const { prefersReduced } = useReducedMotion()
-
-const typeRole = () => {
-  const role = roles[roleIndex]
-  let i = 0
-  const typeInterval = setInterval(() => {
-    if (i <= role.length) {
-      typedRole.value = role.slice(0, i)
-      i++
-    } else {
-      clearInterval(typeInterval)
-      setTimeout(deleteRole, 2000)
-    }
-  }, 70)
-}
-const deleteRole = () => {
-  const deleteInterval = setInterval(() => {
-    if (typedRole.value.length > 0) {
-      typedRole.value = typedRole.value.slice(0, -1)
-    } else {
-      clearInterval(deleteInterval)
-      roleIndex = (roleIndex + 1) % roles.length
-      setTimeout(typeRole, 300)
-    }
-  }, 35)
-}
-
-const onMouseMove = (e: MouseEvent) => {
-  if (!cardEl.value || prefersReduced.value) return
-  const rect = cardEl.value.getBoundingClientRect()
-  const x = ((e.clientX - rect.left) / rect.width - 0.5) * 16
-  const y = ((e.clientY - rect.top) / rect.height - 0.5) * -16
-  cardTransform.value = `perspective(1200px) rotateY(${x}deg) rotateX(${y}deg) scale3d(1.02,1.02,1.02)`
-}
-const onMouseLeave = () => {
-  cardTransform.value = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1,1,1)'
-}
+let ctx: gsap.Context | null = null
 
 onMounted(() => {
-  setTimeout(typeRole, 900)
+  if (prefersReduced.value || !root.value) return
+  ctx = gsap.context(() => {
+    // fromTo with explicit end states: a bare .from() leaves copy invisible if the tween is disturbed.
+    const tl = gsap.timeline({ defaults: { ease: 'expo.out', immediateRender: false }, delay: 0.15 })
+    tl.fromTo('[data-line]', { yPercent: 115 }, { yPercent: 0, duration: 1.3, stagger: 0.12 })
+      .fromTo('[data-hero]', { opacity: 0, y: 22 }, { opacity: 1, y: 0, duration: 0.9, stagger: 0.1, clearProps: 'opacity,transform' }, '-=0.8')
 
-  if (prefersReduced.value) return
-
-  // fromTo, not from: a bare .from() has no declared end state, so if anything disturbs
-  // the tween the element is simply left on its start value - which here means permanently
-  // invisible copy. Every step below lands on an explicit opacity:1, and clearProps drops
-  // the inline styles afterwards so nothing lingers on the elements.
-  const statItems = Array.from(statsEl.value?.children ?? [])
-  const ctaItems = Array.from(ctaEl.value?.children ?? [])
-  const introTargets = [
-    badgeEl.value, line1El.value, line2El.value, roleEl.value,
-    summaryEl.value, ...statItems, ...ctaItems, cardWrapEl.value,
-  ].filter(Boolean) as HTMLElement[]
-
-  // immediateRender:false matters: creating these tweens used to paint the from-state
-  // (opacity 0) immediately, and anything that re-rendered the playhead afterwards -
-  // a ScrollTrigger.refresh() from a pin being built elsewhere on the page - left the
-  // badge, role and summary stranded there permanently. Deferring the from-state means
-  // an undisturbed element simply stays visible.
-  const tl = gsap.timeline({
-    defaults: { ease: easeGsap.expoOut, immediateRender: false },
-    // Whatever happens to the tweens, the hero must not be left mid-animation. Scoped to
-    // the animated properties only — 'all' also strips inline styles GSAP never set, which
-    // wiped the gradient background off the primary CTA.
-    onComplete: () => gsap.set(introTargets, { clearProps: 'opacity,transform' }),
-  })
-  tl.fromTo(badgeEl.value, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: dur.slow })
-    .fromTo([line1El.value, line2El.value], { yPercent: 110 }, { yPercent: 0, duration: dur.slower, stagger: 0.08 }, '-=0.25')
-    .fromTo(roleEl.value, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: dur.slow }, '-=0.4')
-    .fromTo(summaryEl.value, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: dur.slow }, '-=0.35')
-    .fromTo(statItems, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: dur.slow, stagger: 0.06 }, '-=0.3')
-    .fromTo(ctaItems, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: dur.slow, stagger: 0.06 }, '-=0.3')
-    .fromTo(cardWrapEl.value, { opacity: 0, y: 24, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: dur.slower }, '-=0.6')
+    root.value!.querySelectorAll<HTMLElement>('[data-count]').forEach((el) => {
+      const to = Number(el.dataset.to)
+      const decimals = Number(el.dataset.decimals)
+      const obj = { v: 0 }
+      gsap.to(obj, {
+        v: to,
+        duration: 2,
+        delay: 0.9,
+        ease: 'power3.out',
+        onUpdate: () => (el.textContent = obj.v.toFixed(decimals)),
+        onComplete: () => (el.textContent = to.toFixed(decimals)),
+      })
+    })
+  }, root.value)
 })
+
+onBeforeUnmount(() => ctx?.revert())
 </script>
+
+<style scoped>
+.hero {
+  position: relative;
+  z-index: 1;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding-top: 8rem;
+  padding-bottom: clamp(2rem, 5vw, 4rem);
+}
+.hero-grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+}
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.6rem;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1rem 0.45rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--c-line-2);
+  background: var(--c-surface);
+  backdrop-filter: blur(10px);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--c-ink-2);
+}
+.dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--c-mint);
+  box-shadow: 0 0 0 0 var(--c-mint);
+  animation: ping 2.2s infinite;
+}
+@keyframes ping {
+  70% { box-shadow: 0 0 0 0.6rem transparent; }
+  100% { box-shadow: 0 0 0 0 transparent; }
+}
+.hero-name {
+  font-size: clamp(3.25rem, 1.25rem + 7.4vw, 9.5rem);
+  font-weight: 700;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+}
+/* The mask clips the sliding line; a little bottom padding stops descenders being cut. */
+.mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+.line {
+  display: block;
+}
+.hero-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+  font-size: clamp(1.1rem, 0.9rem + 0.9vw, 1.6rem);
+}
+.bar {
+  width: 1px;
+  height: 1.3em;
+  background: var(--c-line-2);
+}
+.hero-tag {
+  max-width: 34ch;
+  font-size: clamp(1.15rem, 1rem + 0.7vw, 1.5rem);
+  line-height: 1.45;
+  color: var(--c-ink-2);
+}
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  border-top: 1px solid var(--c-line-2);
+}
+.stat {
+  display: flex;
+  flex-direction: column-reverse;
+  padding: 1.2rem 0 0.4rem;
+}
+.stat + .stat {
+  padding-left: 0;
+}
+.stat-value {
+  font-size: clamp(2rem, 1.4rem + 2.2vw, 3.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+@media (min-width: 768px) {
+  .stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .stat {
+    padding-right: 1rem;
+  }
+  .stat + .stat {
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--c-line);
+  }
+}
+</style>

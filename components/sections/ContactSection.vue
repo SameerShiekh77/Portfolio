@@ -1,119 +1,70 @@
 <template>
-  <section id="contact" class="relative py-24 lg:py-28 overflow-hidden" aria-labelledby="contact-heading">
-    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-150 h-150 rounded-full opacity-[0.1]" style="background: radial-gradient(circle, var(--color-accent-clay), transparent)" />
-    </div>
+  <section id="contact" class="section contact" aria-labelledby="contact-title">
+    <div class="wrap">
+      <p class="chip">
+        <span class="dot" aria-hidden="true" />
+        {{ profile.availability }}
+      </p>
+      <h2 id="contact-title" class="contact-title">
+        Have a system that needs to stay up, or a team that needs to ship?
+      </h2>
+      <p class="mt-6 max-w-[52ch] text-lg text-ink-2">{{ profile.availabilityNote }}</p>
 
-    <div class="container mx-auto px-6 lg:px-12 relative">
-      <div class="text-center mb-16 max-w-3xl mx-auto">
-        <RevealText id="contact-heading" as="h2" split-by="words" class="font-display font-bold leading-[1.03] text-[var(--color-text-primary)] mb-4" style="font-size: var(--text-h1)">
-          Let's build something <span class="text-gradient">extraordinary</span> together.
-        </RevealText>
-        <p class="text-[var(--color-text-secondary)] text-lg">
-          Open to DevOps Manager, Sr. Software Engineer, and senior architect roles - plus fractional engineering-leadership engagements.
-        </p>
-      </div>
-
-      <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-8">
-        <div class="lg:col-span-2 space-y-4">
-          <a
-            v-for="item in contactItems"
-            :key="item.label"
-            :href="item.href ?? undefined"
-            :target="item.href?.startsWith('http') ? '_blank' : undefined"
-            :rel="item.href?.startsWith('http') ? 'noopener noreferrer' : undefined"
-            class="flex items-center gap-4 rounded-2xl border border-[var(--color-border-subtle)] bg-[var(--color-surface-1)] p-5 transition-all duration-300 hover:border-[var(--color-border-hover)]"
-            :class="item.href ? '' : 'cursor-default'"
-          >
-            <span class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 bg-[var(--color-accent-clay)]/10 border border-[var(--color-accent-clay)]/20">
-              <SocialIcon :name="item.icon" class="w-5 h-5 text-[var(--color-accent-clay-ink)]" />
-            </span>
-            <span>
-              <span class="block text-xs font-semibold text-[var(--color-text-muted)] mb-0.5">{{ item.label }}</span>
-              <span class="block text-sm font-medium text-[var(--color-text-primary)]">{{ item.value }}</span>
-            </span>
-          </a>
-
-          <div class="rounded-2xl border border-emerald-500/30 bg-emerald-500/5 p-5">
-            <div class="flex items-center gap-2 mb-2">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span class="text-emerald-400 font-bold text-sm">{{ profile.availability }}</span>
-            </div>
-            <p class="text-[var(--color-text-muted)] text-xs leading-relaxed">{{ profile.availabilityNote }}</p>
-          </div>
-        </div>
-
-        <div class="lg:col-span-3 rounded-3xl border border-[var(--color-border-subtle)] bg-[var(--color-surface-1)] p-8">
-          <form v-if="!formSent" action="https://api.web3forms.com/submit" method="POST" class="space-y-5" @submit.prevent="submitForm">
-            <input type="hidden" name="access_key" value="2dda2782-f7fe-45fe-918c-6fc64f4b6f93" />
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div>
-                <label for="contact-name" class="block text-xs font-semibold text-[var(--color-text-muted)] mb-2 uppercase tracking-wider">Name</label>
-                <input
-                  id="contact-name"
-                  v-model="form.name"
-                  type="text"
-                  name="name"
-                  placeholder="John Doe"
-                  required
-                  class="w-full px-4 py-3 rounded-xl border text-sm transition-all duration-200 outline-none focus:border-[var(--color-accent-clay)] bg-[var(--color-surface-1)] border-[var(--color-border-subtle)] text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)]"
-                />
-              </div>
-              <div>
-                <label for="contact-email" class="block text-xs font-semibold text-[var(--color-text-muted)] mb-2 uppercase tracking-wider">Email</label>
-                <input
-                  id="contact-email"
-                  v-model="form.email"
-                  type="email"
-                  name="email"
-                  placeholder="john@company.com"
-                  required
-                  class="w-full px-4 py-3 rounded-xl border text-sm transition-all duration-200 outline-none focus:border-[var(--color-accent-clay)] bg-[var(--color-surface-1)] border-[var(--color-border-subtle)] text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)]"
-                />
-              </div>
-            </div>
-            <div>
-              <label for="contact-subject" class="block text-xs font-semibold text-[var(--color-text-muted)] mb-2 uppercase tracking-wider">Subject</label>
-              <input
-                id="contact-subject"
-                v-model="form.subject"
-                type="text"
-                name="subject"
-                placeholder="Opportunity / Project / Consulting"
-                required
-                class="w-full px-4 py-3 rounded-xl border text-sm transition-all duration-200 outline-none focus:border-[var(--color-accent-clay)] bg-[var(--color-surface-1)] border-[var(--color-border-subtle)] text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)]"
-              />
-            </div>
-            <div>
-              <label for="contact-message" class="block text-xs font-semibold text-[var(--color-text-muted)] mb-2 uppercase tracking-wider">Message</label>
-              <textarea
-                id="contact-message"
-                v-model="form.message"
-                name="message"
-                rows="5"
-                placeholder="Tell me about your project or role…"
-                required
-                class="w-full px-4 py-3 rounded-xl border text-sm transition-all duration-200 outline-none focus:border-[var(--color-accent-clay)] bg-[var(--color-surface-1)] border-[var(--color-border-subtle)] text-[var(--color-text-primary)] placeholder-[var(--color-text-muted)] resize-none"
-              />
-            </div>
-            <button
-              type="submit"
-              :disabled="sending"
-              class="w-full py-4 rounded-xl font-bold text-white transition-transform duration-300 hover:scale-[1.02] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100 flex items-center justify-center gap-2"
-              style="background: var(--gradient-primary)"
+      <div class="mt-16 grid gap-10 lg:grid-cols-[5fr_7fr] lg:gap-16">
+        <ul class="methods">
+          <li v-for="item in contactItems" :key="item.label">
+            <component
+              :is="item.href ? 'a' : 'div'"
+              :href="item.href ?? undefined"
+              :target="item.href?.startsWith('http') ? '_blank' : undefined"
+              :rel="item.href?.startsWith('http') ? 'noopener noreferrer' : undefined"
+              class="method"
             >
-              <Loader2 v-if="sending" class="w-4 h-4 animate-spin" />
-              {{ sending ? 'Sending…' : 'Send Message' }}
-              <Send v-if="!sending" class="w-4 h-4" />
+              <SocialIcon :name="item.icon" class="w-5 h-5 text-ember-ink shrink-0" />
+              <span>
+                <span class="block text-sm text-ink-3">{{ item.label }}</span>
+                <span class="block font-semibold break-all">{{ item.value }}</span>
+              </span>
+            </component>
+          </li>
+        </ul>
+
+        <div class="panel p-6 sm:p-9">
+          <form v-if="status !== 'sent'" class="grid gap-5" @submit.prevent="submit">
+            <div class="grid gap-5 sm:grid-cols-2">
+              <label class="grid gap-2 text-sm font-semibold">
+                Name
+                <input v-model="form.name" class="field" name="name" autocomplete="name" required placeholder="Your name" />
+              </label>
+              <label class="grid gap-2 text-sm font-semibold">
+                Email
+                <input v-model="form.email" class="field" type="email" name="email" autocomplete="email" required placeholder="you@company.com" />
+              </label>
+            </div>
+            <label class="grid gap-2 text-sm font-semibold">
+              What do you need help with?
+              <input v-model="form.subject" class="field" name="subject" required placeholder="e.g. Engineering manager role, infrastructure review" />
+            </label>
+            <label class="grid gap-2 text-sm font-semibold">
+              Details
+              <textarea v-model="form.message" class="field" name="message" rows="5" required placeholder="A few lines of context is plenty." />
+            </label>
+            <p v-if="status === 'error'" role="alert" class="text-sm font-semibold text-rose">
+              Message didn't send. Check your connection and try again, or email {{ profile.email }} directly.
+            </p>
+            <button type="submit" class="btn btn-primary w-fit" :disabled="status === 'sending'">
+              <Loader2 v-if="status === 'sending'" class="w-4 h-4 animate-spin" aria-hidden="true" />
+              <Send v-else class="w-4 h-4" aria-hidden="true" />
+              {{ status === 'sending' ? 'Sending' : 'Send message' }}
             </button>
           </form>
 
-          <div v-else class="flex flex-col items-center justify-center py-16 text-center">
-            <div class="w-16 h-16 rounded-full flex items-center justify-center mb-4 bg-emerald-500/15 border border-emerald-500/30">
-              <Check class="w-8 h-8 text-emerald-400" />
-            </div>
-            <h3 class="text-xl font-bold text-[var(--color-text-primary)] mb-2">Message sent!</h3>
-            <p class="text-[var(--color-text-secondary)] text-sm">I'll get back to you within 24 hours.</p>
+          <div v-else class="py-10" role="status">
+            <span class="inline-grid place-items-center w-14 h-14 rounded-full bg-mint text-on-ember mb-5">
+              <Check class="w-7 h-7" aria-hidden="true" />
+            </span>
+            <h3 class="font-display text-3xl font-semibold">Message sent</h3>
+            <p class="mt-2 text-ink-2">Thanks, {{ form.name }}. I'll reply within two working days.</p>
           </div>
         </div>
       </div>
@@ -123,30 +74,76 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Loader2, Send, Check } from '@lucide/vue'
-import RevealText from '../ui/RevealText.vue'
+import { Check, Loader2, Send } from '@lucide/vue'
 import SocialIcon from '../ui/SocialIcon.vue'
-import { profile, contactItems } from '../../data/profile'
+import { contactItems, profile } from '../../data/profile'
 
-const formSent = ref(false)
-const sending = ref(false)
+type Status = 'idle' | 'sending' | 'sent' | 'error'
+const status = ref<Status>('idle')
 const form = ref({ name: '', email: '', subject: '', message: '' })
 
-const submitForm = async () => {
-  sending.value = true
+const submit = async () => {
+  status.value = 'sending'
   try {
     const data = new FormData()
+    // Web3Forms access keys are public by design; they only route mail to the owner's inbox.
     data.append('access_key', '2dda2782-f7fe-45fe-918c-6fc64f4b6f93')
-    data.append('name', form.value.name)
-    data.append('email', form.value.email)
-    data.append('subject', form.value.subject)
-    data.append('message', form.value.message)
-    await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
-    formSent.value = true
-  } catch (e) {
-    console.error(e)
-  } finally {
-    sending.value = false
+    for (const [k, v] of Object.entries(form.value)) data.append(k, v)
+    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+    status.value = res.ok ? 'sent' : 'error'
+  } catch {
+    status.value = 'error'
   }
 }
 </script>
+
+<style scoped>
+.contact {
+  z-index: 1;
+}
+.contact-title {
+  margin-top: 1.5rem;
+  font-size: clamp(2.5rem, 1.2rem + 5vw, 6.5rem);
+  font-weight: 600;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  max-width: 17ch;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 1rem 0.45rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--c-line-2);
+  background: var(--c-surface);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--c-ink-2);
+}
+.dot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--c-mint);
+}
+.methods {
+  border-top: 1px solid var(--c-line-2);
+  align-self: start;
+}
+.method {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--c-line);
+  transition: padding-left 0.35s var(--ease-out);
+}
+a.method:hover {
+  padding-left: 0.6rem;
+}
+button:disabled {
+  opacity: 0.7;
+  cursor: progress;
+}
+</style>

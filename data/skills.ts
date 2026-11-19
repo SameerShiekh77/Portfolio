@@ -95,7 +95,7 @@ export const skillCategories: SkillCategory[] = [
     id: 'leadership',
     title: 'Engineering Leadership',
     icon: 'users-round',
-    color: '#f472b6',
+    color: 'var(--color-accent-plum)',
     description: 'Leading teams, not just leading code.',
     skills: [
       { name: 'Team Leadership (12 engineers)', level: 92, icon: 'users' },

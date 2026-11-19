@@ -1,82 +1,104 @@
-<!-- app.vue -->
 <template>
-  <div class="min-h-screen text-[var(--color-text-primary)]">
+  <div id="app-root">
     <a href="#main-content" class="skip-link">Skip to content</a>
 
-    <template v-if="route.path === '/'">
-      <GlobalBackground />
-      <DroneCharacter />
+    <!-- Static gradient: the whole look when WebGL or motion is unavailable, and the backdrop behind the scene. -->
+    <div class="backdrop" aria-hidden="true" />
+    <SceneCanvas />
+    <div class="grain" aria-hidden="true" />
+    <SiteNav />
 
-      <AppLoader />
-      <CustomCursor />
-      <PipelineRail />
-      <AppNav />
+    <main id="main-content" class="relative z-10">
+      <HeroSection />
+      <StorySection />
+      <JourneySection />
+      <WorkSection />
+      <SkillsSection />
+      <LeadershipSection />
+      <VoicesSection />
+      <WritingSection />
+      <ContactSection />
+    </main>
 
-      <main id="main-content" class="relative z-10">
-        <HeroSection />
-        <StorySection />
-        <JourneyTimeline />
-        <SkillsEcosystem />
-        <ProjectsShowcase />
-        <ArchitectureSection />
-        <ExperienceSection />
-        <OpenSourceSection />
-        <TestimonialsSection />
-        <ContactSection />
-      </main>
-
-      <AppFooter />
-    </template>
+    <SiteFooter />
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, onUnmounted } from 'vue'
-import GlobalBackground from '../components/layout/GlobalBackground.vue'
-import DroneCharacter from '../components/three/DroneCharacter.client.vue'
-import AppLoader from '../components/layout/AppLoader.vue'
-import AppNav from '../components/layout/AppNav.vue'
-import AppFooter from '../components/layout/AppFooter.vue'
-import CustomCursor from '../components/layout/CustomCursor.vue'
-import PipelineRail from '../components/layout/PipelineRail.vue'
+import { onBeforeUnmount, onMounted } from 'vue'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import SceneCanvas from '../components/three/SceneCanvas.client.vue'
+import SiteNav from '../components/layout/SiteNav.vue'
+import SiteFooter from '../components/layout/SiteFooter.vue'
 import HeroSection from '../components/sections/HeroSection.vue'
 import StorySection from '../components/sections/StorySection.vue'
-import JourneyTimeline from '../components/sections/JourneyTimeline.vue'
-import SkillsEcosystem from '../components/sections/SkillsEcosystem.vue'
-import ProjectsShowcase from '../components/sections/ProjectsShowcase.vue'
-import ArchitectureSection from '../components/sections/ArchitectureSection.vue'
-import ExperienceSection from '../components/sections/ExperienceSection.vue'
-import OpenSourceSection from '../components/sections/OpenSourceSection.vue'
-import TestimonialsSection from '../components/sections/TestimonialsSection.vue'
+import JourneySection from '../components/sections/JourneySection.vue'
+import WorkSection from '../components/sections/WorkSection.vue'
+import SkillsSection from '../components/sections/SkillsSection.vue'
+import LeadershipSection from '../components/sections/LeadershipSection.vue'
+import VoicesSection from '../components/sections/VoicesSection.vue'
+import WritingSection from '../components/sections/WritingSection.vue'
 import ContactSection from '../components/sections/ContactSection.vue'
-import { useThemeJourney } from '../composables/useThemeJourney'
+import { sceneState } from '../composables/useScene'
+import { initTheme } from '../composables/useTheme'
+import { hero } from '../data/site'
 import { profile } from '../data/profile'
 
 const route = useRoute()
-
 if (route.path !== '/') {
-  throw createError({
-    statusCode: 404,
-    statusMessage: 'Page not found',
-    fatal: true,
-  })
+  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
 }
 
-const { init: initJourney, destroy: destroyJourney } = useThemeJourney()
+let progressTrigger: ScrollTrigger | null = null
 
-onMounted(() => initJourney())
-onUnmounted(() => destroyJourney())
+onMounted(() => {
+  initTheme()
+  // One trigger turns page scroll into the 0..1 value the 3D scene and the nav bar both read.
+  progressTrigger = ScrollTrigger.create({
+    start: 0,
+    end: 'max',
+    onUpdate: (self) => (sceneState.progress = self.progress),
+  })
+  // The pinned Work section adds scroll distance after the nav's triggers were measured; re-measure once everything has mounted.
+  requestAnimationFrame(() => ScrollTrigger.refresh())
+})
 
+onBeforeUnmount(() => progressTrigger?.kill())
+
+const title = `${profile.name} - ${hero.title} | ${hero.subtitle}`
 useSeoMeta({
-  title: `${profile.name} - ${profile.title}`,
+  title,
   description: profile.summary,
-  ogTitle: `${profile.name} - ${profile.title}`,
+  ogTitle: title,
   ogDescription: profile.summary,
   ogImage: profile.avatar,
   ogType: 'website',
   twitterCard: 'summary_large_image',
-  twitterTitle: `${profile.name} - ${profile.title}`,
+  twitterTitle: title,
   twitterDescription: profile.summary,
   twitterImage: profile.avatar,
 })
 </script>
+
+<style scoped>
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 40rem at 85% 10%, color-mix(in srgb, var(--c-ember) 22%, transparent), transparent 70%),
+    radial-gradient(50rem 40rem at 5% 75%, color-mix(in srgb, var(--c-rose) 16%, transparent), transparent 70%),
+    var(--c-bg);
+}
+/* Fine film grain over everything: takes the digital sheen off the gradients. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+</style>

@@ -1,3 +1,5 @@
+import templateCompilerOptions from '@tresjs/core/template-compiler-options'
+
 const env = (globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env ?? {}
 const isWsl = Boolean(env.WSL_DISTRO_NAME)
 const usePolling = env.NUXT_WATCH_POLLING === 'true' || isWsl
@@ -9,7 +11,12 @@ export default defineNuxtConfig({
   // Fonts are self-hosted in app/assets/css/fonts.css, so @nuxt/fonts is deliberately
   // not installed as a module - it resolves families over the network at build time,
   // which made builds fail when its provider API was unreachable.
-  modules: ['@nuxt/image', '@nuxtjs/seo'],
+  modules: ['@nuxt/image', '@nuxtjs/seo', '@tresjs/nuxt'],
+
+  // TresJS elements (<TresMesh>, <primitive>...) are Three.js objects, not DOM or Vue components.
+  vue: {
+    compilerOptions: templateCompilerOptions.template.compilerOptions,
+  },
 
   css: ['~/assets/css/fonts.css', '~/assets/css/main.css'],
 
@@ -84,7 +91,7 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'theme-color', content: '#ede7dc' },
+        { name: 'theme-color', content: '#0a0710' },
       ],
       link: [
         // .ico first for the browsers that request /favicon.ico regardless, then the SVG
@@ -95,7 +102,14 @@ export default defineNuxtConfig({
       ],
       htmlAttrs: {
         lang: 'en',
+        'data-theme': 'dark',
       },
+      // Restore a saved light theme before first paint so it never flashes dark.
+      script: [
+        {
+          innerHTML: "try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark'){document.documentElement.dataset.theme=t;if(t==='light'){document.documentElement.style.background='#fbf4ec'}}}catch(e){}",
+        },
+      ],
       // Critical CSS, inlined ahead of the stylesheet link. Until main.css lands the
       // browser would otherwise paint the SSR markup as unstyled black-serif-on-white;
       // this keeps the first frame brand sand and holds the raw markup back.
@@ -105,7 +119,7 @@ export default defineNuxtConfig({
       style: [
         {
           innerHTML:
-            'html{background:#ede7dc;color:#2a2621}' +
+            'html{background:#0a0710;color:#f8f0e9}' +
             'body{margin:0;font-family:Satoshi,ui-sans-serif,system-ui,-apple-system,sans-serif}' +
             // Hide the app until real styles parse; main.css flips this straight back.
             // The animation is a safety net: if the stylesheet never arrives the page
