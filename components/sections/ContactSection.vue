@@ -30,6 +30,7 @@
         </ul>
 
         <div class="panel p-6 sm:p-9">
+          <Transition name="swap" mode="out-in">
           <form v-if="status !== 'sent'" class="grid gap-5" @submit.prevent="submit">
             <div class="grid gap-5 sm:grid-cols-2">
               <label class="grid gap-2 text-sm font-semibold">
@@ -49,9 +50,11 @@
               Details
               <textarea v-model="form.message" class="field" name="message" rows="5" required placeholder="A few lines of context is plenty." />
             </label>
-            <p v-if="status === 'error'" role="alert" class="text-sm font-semibold text-rose">
-              Message didn't send. Check your connection and try again, or email {{ profile.email }} directly.
-            </p>
+            <Transition name="swap">
+              <p v-if="status === 'error'" role="alert" class="text-sm font-semibold text-rose">
+                Message didn't send. Check your connection and try again, or email {{ profile.email }} directly.
+              </p>
+            </Transition>
             <button type="submit" class="btn btn-primary w-fit" :disabled="status === 'sending'">
               <Loader2 v-if="status === 'sending'" class="w-4 h-4 animate-spin" aria-hidden="true" />
               <Send v-else class="w-4 h-4" aria-hidden="true" />
@@ -66,6 +69,7 @@
             <h3 class="font-display text-3xl font-semibold">Message sent</h3>
             <p class="mt-2 text-ink-2">Thanks, {{ form.name }}. I'll reply within two working days.</p>
           </div>
+          </Transition>
         </div>
       </div>
     </div>
@@ -126,6 +130,20 @@ const submit = async () => {
   height: 0.55rem;
   border-radius: 50%;
   background: var(--c-mint);
+}
+.swap-enter-active {
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+}
+.swap-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.swap-enter-from {
+  opacity: 0;
+  transform: translateY(14px);
+}
+.swap-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
 }
 .methods {
   border-top: 1px solid var(--c-line-2);

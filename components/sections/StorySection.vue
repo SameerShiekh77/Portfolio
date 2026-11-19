@@ -56,6 +56,10 @@ onBeforeUnmount(() => triggers.forEach((t) => t.kill()))
   display: grid;
   gap: 3rem;
 }
+.story-sticky .h2 {
+  font-size: clamp(2.25rem, 1rem + 2.6vw, 3.75rem);
+  max-width: none;
+}
 .story-sticky {
   display: flex;
   flex-direction: column;

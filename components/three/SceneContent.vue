@@ -1,8 +1,6 @@
 <template>
   <TresPerspectiveCamera ref="cameraRef" :position="[0, 0, 9]" :fov="48" :near="0.1" :far="60" />
 
-  <AvatarModel />
-
   <TresGroup ref="rigRef">
     <!-- The growing network: nodes and the links between them. -->
     <primitive :object="network" />
@@ -13,7 +11,6 @@
 import { onBeforeUnmount, ref, watch } from 'vue'
 import * as THREE from 'three'
 import { useLoop } from '@tresjs/core'
-import AvatarModel from './AvatarModel.vue'
 import { sceneState } from '../../composables/useScene'
 import { theme } from '../../composables/useTheme'
 

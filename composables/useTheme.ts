@@ -6,6 +6,10 @@ export type Theme = 'dark' | 'light'
 export const theme = ref<Theme>('dark')
 
 const apply = (t: Theme) => {
+  // Briefly turn on colour transitions everywhere so the whole page cross-fades.
+  const root = document.documentElement
+  root.classList.add('theme-fade')
+  window.setTimeout(() => root.classList.remove('theme-fade'), 700)
   theme.value = t
   document.documentElement.dataset.theme = t
   const meta = document.querySelector('meta[name="theme-color"]')

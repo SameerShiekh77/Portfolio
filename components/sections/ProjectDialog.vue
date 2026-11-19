@@ -1,7 +1,16 @@
 <template>
-  <dialog ref="dialogEl" class="dlg" :aria-labelledby="project ? 'dlg-title' : undefined" @close="emit('close')" @click="onBackdrop">
+  <dialog
+    ref="dialogEl"
+    class="dlg"
+    :class="{ closing }"
+    data-lenis-prevent
+    :aria-labelledby="project ? 'dlg-title' : undefined"
+    @cancel.prevent="requestClose"
+    @close="emit('close')"
+    @click="onBackdrop"
+  >
     <article v-if="project" class="dlg-body">
-      <button type="button" class="dlg-close" aria-label="Close case study" @click="dialogEl?.close()">
+      <button type="button" class="dlg-close" aria-label="Close case study" @click="requestClose">
         <X class="w-5 h-5" aria-hidden="true" />
       </button>
 
@@ -50,6 +59,18 @@ import type { Project } from '../../data/projects'
 const props = defineProps<{ project: Project | null }>()
 const emit = defineEmits<{ close: [] }>()
 const dialogEl = ref<HTMLDialogElement | null>(null)
+const closing = ref(false)
+
+// Play the exit animation, then actually close. Esc, the X button and the backdrop all come through here.
+const requestClose = () => {
+  const d = dialogEl.value
+  if (!d?.open || closing.value) return
+  closing.value = true
+  setTimeout(() => {
+    d.close()
+    closing.value = false
+  }, 260)
+}
 
 const sections = computed(() =>
   props.project
@@ -75,7 +96,7 @@ watch(
 )
 
 const onBackdrop = (e: MouseEvent) => {
-  if (e.target === dialogEl.value) dialogEl.value?.close()
+  if (e.target === dialogEl.value) requestClose()
 }
 </script>
 
@@ -97,10 +118,28 @@ const onBackdrop = (e: MouseEvent) => {
   backdrop-filter: blur(6px);
 }
 .dlg[open] {
-  animation: rise 0.45s var(--ease-out);
+  animation: rise 0.5s var(--ease-out);
+}
+.dlg[open]::backdrop {
+  animation: fade-in 0.4s ease;
+}
+.dlg.closing {
+  animation: sink 0.26s ease forwards;
+}
+.dlg.closing::backdrop {
+  animation: fade-out 0.26s ease forwards;
 }
 @keyframes rise {
-  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  from { opacity: 0; transform: translateY(28px) scale(0.97); }
+}
+@keyframes sink {
+  to { opacity: 0; transform: translateY(18px) scale(0.98); }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+}
+@keyframes fade-out {
+  to { opacity: 0; }
 }
 .dlg-body {
   position: relative;

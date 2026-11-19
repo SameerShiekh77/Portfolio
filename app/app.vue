@@ -5,6 +5,7 @@
     <!-- Static gradient: the whole look when WebGL or motion is unavailable, and the backdrop behind the scene. -->
     <div class="backdrop" aria-hidden="true" />
     <SceneCanvas />
+    <AvatarCanvas />
     <div class="grain" aria-hidden="true" />
     <SiteNav />
 
@@ -16,7 +17,7 @@
       <SkillsSection />
       <LeadershipSection />
       <VoicesSection />
-      <WritingSection />
+      <!-- <WritingSection /> -->
       <ContactSection />
     </main>
 
@@ -28,6 +29,7 @@
 import { onBeforeUnmount, onMounted } from 'vue'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import SceneCanvas from '../components/three/SceneCanvas.client.vue'
+import AvatarCanvas from '../components/three/AvatarCanvas.client.vue'
 import SiteNav from '../components/layout/SiteNav.vue'
 import SiteFooter from '../components/layout/SiteFooter.vue'
 import HeroSection from '../components/sections/HeroSection.vue'

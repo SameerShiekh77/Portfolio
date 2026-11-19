@@ -1,44 +1,71 @@
 <template>
-  <section id="work" ref="root" class="work" aria-labelledby="work-title">
-    <div ref="pinEl" class="pin">
-      <div class="wrap head">
-        <h2 id="work-title" class="h2">Production systems I've built and run</h2>
-        <p class="lede">{{ projects.length }} platforms in production. Open any card for the problem, architecture and what changed.</p>
+  <section id="work" class="section" aria-labelledby="work-title">
+    <div class="wrap">
+      <div class="head">
+        <div>
+          <h2 id="work-title" class="h2">Production systems I've built and run</h2>
+          <p class="lede">{{ projects.length }} production case studies: e-learning platforms, fintech, cloud labs and internal automation.</p>
+        </div>
+
+        <div class="filters" role="group" aria-label="Filter projects">
+          <button
+            v-for="f in projectFilters"
+            :key="f"
+            type="button"
+            class="filter"
+            :class="{ on: f === filter }"
+            :aria-pressed="f === filter"
+            @click="filter = f"
+          >
+            {{ f }}
+          </button>
+        </div>
       </div>
 
-      <div class="viewport" tabindex="0" role="group" aria-label="Project cards, scroll horizontally">
-        <ul ref="trackEl" class="track">
-          <li v-for="p in projects" :key="p.slug" class="slot">
-            <article class="card" @pointermove="tilt($event)" @pointerleave="untilt($event)">
-              <div class="shot">
-                <NuxtImg v-if="p.screenshots[0]" :src="p.screenshots[0]" :alt="`${p.title} interface`" width="640" height="400" format="webp" loading="lazy" />
-                <div v-else class="shot-fallback" aria-hidden="true">
-                  <DynamicIcon :name="p.icon" class="w-14 h-14" />
-                </div>
-                <span class="status"><span class="dot" aria-hidden="true" />{{ p.status }}</span>
+      <TransitionGroup tag="ul" name="card" class="grid" :aria-label="`${shown.length} projects`">
+        <li v-for="(p, i) in shown" :key="p.slug" :style="{ '--i': i }">
+          <article class="card">
+            <header class="card-top">
+              <span class="icon" aria-hidden="true"><DynamicIcon :name="p.icon" class="w-6 h-6" /></span>
+              <span class="status"><span class="dot" aria-hidden="true" />{{ p.status }}</span>
+            </header>
+
+            <h3 class="card-title">{{ p.title }}</h3>
+            <p class="card-tag">{{ p.tagline }}</p>
+
+            <dl class="metrics">
+              <div v-for="m in p.metrics" :key="m.label">
+                <dd class="font-display">{{ m.value }}</dd>
+                <dt>{{ m.label }}</dt>
               </div>
-              <div class="body">
-                <h3 class="card-title">{{ p.title }}</h3>
-                <p class="card-tag">{{ p.tagline }}</p>
-                <dl class="metrics">
-                  <div v-for="m in p.metrics" :key="m.label">
-                    <dd class="font-display heat-text">{{ m.value }}</dd>
-                    <dt>{{ m.label }}</dt>
-                  </div>
-                </dl>
-                <div class="flex flex-wrap gap-1.5 mb-5">
-                  <span v-for="t in p.technologies.slice(0, 4)" :key="t" class="tag">{{ t }}</span>
-                </div>
-                <button type="button" class="more" @click="selected = p">
-                  Read case study
-                  <ArrowUpRight class="w-4 h-4" aria-hidden="true" />
-                  <span class="sr-only">for {{ p.title }}</span>
-                </button>
-              </div>
-            </article>
-          </li>
-        </ul>
-      </div>
+            </dl>
+
+            <div class="tags">
+              <span v-for="t in p.technologies.slice(0, 4)" :key="t" class="tag">{{ t }}</span>
+              <span v-if="p.technologies.length > 4" class="more-tags">+{{ p.technologies.length - 4 }}</span>
+            </div>
+
+            <footer class="actions">
+              <a
+                v-if="p.liveUrl"
+                :href="p.liveUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="action"
+              >
+                View live
+                <ExternalLink class="w-4 h-4" aria-hidden="true" />
+                <span class="sr-only">({{ p.title }}, opens in a new tab)</span>
+              </a>
+              <button type="button" class="action" @click="selected = p">
+                Case study
+                <ArrowRight class="w-4 h-4" aria-hidden="true" />
+                <span class="sr-only">for {{ p.title }}</span>
+              </button>
+            </footer>
+          </article>
+        </li>
+      </TransitionGroup>
     </div>
 
     <ProjectDialog :project="selected" @close="selected = null" />
@@ -46,84 +73,23 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
-import gsap from 'gsap'
-import { ArrowUpRight } from '@lucide/vue'
+import { computed, ref } from 'vue'
+import { ArrowRight, ExternalLink } from '@lucide/vue'
 import DynamicIcon from '../ui/DynamicIcon.vue'
 import ProjectDialog from './ProjectDialog.vue'
-import { projects, type Project } from '../../data/projects'
+import { projectFilters, projects, type Project } from '../../data/projects'
 
-const root = ref<HTMLElement | null>(null)
-const pinEl = ref<HTMLElement | null>(null)
-const trackEl = ref<HTMLElement | null>(null)
+const filter = ref<(typeof projectFilters)[number]>('All')
 const selected = ref<Project | null>(null)
-let mm: gsap.MatchMedia | null = null
-
-onMounted(() => {
-  mm = gsap.matchMedia()
-  // Desktop: the section pins and the cards travel sideways as you scroll down.
-  // Everywhere else the viewport is a native, snap-scrolling strip - no pin, no hijacked scroll.
-  mm.add('(min-width: 1024px) and (prefers-reduced-motion: no-preference)', () => {
-    const track = trackEl.value
-    const pin = pinEl.value
-    if (!track || !pin) return
-    const distance = () => Math.max(0, track.scrollWidth - track.parentElement!.clientWidth)
-    gsap.to(track, {
-      x: () => -distance(),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: pin,
-        pin: true,
-        scrub: 0.6,
-        start: 'top top',
-        end: () => `+=${distance()}`,
-        invalidateOnRefresh: true,
-      },
-    })
-  })
-})
-
-onBeforeUnmount(() => mm?.revert())
-
-// Pointer-driven 3D tilt. Only writes CSS variables, so it stays off the layout path.
-const tilt = (e: PointerEvent) => {
-  const card = e.currentTarget as HTMLElement
-  if (e.pointerType !== 'mouse') return
-  const r = card.getBoundingClientRect()
-  card.style.setProperty('--ry', `${((e.clientX - r.left) / r.width - 0.5) * 9}deg`)
-  card.style.setProperty('--rx', `${((e.clientY - r.top) / r.height - 0.5) * -9}deg`)
-  card.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`)
-  card.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`)
-}
-const untilt = (e: PointerEvent) => {
-  const card = e.currentTarget as HTMLElement
-  card.style.setProperty('--rx', '0deg')
-  card.style.setProperty('--ry', '0deg')
-}
+const shown = computed(() => (filter.value === 'All' ? projects : projects.filter((p) => p.category.includes(filter.value))))
 </script>
 
 <style scoped>
-.work {
-  position: relative;
-  z-index: 1;
-  padding-block: clamp(5rem, 9vw, 8rem);
-}
-.pin {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: clamp(2rem, 4vw, 3.5rem);
-}
-@media (min-width: 1024px) {
-  .pin {
-    min-height: 100svh;
-    padding-block: 5.5rem 2rem;
-  }
-}
 .head {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 2rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
 }
 @media (min-width: 1024px) {
   .head {
@@ -131,107 +97,120 @@ const untilt = (e: PointerEvent) => {
     align-items: flex-end;
     justify-content: space-between;
   }
-  .head .h2 {
-    max-width: 18ch;
-    font-size: clamp(2.25rem, 1.2rem + 2.6vw, 4rem);
-  }
 }
 .lede {
-  max-width: 36ch;
+  margin-top: 1.5rem;
+  max-width: 44ch;
   color: var(--c-ink-2);
 }
-.viewport {
-  overflow-x: auto;
-  scroll-snap-type: x proximity;
-  padding-inline: var(--gutter);
-  padding-block: 1.5rem 2rem;
-  scrollbar-width: thin;
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  max-width: 34rem;
 }
-@media (min-width: 1024px) {
-  .viewport {
-    overflow: visible;
+.filter {
+  padding: 0.65rem 1.2rem;
+  border-radius: 0.9rem;
+  border: 1px solid var(--c-line);
+  background: var(--c-surface);
+  color: var(--c-ink-2);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s;
+}
+.filter:hover {
+  border-color: var(--c-ember);
+  color: var(--c-ink);
+}
+.filter.on {
+  background: var(--c-ember);
+  border-color: var(--c-ember);
+  color: var(--c-on-ember);
+}
+
+.grid {
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 720px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
-.track {
-  display: flex;
-  gap: clamp(1rem, 2vw, 1.75rem);
-  width: max-content;
-  will-change: transform;
+@media (min-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
-.slot {
-  width: min(84vw, 28rem);
-  scroll-snap-align: start;
-  perspective: 1200px;
+.grid > li {
+  display: flex;
+}
+/* Filtering: cards ease out quickly, new ones rise in one after another, the rest slide into place. */
+.card-enter-active {
+  transition: opacity 0.55s var(--ease-out), transform 0.55s var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 55ms);
+}
+.card-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.card-enter-from {
+  opacity: 0;
+  transform: translateY(28px) scale(0.97);
+}
+.card-leave-to {
+  opacity: 0;
+  transform: scale(0.96);
+}
+.card-move {
+  transition: transform 0.5s var(--ease-out);
 }
 .card {
-  --rx: 0deg;
-  --ry: 0deg;
-  --mx: 50%;
-  --my: 0%;
-  position: relative;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  padding: 1.6rem;
   border-radius: 1.5rem;
   border: 1px solid var(--c-line);
-  background: var(--c-bg-2);
-  overflow: hidden;
-  transform: rotateX(var(--rx)) rotateY(var(--ry));
-  transform-style: preserve-3d;
-  transition: transform 0.45s var(--ease-out), border-color 0.3s, box-shadow 0.4s;
-}
-.card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(22rem circle at var(--mx) var(--my), var(--glow), transparent 60%);
-  opacity: 0;
-  transition: opacity 0.3s;
+  background: var(--c-surface);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.4s var(--ease-out), border-color 0.3s, box-shadow 0.4s;
 }
 .card:hover,
 .card:focus-within {
+  transform: translateY(-4px);
   border-color: var(--c-ember);
-  box-shadow: 0 30px 70px -30px var(--glow);
+  box-shadow: 0 28px 60px -32px var(--glow);
 }
-.card:hover::after {
-  opacity: 0.7;
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.4rem;
 }
-.shot {
-  position: relative;
-  aspect-ratio: 16 / 10;
-  background: var(--c-surface-2);
-  overflow: hidden;
-}
-.shot img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top;
-  display: block;
-}
-.shot-fallback {
-  position: absolute;
-  inset: 0;
+.icon {
   display: grid;
   place-items: center;
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--c-ember) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-ember) 30%, transparent);
   color: var(--c-ember-ink);
-  background: radial-gradient(circle at 30% 20%, var(--glow), transparent 70%), var(--c-surface);
 }
 .status {
-  position: absolute;
-  top: 0.9rem;
-  left: 0.9rem;
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  padding: 0.3rem 0.75rem;
+  padding: 0.3rem 0.8rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--c-bg) 80%, transparent);
-  backdrop-filter: blur(8px);
-  font-size: 0.78rem;
+  background: color-mix(in srgb, var(--c-mint) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--c-mint) 35%, transparent);
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--c-ink);
+  color: var(--c-mint);
 }
 .dot {
   width: 0.45rem;
@@ -239,54 +218,63 @@ const untilt = (e: PointerEvent) => {
   border-radius: 50%;
   background: var(--c-mint);
 }
-.body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 1.4rem 1.5rem 1.6rem;
-}
 .card-title {
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   font-weight: 600;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 .card-tag {
-  margin-top: 0.5rem;
+  margin-top: 0.6rem;
   color: var(--c-ink-2);
-  font-size: 0.95rem;
-  line-height: 1.5;
-  min-height: 3em;
+  font-size: 0.97rem;
+  line-height: 1.55;
+  min-height: 3.1em;
 }
 .metrics {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.75rem;
-  margin-block: 1.2rem;
-  padding-block: 1rem;
-  border-block: 1px solid var(--c-line);
+  display: flex;
+  gap: 1.6rem;
+  margin-top: 1.4rem;
 }
 .metrics dd {
-  font-size: 1.7rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  line-height: 1;
-  width: fit-content;
+  color: var(--c-ember-ink);
+  line-height: 1.1;
 }
 .metrics dt {
-  margin-top: 0.3rem;
+  margin-top: 0.15rem;
   font-size: 0.78rem;
   color: var(--c-ink-3);
 }
-.more {
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin-block: 1.4rem 1.3rem;
+  padding-top: 1.3rem;
+  border-top: 1px solid var(--c-line);
+}
+.more-tags {
+  padding-inline: 0.3rem;
+  font-size: 0.85rem;
+  color: var(--c-ink-3);
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
   margin-top: auto;
+}
+.action {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   font-weight: 700;
-  color: var(--c-ember-ink);
-  width: fit-content;
+  font-size: 0.95rem;
+  color: var(--c-ink);
 }
-.more:hover {
-  text-decoration: underline;
-  text-underline-offset: 4px;
+.action:hover {
+  color: var(--c-ember-ink);
 }
 </style>

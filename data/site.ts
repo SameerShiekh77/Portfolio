@@ -19,7 +19,7 @@ export const navLinks = [
   { id: 'skills', label: 'Skills' },
   { id: 'leadership', label: 'Leadership' },
   { id: 'voices', label: 'Voices' },
-  { id: 'writing', label: 'Writing' },
+  // { id: 'writing', label: 'Writing' },
   { id: 'contact', label: 'Contact' },
 ] as const
 

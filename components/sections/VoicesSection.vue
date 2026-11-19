@@ -5,14 +5,18 @@
 
       <div class="mt-14 grid gap-10 lg:grid-cols-[8fr_4fr] lg:gap-16">
         <figure class="quote" aria-live="polite">
-          <blockquote :key="current.name" class="quote-text">&ldquo;{{ current.text }}&rdquo;</blockquote>
-          <figcaption class="flex items-center gap-4 mt-8">
-            <span class="avatar font-display" aria-hidden="true">{{ initials(current.name) }}</span>
-            <span>
-              <span class="block font-semibold">{{ current.name }}</span>
-              <span class="block text-sm text-ink-3">{{ current.role }}</span>
-            </span>
-          </figcaption>
+          <Transition name="swap" mode="out-in">
+            <div :key="current.name">
+              <blockquote class="quote-text">&ldquo;{{ current.text }}&rdquo;</blockquote>
+              <figcaption class="flex items-center gap-4 mt-8">
+                <span class="avatar font-display" aria-hidden="true">{{ initials(current.name) }}</span>
+                <span>
+                  <span class="block font-semibold">{{ current.name }}</span>
+                  <span class="block text-sm text-ink-3">{{ current.role }}</span>
+                </span>
+              </figcaption>
+            </div>
+          </Transition>
         </figure>
 
         <div>
@@ -61,10 +65,20 @@ const initials = (name: string) =>
   letter-spacing: -0.01em;
   word-spacing: 0.1em;
   max-width: 36ch;
-  animation: swap 0.6s var(--ease-out);
 }
-@keyframes swap {
-  from { opacity: 0; transform: translateY(14px); }
+.swap-enter-active {
+  transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+}
+.swap-leave-active {
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.swap-enter-from {
+  opacity: 0;
+  transform: translateY(16px);
+}
+.swap-leave-to {
+  opacity: 0;
+  transform: translateY(-10px);
 }
 .avatar {
   display: grid;

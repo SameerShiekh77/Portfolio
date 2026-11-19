@@ -32,20 +32,24 @@
           class="panel p-6 sm:p-9"
           tabindex="0"
         >
-          <p class="text-lg text-ink-2 max-w-[50ch] mb-8">{{ current.description }}</p>
-          <ul class="grid gap-x-10 gap-y-5 sm:grid-cols-2">
-            <li v-for="s in current.skills" :key="current.id + s.name">
+          <Transition name="swap" mode="out-in">
+            <div :key="current.id">
+              <p class="text-lg text-ink-2 max-w-[50ch] mb-8">{{ current.description }}</p>
+              <ul class="grid gap-x-10 gap-y-5 sm:grid-cols-2">
+                <li v-for="(s, i) in current.skills" :key="current.id + s.name" class="skill" :style="{ '--i': i }">
               <div class="flex items-center justify-between text-sm mb-2">
                 <span class="flex items-center gap-2 font-semibold">
                   <DynamicIcon :name="s.icon" class="w-4 h-4 text-ember-ink" />{{ s.name }}
                 </span>
                 <span class="text-ink-3">{{ s.level }}%</span>
               </div>
-              <div class="meter" role="presentation">
-                <span class="meter-fill" :style="{ width: s.level + '%' }" />
-              </div>
-            </li>
-          </ul>
+                  <div class="meter" role="presentation">
+                    <span class="meter-fill" :style="{ width: s.level + '%' }" />
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </Transition>
         </div>
       </div>
     </div>
@@ -133,6 +137,27 @@ const onKey = async (e: KeyboardEvent) => {
     color: var(--c-ember-ink);
     opacity: 1;
   }
+}
+.swap-enter-active {
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+}
+.swap-leave-active {
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.swap-enter-from {
+  opacity: 0;
+  transform: translateY(14px);
+}
+.swap-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+.skill {
+  animation: skill-in 0.5s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 45ms + 120ms);
+}
+@keyframes skill-in {
+  from { opacity: 0; transform: translateY(10px); }
 }
 .meter {
   height: 0.35rem;

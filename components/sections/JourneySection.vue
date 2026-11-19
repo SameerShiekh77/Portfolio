@@ -34,15 +34,19 @@
                 </span>
                 <ChevronDown class="w-5 h-5 shrink-0 chev" :class="{ open: openRole === i }" aria-hidden="true" />
               </button>
-              <div :id="`role-${i}`" class="role-body" :class="{ open: openRole === i }" :hidden="openRole !== i">
-                <p class="text-ink-2 mb-3">{{ r.description }}</p>
-                <ul class="space-y-1.5 mb-4">
-                  <li v-for="a in r.achievements" :key="a" class="flex gap-2 text-sm text-ink-2">
-                    <span class="mt-2 w-1.5 h-1.5 rounded-full bg-ember shrink-0" aria-hidden="true" />{{ a }}
-                  </li>
-                </ul>
-                <div class="flex flex-wrap gap-1.5">
-                  <span v-for="t in r.technologies.slice(0, 8)" :key="t" class="tag">{{ t }}</span>
+              <div :id="`role-${i}`" class="role-body" :class="{ open: openRole === i }">
+                <div class="role-inner">
+                  <div class="role-content">
+                    <p class="text-ink-2 mb-3">{{ r.description }}</p>
+                    <ul class="space-y-1.5 mb-4">
+                      <li v-for="a in r.achievements" :key="a" class="flex gap-2 text-sm text-ink-2">
+                        <span class="mt-2 w-1.5 h-1.5 rounded-full bg-ember shrink-0" aria-hidden="true" />{{ a }}
+                      </li>
+                    </ul>
+                    <div class="flex flex-wrap gap-1.5">
+                      <span v-for="t in r.technologies.slice(0, 8)" :key="t" class="tag">{{ t }}</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </li>
@@ -179,7 +183,26 @@ onBeforeUnmount(() => ctx?.revert())
   transform: rotate(180deg);
   color: var(--c-ember-ink);
 }
+/* Height animates by moving a grid row between 0fr and 1fr, so it works for any content height.
+   visibility keeps closed content out of the tab order once it has finished collapsing. */
 .role-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  opacity: 0;
+  transition: grid-template-rows 0.5s var(--ease-out), opacity 0.35s ease, visibility 0s linear 0.5s;
+}
+.role-body.open {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  opacity: 1;
+  transition: grid-template-rows 0.5s var(--ease-out), opacity 0.45s ease 0.08s, visibility 0s;
+}
+.role-inner {
+  min-height: 0;
+  overflow: hidden;
+}
+.role-content {
   padding-bottom: 1.4rem;
 }
 </style>
