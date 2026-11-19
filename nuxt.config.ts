@@ -18,6 +18,13 @@ export default defineNuxtConfig({
     compilerOptions: templateCompilerOptions.template.compilerOptions,
   },
 
+  // `nuxt generate` writes a separate _payload.json per page. For the home page Nuxt builds the cache key
+  // "/", which unstorage 1.17.x now rejects ("Invalid key"), failing the prerender. This is a one-page site,
+  // so the payload is inlined in the HTML instead.
+  experimental: {
+    payloadExtraction: false,
+  },
+
   css: ['~/assets/css/fonts.css', '~/assets/css/main.css'],
 
   devServer: {
