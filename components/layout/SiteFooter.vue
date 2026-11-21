@@ -1,7 +1,7 @@
 <template>
   <footer class="relative z-10 border-t border-line">
     <div class="wrap flex flex-col gap-4 py-10 sm:flex-row sm:items-center sm:justify-between text-sm text-ink-3">
-      <p>&copy; {{ year }} Muhammad Sameer. Built with Nuxt, GSAP and TresJS.</p>
+      <p>&copy; {{ year }} Muhammad Sameer</p>
       <ul class="flex items-center gap-3">
         <li v-for="s in socials" :key="s.label">
           <a
